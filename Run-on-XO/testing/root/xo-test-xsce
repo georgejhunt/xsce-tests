@@ -126,7 +126,7 @@ fi
 # - moodle
 function test_moodle() {
 echo -n "[XSCE] Test schoolserver moodle access..."
-if `curl -Is http://schoolserver.lan/moodle/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://schoolserver.lan/moodle/ | grep -is "moodle/login" > /dev/null`
 then
     green OK
     else
