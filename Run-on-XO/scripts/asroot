@@ -1,0 +1,36 @@
+#!/bin/bash -x
+
+# check os version
+os=`cat /etc/issue|gawk '/OLPC/ {print $3}'`
+while [ "$os" != "12.1.0" ]; do
+	# get stuck here forever
+	echo "Please do 4 button start"
+	sleep 5
+done
+
+# change the default favorites
+cp -f /media/scripts/activities.default /usr/share/sugar/data/activities.defaults
+
+# copy some files to test xsce
+
+mkdir /root/testing
+cp /media/testing/root/* /root/testing
+chmod 755 /root/testing/*
+
+# for all future boots, fix the clock, #12621
+cp /media/scripts/olpc.fth /boot/olpc.fth
+
+# update the clock if it is way off, i.e. battery probably died
+currentyear=`date|gawk '{print $6}'`
+if [ "$currentyear" \< "2014" ];then
+    date "013012002014"
+    /media/scripts/hwclock --systohc -noadjfile -utc
+fi
+
+# put a large marker on the screen that is easily checked for
+echo ""
+echo "           ********************************************"
+echo "           *                                          *"
+echo "           *  Good, bon, bueno install was successful *"
+echo "           *                                          *"
+echo "           ********************************************"

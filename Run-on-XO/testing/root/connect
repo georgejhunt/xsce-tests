@@ -1,0 +1,9 @@
+# turn off sleep mode
+touch /etc/powerd/flags/inhibit-suspend
+# connect to AP
+ap=$1
+if [ "$ap" == "" ]; then
+  ap="lekol"
+fi
+
+nmcli dev wifi connect $ap
