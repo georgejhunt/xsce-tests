@@ -83,7 +83,7 @@ fi
 }
 
 function test_registration() {
-echo -n "[XSCE] Test if xo is registered ..."
+echo -n "[XSCE] Test if xo is registered via Authserver..."
 if `wget -qO - http://schoolserver.lan:5000/  | grep -is "SHF00000000" > /dev/null`
 then
     green OK
@@ -134,9 +134,23 @@ then
 fi
 }
 
+# - ds-backup
+
+function test_backup() {
+echo -n "[XSCE] Test backup..."
+su - olpc -c "python /home/olpc/testing/idmgr-test.py >/home/olpc/testing/backup-test.result"
+rc=`cat /home/olpc/testing/backup-test.result`
+
+if [ "$rc" == "OK" ]
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
 # - ejabberd
 function test_ejabberd() {
-echo -n "[XSCE] Test ejabberd collaboration..."
+echo -n "[XSCE] Test ejabberd running..."
 
 if `curl -Is http://schoolserver.lan:5280/admin | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
@@ -150,7 +164,7 @@ fi
 
 function test_ajenti() {
 echo -n "[XSCE] Test ajenti access..."
-if `curl -Is http://schoolserver.lan:5000 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://schoolserver.lan:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
     green OK
     else
@@ -222,7 +236,9 @@ test_squid_cache
 test_dansguardian
 test_moodle
 test_ajenti
+test_backup
+test_ejabberd
 
 echo 
 echo "IIAB Tests"
-#iiab_presence
+iiab_presence
