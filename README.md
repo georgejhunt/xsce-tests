@@ -29,11 +29,15 @@ Tests Performed:
 * dns: ping schoolserver, ping translate.google.com
 * httpd: access portal page
 * idmgr: register SHF00000000 id ('killed' message is expected)
-         get result from ajenti (schoolserver.lan:5000) to see if SHF00000000 id is registered
+* Authserver: get result from Authserver (schoolserver.lan:5000) to see if SHF00000000 id is registered
 * squid: retrieve a jpg twice and see if there is a cache hit the second time
 * dansguardian: see if http://en.wikipedia.org/wiki/Pornography blocked
 * moodle: see if schoolserver.lan/moodle redirects to moodle/login
-* ajenti: retrieve schoolserver.lan:5000 to see if exists
+* ajenti: see if  schoolserver.lan:9990 exists
+* backup: perform a backup for user SHF00000000
+* ejabberd: see if  schoolserver.lan:5280/admin redirects to login
+* IIAB: main page and several items of content.
+*       content will fail if not present
 
 A list of tests and results should scroll down the screen.
 

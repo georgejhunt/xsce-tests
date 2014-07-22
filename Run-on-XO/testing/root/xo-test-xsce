@@ -4,9 +4,15 @@
 # - dns: ping schoolserver, ping 
 # - httpd
 # - idmgr
-# - squid
-# - dansguardian
-# - moodle
+# - Authserver shows registration
+# - squid: caching (filtering is off by default)
+# - dansguardian: filtering
+# - moodle: access to login
+# - ajenti: access
+# - backup: does a backup
+# - ejabberd: access to login
+# - IIAB: main page and several items of content.
+#   content will fail if not present
 
 # Define colors for results
 NORMAL=$(tput sgr0)
@@ -152,7 +158,7 @@ fi
 function test_ejabberd() {
 echo -n "[XSCE] Test ejabberd running..."
 
-if `curl -Is http://schoolserver.lan:5280/admin | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://schoolserver.lan:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
 then
     green OK
     else
