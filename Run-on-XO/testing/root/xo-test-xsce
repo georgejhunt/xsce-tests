@@ -14,6 +14,16 @@
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
+# ToDo
+
+# - monit
+# - munin
+# - openvpn
+# - ?pathagar
+# - samba
+# - vnstat
+# - xovis
+
 # Define colors for results
 NORMAL=$(tput sgr0)
 GREEN=$(tput setaf 2; tput bold)
