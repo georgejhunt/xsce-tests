@@ -8,21 +8,21 @@
 # - squid: caching (filtering is off by default)
 # - dansguardian: filtering
 # - moodle: access to login
+# - munin: access to login
 # - ajenti: access
 # - backup: does a backup
 # - ejabberd: access to login
+# - xovis: access
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
 # ToDo
 
 # - monit
-# - munin
 # - openvpn
 # - ?pathagar
 # - samba
 # - vnstat
-# - xovis
 
 # Define colors for results
 NORMAL=$(tput sgr0)
@@ -74,7 +74,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -Is http://schoolserver.lan | grep -is "Location: http://schoolserver.lan/xs-portal" > /dev/null`
+if `curl -Is http://schoolserver | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
 then
     green OK
     else
@@ -100,7 +100,7 @@ fi
 
 function test_registration() {
 echo -n "[XSCE] Test if xo is registered via Authserver..."
-if `wget -qO - http://schoolserver.lan:5000/  | grep -is "SHF00000000" > /dev/null`
+if `wget -qO - http://schoolserver:5000/  | grep -is "SHF00000000" > /dev/null`
 then
     green OK
     else
@@ -142,7 +142,7 @@ fi
 # - moodle
 function test_moodle() {
 echo -n "[XSCE] Test schoolserver moodle access..."
-if `curl -Is http://schoolserver.lan/moodle/ | grep -is "moodle/login" > /dev/null`
+if `curl -Is http://schoolserver/moodle/ | grep -is "moodle/login" > /dev/null`
 then
     green OK
     else
@@ -168,7 +168,19 @@ fi
 function test_ejabberd() {
 echo -n "[XSCE] Test ejabberd running..."
 
-if `curl -Is http://schoolserver.lan:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
+if `curl -Is http://schoolserver:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
+
+# munin
+
+function test_munin() {
+echo -n "[XSCE] Test munin access..."
+if `curl -Is http://schoolserver/munin  | grep -is 'realm="Munin"' > /dev/null`
 then
     green OK
     else
@@ -180,7 +192,19 @@ fi
 
 function test_ajenti() {
 echo -n "[XSCE] Test ajenti access..."
-if `curl -Is http://schoolserver.lan:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://schoolserver:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
+
+# xovis
+
+function test_xovis() {
+echo -n "[XSCE] Test xovis access..."
+if `curl -Is http://schoolserver:5984/xovis/_design/xovis-couchapp/index.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
     green OK
     else
@@ -190,7 +214,7 @@ fi
 
 function iiab_presence() {
 echo -n "[IIAB] Test main iiab page..."
-if `curl -Is http://schoolserver.lan/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://schoolserver/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
     green OK
     else
@@ -198,7 +222,7 @@ then
 fi
 
 echo -n "[IIAB] Test wikipedia page..."
-if `curl -Is http://schoolserver.lan/iiab/zim/wikipedia_gn_all_01_2013/A/Pirane.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://schoolserver/iiab/zim/wikipedia_gn_all_01_2013/A/Pirane.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
     green OK
     else
@@ -251,9 +275,11 @@ test_registration
 test_squid_cache
 test_dansguardian
 test_moodle
+test_munin
 test_ajenti
 test_backup
 test_ejabberd
+test_xovis
 
 echo 
 echo "IIAB Tests"
