@@ -3,8 +3,8 @@ xsce-tests
 
 Scripts to test basic xsce functionality.  Scripts are planned for both client and server side testing.
 
-Run on XO
----------
+Run on XO1
+----------
 
 This includes a tinycore bootable script to install test scripts on an xo and configure it to a minimal system
 with only terminal and browser.
