@@ -11,7 +11,7 @@ with only terminal and browser.
 
 Copy files to a usb stick, insert in an xo, and boot (without depressing the four buttons).
 
-Enter the console by pressing Ctrl-Alt-F2 (F2 is the Friends key) 
+Enter the console by pressing Ctrl-Alt-F2 (F2 is the Friends key)
 
 or start a terminal session
 
@@ -22,6 +22,32 @@ and run the following Commands:
 * ./xo-test-xsce
 
 If you prefer to ssh into the xo, you can run ./start-sshd
+
+Install Manually
+----------------
+
+It is also possible to simply copy the test scripts into the proper directories and run them.
+
+On the target machine git clone https://github.com/XSCE/xsce-tests --depth 1
+
+mkdir /root/testing
+cp xsce-tests/Run-on-XO/testing/root/* /root/testing
+chmod 755 /root/testing/*
+
+To run the XO-specific tests, which will be marked as FAIL otherwise:
+
+mkdir /home/olpc/testing
+cp xsce-tests/Run-on-XO/testing/olpc/* /home/olpc/testing
+chmod 755 /home/olpc/testing/*
+chown -R olpc:olpc /home/olpc/testing
+
+If you want to remove the XO tests edit /root/testing/xo-test-xsce and comment out things that fail.
+
+Now you can:
+
+* cd /root/testing
+* ./connect <access point ssid> (assumes no password) if you don't already have a network connection
+* ./xo-test-xsce
 
 Tests Performed:
 
