@@ -23,6 +23,30 @@
 # - ?pathagar
 # - samba
 # - vnstat
+# - owncloud
+# - kiwix
+# - kalite
+# - activity-server
+
+# default to gateway mode
+testmode="gateway"
+if [ $# -gt 0 ];then
+  if [ "$1" == "appliance" ];then
+    # add an entry to hosts for schoolserver ip address
+  else
+    if [ "$1" == "lan-controller" ]; then
+      source ./lan-controller
+    fi
+  fi
+fi
+
+# Are we running on an XO platform
+if [ -f /proc/device-tree/mfg-data/MN ]
+then
+  XO_VERSION=`cat /proc/device-tree/mfg-data/MN`
+else
+  XO_VERSION="none"
+fi
 
 # Define colors for results
 NORMAL=$(tput sgr0)
@@ -62,6 +86,8 @@ if `ping -c 1 schoolserver | grep unknown`
   else
       green OK
 fi
+}
+function test_external_dns() {
 echo -n "[XSCE] Test resolve translate.google.com ..."
 if `ping -c 1 translate.google.com | grep unknown`
   then
@@ -143,6 +169,15 @@ fi
 function test_moodle() {
 echo -n "[XSCE] Test schoolserver moodle access..."
 if `curl -Is http://schoolserver/moodle/ | grep -is "moodle/login" > /dev/null`
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
+function test_activity_server() {
+echo -n "[XSCE] Test schoolserver moodle access..."
+if `curl -Is http://schoolserver/activity_serveer/ | grep -is "activities" > /dev/null`
 then
     green OK
     else
@@ -266,20 +301,35 @@ fi
 # Main
 
 echo
-echo "Starting Tests"
-ip_range
-test_dns
+echo "Starting Tests in $testmode mode on XO model $XO_VERSION"
+
+# Do the following regardless of testmode
 test_httpd
-test_idmgr
-test_registration
-test_squid_cache
-test_dansguardian
 test_moodle
 test_munin
 test_ajenti
-test_backup
 test_ejabberd
 test_xovis
+
+#if [ "$testmode" == "appliance" ]; then
+#fi
+
+if [ "$testmode" == "lan-controller" -o "$testmode" == "gateway"]; then
+  ip_range
+  test_dns
+fi
+
+if [ "$testmode" == "gateway"]; then
+  test_external_dns
+  test_dansguardian
+  test_squid_cache
+fi
+
+if [ "$XO_VERSION" != "none" ];then
+  test_idmgr
+  test_registration
+  test_backup
+fi
 
 echo
 echo "IIAB Tests"
