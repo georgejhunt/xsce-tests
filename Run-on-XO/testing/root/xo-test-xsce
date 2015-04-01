@@ -23,16 +23,18 @@
 # - ?pathagar
 # - samba
 # - vnstat
-# - owncloud
 # - kiwix
-# - kalite
-# - activity-server
 
 # default to gateway mode
 testmode="gateway"
+# except in appliance mode, let server's dns resolve schoolserver's name
+sed -i -e '/.*schoolserver.*/ d' /etc/hosts
 if [ $# -gt 0 ];then
   if [ "$1" == "appliance" ];then
     # add an entry to hosts for schoolserver ip address
+    testmode="appliance"
+    if [ "$2" ]; then
+      echo "$2   schoolserver schoolserver.lan" >>/etc/hosts
   else
     if [ "$1" == "lan-controller" ]; then
       source ./lan-controller
@@ -177,7 +179,38 @@ fi
 }
 function test_activity_server() {
 echo -n "[XSCE] Test schoolserver moodle access..."
-if `curl -Is http://schoolserver/activity_serveer/ | grep -is "activities" > /dev/null`
+if `curl -Is http://schoolserver/activities/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
+
+function test_kalite() {
+echo -n "[XSCE] Test Kalite..."
+if `curl -Is http://schoolserver:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
+
+
+function test_elgg() {
+echo -n "[XSCE] Test elgg..."
+if `curl -Is http://schoolserver/elgg/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
+
+function test_owncloud() {
+echo -n "[XSCE] Test owncloud..."
+if `curl -Is http://schoolserver/owncloud/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
     green OK
     else
@@ -186,7 +219,6 @@ fi
 }
 
 # - ds-backup
-
 function test_backup() {
 echo -n "[XSCE] Test backup..."
 su - olpc -c "python /home/olpc/testing/idmgr-test.py >/home/olpc/testing/backup-test.result"
@@ -310,16 +342,21 @@ test_munin
 test_ajenti
 test_ejabberd
 test_xovis
+test_activity_server
+test_kalite
+test_owncloud
+test_elgg
+#test_kiwix
 
 #if [ "$testmode" == "appliance" ]; then
 #fi
 
-if [ "$testmode" == "lan-controller" -o "$testmode" == "gateway"]; then
+if [ "$testmode" == "lan-controller" -o "$testmode" == "gateway" ]; then
   ip_range
   test_dns
 fi
 
-if [ "$testmode" == "gateway"]; then
+if [ "$testmode" == "gateway" ]; then
   test_external_dns
   test_dansguardian
   test_squid_cache
