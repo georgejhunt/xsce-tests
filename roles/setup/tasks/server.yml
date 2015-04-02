@@ -1,0 +1,7 @@
+- name: Set up authorized_keys on Schoolserver
+  authorized_key: user=root key=xsce-test.pub state=present
+
+- name: Set up httpd to pass ini and other setup info to client when properly authenticated
+  template: src=xsce-tests.conf
+            dest=/etc/httpd/conf.d/
+            mode=0644
