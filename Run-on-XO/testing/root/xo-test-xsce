@@ -1,18 +1,23 @@
 #!/bin/bash
 # Perform the following tests:
 # - dhcpd - done by connect script
-# - dns: ping schoolserver, ping
 # - httpd
+# - moodle: access to login
+# - munin: access to login
+# - ajenti: access
+# - ejabberd: access to login
+# - xovis: access
+# - activity-server
+# - Kalite
+# - owncloud
+# - elgg
+# - pathagar
+# - dns: ping schoolserver, ping
 # - idmgr
 # - Authserver shows registration
 # - squid: caching (filtering is off by default)
 # - dansguardian: filtering
-# - moodle: access to login
-# - munin: access to login
-# - ajenti: access
 # - backup: does a backup
-# - ejabberd: access to login
-# - xovis: access
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
@@ -20,7 +25,6 @@
 
 # - monit
 # - openvpn
-# - ?pathagar
 # - samba
 # - vnstat
 # - kiwix
@@ -187,6 +191,16 @@ then
 fi
 }
 
+function test_pathagar() {
+echo -n "[XSCE] Test Pathagar..."
+if `curl -Is http://schoolserver/books/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+    green OK
+    else
+    red FAILED!
+fi
+}
+
 function test_kalite() {
 echo -n "[XSCE] Test Kalite..."
 if `curl -Is http://schoolserver:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
@@ -346,6 +360,7 @@ test_activity_server
 test_kalite
 test_owncloud
 test_elgg
+test_pathagar
 #test_kiwix
 
 #if [ "$testmode" == "appliance" ]; then
