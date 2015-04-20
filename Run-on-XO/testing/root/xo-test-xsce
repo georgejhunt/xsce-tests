@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # Perform the following tests:
 # - dhcpd - done by connect script
 # - httpd
@@ -9,6 +9,7 @@
 # - xovis: access
 # - activity-server
 # - Kalite
+# - kiwix
 # - owncloud
 # - elgg
 # - pathagar
@@ -18,6 +19,7 @@
 # - squid: caching (filtering is off by default)
 # - dansguardian: filtering
 # - backup: does a backup
+# - samba
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
@@ -25,9 +27,7 @@
 
 # - monit
 # - openvpn
-# - samba
 # - vnstat
-# - kiwix
 
 # default to gateway mode
 testmode="gateway"
@@ -39,6 +39,7 @@ if [ $# -gt 0 ];then
     testmode="appliance"
     if [ "$2" ]; then
       echo "$2   schoolserver schoolserver.lan" >>/etc/hosts
+    fi
   else
     if [ "$1" == "lan-controller" ]; then
       source ./lan-controller
@@ -59,6 +60,7 @@ NORMAL=$(tput sgr0)
 GREEN=$(tput setaf 2; tput bold)
 YELLOW=$(tput setaf 3)
 RED=$(tput setaf 1)
+LOGFILE=test_results.csv
 
 function red() {
     echo -e "$RED$*$NORMAL"
@@ -72,13 +74,19 @@ function yellow() {
     echo -e "$YELLOW$*$NORMAL"
 }
 
+function log() {
+ echo -n "$1,$2," >> $LOGFILE
+}
+
 # dhcpd - verify
 function ip_range() {
 echo -n "[XSCE] Test got address from server ..."
 if `ifconfig | grep -q 172.18`
   then
+      log dhcpd OK
       green OK
   else
+      log dhcpd FAILED
       red FAILED!
 fi
 }
@@ -88,8 +96,10 @@ function test_dns() {
 echo -n "[XSCE] Test resolve schoolserver ..."
 if `ping -c 1 schoolserver | grep unknown`
   then
+      log ping_schoolserver FAILED
       red FAILED!
   else
+      log ping_schoolserver OK
       green OK
 fi
 }
@@ -97,8 +107,10 @@ function test_external_dns() {
 echo -n "[XSCE] Test resolve translate.google.com ..."
 if `ping -c 1 translate.google.com | grep unknown`
   then
+      log dns_external FAILED
       red FAILED!
   else
+      log dns_external OK
       green OK
 fi
 }
@@ -108,8 +120,10 @@ function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
 if `curl -Is http://schoolserver | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
 then
+      log httpd OK
     green OK
     else
+      log httpd FAILED
     red FAILED!
 fi
 }
@@ -124,8 +138,10 @@ rc=`cat /home/olpc/testing/idmgr-test.result`
 
 if [ "$rc" == "OK" ]
 then
+      log idmgr_registration OK
     green OK
     else
+      log idmgr_registration FAILED
     red FAILED!
 fi
 }
@@ -134,8 +150,10 @@ function test_registration() {
 echo -n "[XSCE] Test if xo is registered via Authserver..."
 if `wget -qO - http://schoolserver:5000/  | grep -is "SHF00000000" > /dev/null`
 then
+      log authserver OK
     green OK
     else
+      log authserver FAILED
     red FAILED!
 fi
 
@@ -146,16 +164,20 @@ function test_squid_cache() {
 echo -n "[XSCE] Test squid proxy settings..."
 if `curl -Is http://one.laptop.org//sites/default/files/charlotte2.jpg | grep X-Cache | grep -q schoolserver`
 then
+      log squid OK
     green OK
     else
+      log squid FAILED
     red FAILED!
 fi
 
 echo -n "[XSCE] Test squid proxy caching settings..."
 if `curl -Is http://one.laptop.org//sites/default/files/charlotte2.jpg | grep X-Cache | grep schoolserver | grep -q HIT`
 then
+      log squid_cache OK
     green OK
     else
+      log squid_cache FAILED
     red FAILED!
 fi
 }
@@ -165,8 +187,10 @@ function test_dansguardian() {
 echo -n "[XSCE] Test dansguardian settings..."
 if `wget -qO - http://www.pornhub.com | grep -is dansguardian > /dev/null`
 then
+      log dansguardian OK
     green OK
     else
+      log dansguardian FAILED
     red FAILED!
 fi
 }
@@ -176,8 +200,10 @@ function test_moodle() {
 echo -n "[XSCE] Test schoolserver moodle access..."
 if `curl -Is http://schoolserver/moodle/ | grep -is "moodle/login" > /dev/null`
 then
+      log moodle OK
     green OK
     else
+      log moodle FAILED
     red FAILED!
 fi
 }
@@ -185,8 +211,10 @@ function test_activity_server() {
 echo -n "[XSCE] Test schoolserver moodle access..."
 if `curl -Is http://schoolserver/activities/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log activity_server OK
     green OK
     else
+      log activity_seerver FAILED
     red FAILED!
 fi
 }
@@ -195,8 +223,10 @@ function test_pathagar() {
 echo -n "[XSCE] Test Pathagar..."
 if `curl -Is http://schoolserver/books/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log pathagar OK
     green OK
     else
+      log pathagar FAILED
     red FAILED!
 fi
 }
@@ -205,8 +235,22 @@ function test_kalite() {
 echo -n "[XSCE] Test Kalite..."
 if `curl -Is http://schoolserver:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log kalite OK
     green OK
     else
+      log kalite FAILED
+    red FAILED!
+fi
+}
+
+function test_kiwix() {
+echo -n "[XSCE] Test Kiwix..."
+if `curl -Is http://schoolserver:3000 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+      log kiwix OK
+    green OK
+    else
+      log kiwix FAILED
     red FAILED!
 fi
 }
@@ -216,8 +260,10 @@ function test_elgg() {
 echo -n "[XSCE] Test elgg..."
 if `curl -Is http://schoolserver/elgg/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log elgg OK
     green OK
     else
+      log elgg FAILED
     red FAILED!
 fi
 }
@@ -226,8 +272,10 @@ function test_owncloud() {
 echo -n "[XSCE] Test owncloud..."
 if `curl -Is http://schoolserver/owncloud/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log owncloud OK
     green OK
     else
+      log owncloud FAILED
     red FAILED!
 fi
 }
@@ -240,22 +288,51 @@ rc=`cat /home/olpc/testing/backup-test.result`
 
 if [ "$rc" == "OK" ]
 then
+      log backup OK
     green OK
     else
+      log backup FAILED
     red FAILED!
 fi
 }
+
 # - ejabberd
 function test_ejabberd() {
 echo -n "[XSCE] Test ejabberd running..."
 
 if `curl -Is http://schoolserver:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
 then
+      log ejabberd OK
     green OK
     else
+      log ejabberd FAILED
     red FAILED!
 fi
 }
+
+# Samba
+function test_samba(){
+  mkdir -p /tmp/smb
+  if  mount -t cifs //schoolserver/public -U smbuser -p smbuser /tmp/smb; then
+    echo "this is a test" > /tmp/smb/test
+    stored=`cat /tmp/smb/test`
+    if [ "$stored" == "this is a test" ]; then
+      rm /tmp/smb/test
+      umount /tmp/smb
+      log samba OK
+      green OK
+      else
+      log samba FAILED
+      red FAILED!
+    fi
+  else
+      log samba FAILED
+      red FAILED!
+  fi
+  rmdir /tmp/smb
+}
+
+
 
 # munin
 
@@ -263,8 +340,10 @@ function test_munin() {
 echo -n "[XSCE] Test munin access..."
 if `curl -Is http://schoolserver/munin  | grep -is 'realm="Munin"' > /dev/null`
 then
+      log munin OK
     green OK
     else
+      log munin FAILED
     red FAILED!
 fi
 }
@@ -275,8 +354,10 @@ function test_ajenti() {
 echo -n "[XSCE] Test ajenti access..."
 if `curl -Is http://schoolserver:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log ajenti OK
     green OK
     else
+      log ajenti FAILED
     red FAILED!
 fi
 }
@@ -287,8 +368,22 @@ function test_xovis() {
 echo -n "[XSCE] Test xovis access..."
 if `curl -Is http://schoolserver:5984/xovis/_design/xovis-couchapp/index.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log xovis OK
     green OK
     else
+      log xovis FAILED
+    red FAILED!
+fi
+}
+
+function test_server_prep() {
+echo -n "[XSCE] Test server prep..."
+if `curl -Is http://schoolserver/content/xsce.ini | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+      log ini OK
+    green OK
+    else
+      log ini FAILED
     red FAILED!
 fi
 }
@@ -297,48 +392,60 @@ function iiab_presence() {
 echo -n "[IIAB] Test main iiab page..."
 if `curl -Is http://schoolserver/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log iiab OK
     green OK
     else
+      log iiab FAILED
     red FAILED!
 fi
 
 echo -n "[IIAB] Test wikipedia page..."
 if `curl -Is http://schoolserver/iiab/zim/wikipedia_gn_all_01_2013/A/Pirane.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log iiab_wikipedia OK
     green OK
     else
+      log iiab_wikipedia FAILED
     red FAILED!
 fi
 
 echo -n "[IIAB] Test khan akademy video..."
 if `curl -Is http://schoolserver/iiab/video/khanvideo/1/1/2/3.webm | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log iiab_khan OK
     green OK
     else
+      log iiab_khan FAILED
     red FAILED!
 fi
 
 echo -n "[IIAB] Test map link..."
 if `curl -Is http://schoolserver/iiab/maps/tile/6/31/29.png | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log iiab_map OK
     green OK
     else
+      log iiab_map FAILED
     red FAILED!
 fi
 
 echo -n "[IIAB] Test book search..."
 if `curl -Is http://schoolserver/iiab/books/search?q=moby+dick | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log iiab_search OK
     green OK
     else
+      log iiab_search FAILED
     red FAILED!
 fi
 
 echo -n "[IIAB] Test book download..."
 if `curl -Is http://schoolserver/iiab/books/epub/2701.epub | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
+      log iiab_book OK
     green OK
     else
+      log iiab_book FAILED
     red FAILED!
 fi
 
@@ -361,7 +468,8 @@ test_kalite
 test_owncloud
 test_elgg
 test_pathagar
-#test_kiwix
+test_kiwix
+test_samba
 
 #if [ "$testmode" == "appliance" ]; then
 #fi
