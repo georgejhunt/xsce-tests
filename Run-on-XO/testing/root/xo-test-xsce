@@ -1,4 +1,6 @@
 #!/bin/bash -x
+LOGFILE=test_results
+
 # Perform the following tests:
 # - dhcpd - done by connect script
 # - httpd
@@ -60,7 +62,6 @@ NORMAL=$(tput sgr0)
 GREEN=$(tput setaf 2; tput bold)
 YELLOW=$(tput setaf 3)
 RED=$(tput setaf 1)
-LOGFILE=test_results.csv
 
 function red() {
     echo -e "$RED$*$NORMAL"
@@ -75,7 +76,7 @@ function yellow() {
 }
 
 function log() {
- echo -n "$1,$2," >> $LOGFILE
+ echo  "$1 : $2," >> $LOGFILE
 }
 
 # dhcpd - verify
@@ -313,7 +314,7 @@ fi
 # Samba
 function test_samba(){
   mkdir -p /tmp/smb
-  if  mount -t cifs //schoolserver/public -U smbuser -p smbuser /tmp/smb; then
+  if  mount -t cifs //schoolserver/public -o username=smbuser password=smbuser /tmp/smb; then
     echo "this is a test" > /tmp/smb/test
     stored=`cat /tmp/smb/test`
     if [ "$stored" == "this is a test" ]; then
@@ -378,13 +379,10 @@ fi
 
 function test_server_prep() {
 echo -n "[XSCE] Test server prep..."
-if `curl -Is http://schoolserver/content/xsce.ini | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if ! `curl  http://schoolserver/content/xsce.ini  > $LOGFILE`
 then
-      log ini OK
-    green OK
-    else
-      log ini FAILED
-    red FAILED!
+  echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
+  exit 1
 fi
 }
 
@@ -457,6 +455,7 @@ echo
 echo "Starting Tests in $testmode mode on XO model $XO_VERSION"
 
 # Do the following regardless of testmode
+test_server_prep
 test_httpd
 test_moodle
 test_munin
@@ -493,4 +492,7 @@ fi
 
 echo
 echo "IIAB Tests"
+
 iiab_presence
+
+cat footer >> $LOGFILE
