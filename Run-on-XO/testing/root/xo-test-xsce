@@ -31,6 +31,19 @@ LOGFILE=test_results
 # - openvpn
 # - vnstat
 
+function test_server_prep() {
+echo -n "[XSCE] Test server prep..."
+if ! `curl  http://schoolserver/content/xsce.ini  > $LOGFILE`
+then
+  echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
+  exit 1
+fi
+cat $LOGFILE | ./ini2map.py > xsce.ini.map
+# now create a bash map with this information
+declare -A settings=`cat xsce.ini.map`
+echo "settings mode is 
+}
+
 # default to gateway mode
 testmode="gateway"
 # except in appliance mode, let server's dns resolve schoolserver's name
@@ -378,15 +391,6 @@ then
 fi
 }
 
-function test_server_prep() {
-echo -n "[XSCE] Test server prep..."
-if ! `curl  http://schoolserver/content/xsce.ini  > $LOGFILE`
-then
-  echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
-  exit 1
-fi
-}
-
 function iiab_presence() {
 echo -n "[IIAB] Test main iiab page..."
 if `curl -Is http://schoolserver/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
@@ -452,11 +456,12 @@ fi
 
 # Main
 
+test_server_prep
+testmode=${settings['network_xsce_network_mode']}"
 echo
 echo "Starting Tests in $testmode mode on XO model $XO_VERSION"
 
 # Do the following regardless of testmode
-test_server_prep
 test_httpd
 test_moodle
 test_munin
@@ -469,7 +474,7 @@ test_owncloud
 test_elgg
 test_pathagar
 test_kiwix
-test_samba
+#test_samba -- fc18 XO kernel does not have cifs configured
 
 #if [ "$testmode" == "appliance" ]; then
 #fi
