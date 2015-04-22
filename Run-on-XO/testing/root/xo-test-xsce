@@ -314,7 +314,8 @@ fi
 # Samba
 function test_samba(){
   mkdir -p /tmp/smb
-  if  mount -t cifs //schoolserver/public -o username=smbuser password=smbuser /tmp/smb; then
+  if  mount -t cifs  -o username=smbuser,password=smbuser //schoolserver/public /tmp/smb
+     then
     echo "this is a test" > /tmp/smb/test
     stored=`cat /tmp/smb/test`
     if [ "$stored" == "this is a test" ]; then
