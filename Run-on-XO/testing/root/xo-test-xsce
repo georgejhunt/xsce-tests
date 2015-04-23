@@ -33,7 +33,7 @@ LOGFILE=testresults
 
 function test_server_prep() {
 echo -n "[XSCE] Test server prep..."
-if ! curl  http://schoolserver/content/xsce.ini 
+if ! `curl  http://schoolserver/content/xsce.ini > xsce.ini`;then
   echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
   exit 1
 fi
@@ -90,7 +90,7 @@ function yellow() {
 }
 
 function log() {
- echo  "$1 : $2," >> $LOGFILE
+ echo  "\"$1\" : \"$2\"," >> $LOGFILE
 }
 
 # dhcpd - verify
@@ -458,7 +458,7 @@ fi
 # Main
 
 test_server_prep
-testmode=${settings['network_xsce_network_mode']}"
+testmode=${settings['network_xsce_network_mode']}
 echo
 echo "Starting Tests in $testmode mode on XO model $XO_VERSION"
 
