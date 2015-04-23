@@ -1,5 +1,5 @@
 # put any additional fields for inclusion in couchdb here
-notes: "this is a comment",
-platform: "2830NUC"
+"notes" : "this is a comment",
+"platform" : "2830NUC"
 # the following terminates the json dictionary definition
 }

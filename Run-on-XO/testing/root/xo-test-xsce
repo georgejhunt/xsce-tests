@@ -468,7 +468,7 @@ test_moodle
 test_munin
 test_ajenti
 test_ejabberd
-test_xovis
+#test_xovis
 test_activity_server
 test_kalite
 test_owncloud

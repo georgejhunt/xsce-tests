@@ -6,5 +6,6 @@ dbname="testlog"
 
 # fetch the ini settings for this unit under test
 declare -A settings=`cat xsce.ini.map`
-data=`cat testresults`
-curl --user $user_pass -vX PUT http://$ipaddr:5984/$dbname/$settings{["version_xsce_uuid"]} -d $data
+
+curl --user $user_pass -vX PUT -o ouput -H "Content-Type: application/json \
+      -d @testresults http://$ipaddr:5984/$dbname/${settings["version_xsce_uuid"]}
