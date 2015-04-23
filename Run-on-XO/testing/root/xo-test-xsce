@@ -236,7 +236,7 @@ fi
 
 function test_pathagar() {
 echo -n "[XSCE] Test Pathagar..."
-if `curl -Is http://schoolserver/books/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://schoolserver/books/ | grep -is "HTTP/1.1 302 FOUND" > /dev/null`
 then
       log pathagar OK
     green OK
@@ -477,15 +477,15 @@ test_pathagar
 test_kiwix
 #test_samba -- fc18 XO kernel does not have cifs configured
 
-#if [ "$testmode" == "appliance" ]; then
+#if [ "$testmode" == "Appliance" ]; then
 #fi
 
-if [ "$testmode" == "lan-controller" -o "$testmode" == "gateway" ]; then
+if [ "$testmode" == "LanController" -o "$testmode" == "gateway" ]; then
   ip_range
   test_dns
 fi
 
-if [ "$testmode" == "gateway" ]; then
+if [ "$testmode" == "Gateway" ]; then
   test_external_dns
   test_dansguardian
   test_squid_cache

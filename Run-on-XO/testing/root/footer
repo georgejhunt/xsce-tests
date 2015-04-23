@@ -1,5 +1,3 @@
-# put any additional fields for inclusion in couchdb here
-"notes" : "this is a comment",
+"notes" : "did not update firse,did it after runansible, broke ejabberd because it was updated",
 "platform" : "2830NUC"
-# the following terminates the json dictionary definition
 }
