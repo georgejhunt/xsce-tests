@@ -260,12 +260,26 @@ fi
 
 function test_kiwix() {
 echo -n "[XSCE] Test Kiwix..."
-if `curl -Is http://schoolserver:3000 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+# the kiwix server returns a blank header, even when serving 
+lines=`curl -s http://schoolserver:3000 | wc | gawk '{print $1}'`
+if [ $lines -gt 10 ]
 then
       log kiwix OK
     green OK
     else
       log kiwix FAILED
+    red FAILED!
+fi
+}
+
+function test_rachel() {
+echo -n "[XSCE] Test rachel..."
+if `curl -Is http://schoolserver/rachel/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+      log elgg OK
+    green OK
+    else
+      log elgg FAILED
     red FAILED!
 fi
 }
@@ -466,13 +480,16 @@ echo "Starting Tests in $testmode mode on XO model $XO_VERSION"
 test_httpd
 test_moodle
 test_munin
-test_ajenti
+if [ "x$ajenti_name" != "x" ];then
+  test_ajenti
+fi
 test_ejabberd
 #test_xovis
 test_activity_server
 test_kalite
 test_owncloud
 test_elgg
+test_rachel
 test_pathagar
 test_kiwix
 #test_samba -- fc18 XO kernel does not have cifs configured
