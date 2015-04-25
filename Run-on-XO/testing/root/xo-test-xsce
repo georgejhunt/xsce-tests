@@ -33,7 +33,8 @@ LOGFILE=testresults
 
 function test_server_prep() {
 echo -n "[XSCE] Test server prep..."
-if ! `curl  http://schoolserver/content/xsce.ini > xsce.ini`;then
+if ! `curl -Is http://schoolserver/content/xsce.ini | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
   echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
   exit 1
 fi
