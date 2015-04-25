@@ -38,7 +38,7 @@ then
   echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
   exit 1
 fi
-
+curl http://schoolserver/library/content/xsce.ini > xsce.ini
 cat xsce.ini | ./ini2bash.py > $LOGFILE
 cat xsce.ini | ./ini2map.py > xsce.ini.map
 
@@ -277,10 +277,10 @@ function test_rachel() {
 echo -n "[XSCE] Test rachel..."
 if `curl -Is http://schoolserver/rachel/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
-      log elgg OK
+      log rachel OK
     green OK
     else
-      log elgg FAILED
+      log rachel FAILED
     red FAILED!
 fi
 }
