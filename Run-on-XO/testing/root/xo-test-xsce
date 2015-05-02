@@ -33,12 +33,13 @@ LOGFILE=testresults
 
 function test_server_prep() {
 echo -n "[XSCE] Test server prep..."
-if ! `curl -Is http://schoolserver/content/xsce.ini | grep -is "HTTP/1.1 200 OK" > /dev/null`
+curl http://schoolserver/content/xsce.ini > xsce.ini
+lines=`cat xsce.ini | wc | gawk '{print $1}'`
+if [ $lines -lt 10 ];then
 then
   echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
   exit 1
 fi
-curl http://schoolserver/content/xsce.ini > xsce.ini
 cat xsce.ini | ./ini2bash.py > $LOGFILE
 cat xsce.ini | ./ini2map.py > xsce.ini.map
 
