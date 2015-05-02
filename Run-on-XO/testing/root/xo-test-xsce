@@ -38,7 +38,7 @@ then
   echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
   exit 1
 fi
-curl http://schoolserver/library/content/xsce.ini > xsce.ini
+curl http://schoolserver/content/xsce.ini > xsce.ini
 cat xsce.ini | ./ini2bash.py > $LOGFILE
 cat xsce.ini | ./ini2map.py > xsce.ini.map
 
