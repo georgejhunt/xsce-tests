@@ -36,7 +36,6 @@ echo -n "[XSCE] Test server prep..."
 curl http://schoolserver/content/xsce.ini > xsce.ini
 lines=`cat xsce.ini | wc | gawk '{print $1}'`
 if [ $lines -lt 10 ];then
-then
   echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
   exit 1
 fi
