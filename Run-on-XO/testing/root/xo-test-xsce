@@ -22,6 +22,7 @@ LOGFILE=testresults
 # - dansguardian: filtering
 # - backup: does a backup
 # - samba
+# - awstats
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
@@ -403,6 +404,18 @@ then
     green OK
     else
       log xovis FAILED
+    red FAILED!
+fi
+}
+
+function test_awstats() {
+echo -n "[XSCE] Test awstats..."
+if `curl -Is http://schoolserver/awstats/awstats.pl | grep -is "HTTP/1.1 200 OK" > /dev/null`
+then
+      log awstats OK
+    green OK
+    else
+      log awstats FAILED
     red FAILED!
 fi
 }
