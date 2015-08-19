@@ -1,5 +1,6 @@
 #!/bin/bash -x
 LOGFILE=testresults
+SCHOOLSERVER=172.18.96.1
 
 # Perform the following tests:
 # - dhcpd - done by connect script
@@ -34,7 +35,7 @@ LOGFILE=testresults
 
 function test_server_prep() {
 echo -n "[XSCE] Test server prep..."
-curl http://schoolserver/content/xsce.ini > xsce.ini
+curl http://${SCHOOLSERVER}/content/xsce.ini > xsce.ini
 lines=`cat xsce.ini | wc | gawk '{print $1}'`
 if [ $lines -lt 10 ];then
   echo "Please put a symbolic link to /etc/xsce/xsce.ini in /library/content on server"
@@ -50,14 +51,9 @@ declare -A settings=`cat xsce.ini.map`
 # default to gateway mode
 testmode="gateway"
 # except in appliance mode, let server's dns resolve schoolserver's name
-sed -i -e '/.*schoolserver.*/ d' /etc/hosts
 if [ $# -gt 0 ];then
   if [ "$1" == "appliance" ];then
-    # add an entry to hosts for schoolserver ip address
     testmode="appliance"
-    if [ "$2" ]; then
-      echo "$2   schoolserver schoolserver.lan" >>/etc/hosts
-    fi
   else
     if [ "$1" == "lan-controller" ]; then
       source ./lan-controller
@@ -111,7 +107,7 @@ fi
 # - dns: ping schoolserver, translate.google.com
 function test_dns() {
 echo -n "[XSCE] Test resolve schoolserver ..."
-if `ping -c 1 schoolserver | grep unknown`
+if `ping -c 1 ${SCHOOLSERVER} | grep unknown`
   then
       log ping_schoolserver FAILED
       red FAILED!
@@ -135,7 +131,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -Is http://schoolserver | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER} | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
 then
       log httpd OK
     green OK
@@ -165,7 +161,7 @@ fi
 
 function test_registration() {
 echo -n "[XSCE] Test if xo is registered via Authserver..."
-if `wget -qO - http://schoolserver:5000/  | grep -is "SHF00000000" > /dev/null`
+if `wget -qO - http://${SCHOOLSERVER}:5000/  | grep -is "SHF00000000" > /dev/null`
 then
       log authserver OK
     green OK
@@ -215,7 +211,7 @@ fi
 # - moodle
 function test_moodle() {
 echo -n "[XSCE] Test schoolserver moodle access..."
-if `curl -Is http://schoolserver/moodle/ | grep -is "moodle/login" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/moodle/ | grep -is "moodle/login" > /dev/null`
 then
       log moodle OK
     green OK
@@ -226,7 +222,7 @@ fi
 }
 function test_activity_server() {
 echo -n "[XSCE] Test schoolserver moodle access..."
-if `curl -Is http://schoolserver/activities/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/activities/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log activity_server OK
     green OK
@@ -238,7 +234,7 @@ fi
 
 function test_pathagar() {
 echo -n "[XSCE] Test Pathagar..."
-if `curl -Is http://schoolserver/books/ | grep -is "HTTP/1.1 302 FOUND" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/books/ | grep -is "HTTP/1.1 302 FOUND" > /dev/null`
 then
       log pathagar OK
     green OK
@@ -250,7 +246,7 @@ fi
 
 function test_kalite() {
 echo -n "[XSCE] Test Kalite..."
-if `curl -Is http://schoolserver:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log kalite OK
     green OK
@@ -263,7 +259,7 @@ fi
 function test_kiwix() {
 echo -n "[XSCE] Test Kiwix..."
 # the kiwix server returns a blank header, even when serving 
-lines=`curl -s http://schoolserver:3000 | wc | gawk '{print $1}'`
+lines=`curl -s http://${SCHOOLSERVER}:3000 | wc | gawk '{print $1}'`
 if [ $lines -gt 10 ]
 then
       log kiwix OK
@@ -276,7 +272,7 @@ fi
 
 function test_rachel() {
 echo -n "[XSCE] Test rachel..."
-if `curl -Is http://schoolserver/rachel/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/rachel/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log rachel OK
     green OK
@@ -289,7 +285,7 @@ fi
 
 function test_elgg() {
 echo -n "[XSCE] Test elgg..."
-if `curl -Is http://schoolserver/elgg/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/elgg/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log elgg OK
     green OK
@@ -301,7 +297,7 @@ fi
 
 function test_owncloud() {
 echo -n "[XSCE] Test owncloud..."
-if `curl -Is http://schoolserver/owncloud/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/owncloud/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log owncloud OK
     green OK
@@ -331,7 +327,7 @@ fi
 function test_ejabberd() {
 echo -n "[XSCE] Test ejabberd running..."
 
-if `curl -Is http://schoolserver:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
 then
       log ejabberd OK
     green OK
@@ -344,7 +340,7 @@ fi
 # Samba
 function test_samba(){
   mkdir -p /tmp/smb
-  if  mount -t cifs  -o username=smbuser,password=smbuser //schoolserver/public /tmp/smb
+  if  mount -t cifs  -o username=smbuser,password=smbuser //${SCHOOLSERVER}/public /tmp/smb
      then
     echo "this is a test" > /tmp/smb/test
     stored=`cat /tmp/smb/test`
@@ -370,7 +366,7 @@ function test_samba(){
 
 function test_munin() {
 echo -n "[XSCE] Test munin access..."
-if `curl -Is http://schoolserver/munin  | grep -is 'realm="Munin"' > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/munin  | grep -is 'realm="Munin"' > /dev/null`
 then
       log munin OK
     green OK
@@ -384,7 +380,7 @@ fi
 
 function test_ajenti() {
 echo -n "[XSCE] Test ajenti access..."
-if `curl -Is http://schoolserver:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log ajenti OK
     green OK
@@ -398,7 +394,7 @@ fi
 
 function test_xovis() {
 echo -n "[XSCE] Test xovis access..."
-if `curl -Is http://schoolserver:5984/xovis/_design/xovis-couchapp/index.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}:5984/xovis/_design/xovis-couchapp/index.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log xovis OK
     green OK
@@ -410,7 +406,7 @@ fi
 
 function test_awstats() {
 echo -n "[XSCE] Test awstats..."
-if `curl -Is http://schoolserver/awstats/awstats.pl | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/awstats/awstats.pl | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log awstats OK
     green OK
@@ -422,7 +418,7 @@ fi
 
 function iiab_presence() {
 echo -n "[IIAB] Test main iiab page..."
-if `curl -Is http://schoolserver/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log iiab OK
     green OK
@@ -432,7 +428,7 @@ then
 fi
 
 echo -n "[IIAB] Test wikipedia page..."
-if `curl -Is http://schoolserver/iiab/zim/wikipedia_gn_all_01_2013/A/Pirane.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/iiab/zim/wikipedia_gn_all_01_2013/A/Pirane.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log iiab_wikipedia OK
     green OK
@@ -442,7 +438,7 @@ then
 fi
 
 echo -n "[IIAB] Test khan akademy video..."
-if `curl -Is http://schoolserver/iiab/video/khanvideo/1/1/2/3.webm | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/iiab/video/khanvideo/1/1/2/3.webm | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log iiab_khan OK
     green OK
@@ -452,7 +448,7 @@ then
 fi
 
 echo -n "[IIAB] Test map link..."
-if `curl -Is http://schoolserver/iiab/maps/tile/6/31/29.png | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/iiab/maps/tile/6/31/29.png | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log iiab_map OK
     green OK
@@ -462,7 +458,7 @@ then
 fi
 
 echo -n "[IIAB] Test book search..."
-if `curl -Is http://schoolserver/iiab/books/search?q=moby+dick | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/iiab/books/search?q=moby+dick | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log iiab_search OK
     green OK
@@ -472,7 +468,7 @@ then
 fi
 
 echo -n "[IIAB] Test book download..."
-if `curl -Is http://schoolserver/iiab/books/epub/2701.epub | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -Is http://${SCHOOLSERVER}/iiab/books/epub/2701.epub | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log iiab_book OK
     green OK
