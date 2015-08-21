@@ -1,0 +1,57 @@
+#!/bin/bash -x
+# test script initiated by cmdsrv and reports via http
+TESTRESULTS=test
+LOGFILE=/etc/xsce/${TESTRESULTS}.ini
+
+function log() {
+ echo  "\"$1\" : \"$2\"," >> $LOGFILE
+}
+
+# first set up the link for xsce.ini if it does not exist
+if [ ! -h /library/content/xsce.ini ]; then
+   ln -sf /etc/xsce/xsce.ini /library/content/.xsce.ini
+fi
+
+# set up a link for feedback via httpd to client requesting test
+if [ ! -h /library/content/${TESTRESULTS}.ini ]; then
+
+   ln -sf /etc/xsce/${TESTRESULTS}.ini /library/content/.${TESTRESULTS}.ini
+fi
+
+function test_openvpn() {
+  if `ping -c 1 10.8.0.1 | grep unknown`
+    then
+        log openvpn FAILED
+    else
+        log openvpn OK
+  fi
+}	
+
+function test_teamviewer() {
+  if [ `systemctl status teamviewerd | grep running` ]; then
+    log teamviewer OK
+  else 
+    log teamviewer FAILED
+  fi
+} 
+
+function test_vnstat() {
+  LAN=`cat /etc/sysconfig/xs_lan_device`
+  WAN=`cat /etc/sysconfig/xs_wan_device`
+  RESULT=OK
+  if [ ! -z "$LAN" ]; then
+    vnstat | grep "$LAN" 
+    if [ $? -ne 0 ]; then
+      RESULT=FAILED
+    fi
+  fi
+  if [ ! -z "$WAN" ]; then
+    vnstat | grep "$WAN" 
+    if [ $? -ne 0 ]; then
+      RESULT=FAILED
+    fi
+  fi
+  log vnstat "$RESULT"
+}
+
+
