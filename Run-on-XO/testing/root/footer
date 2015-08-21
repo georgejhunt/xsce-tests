@@ -1,3 +1,3 @@
-"notes" : "did not update firse,did it after runansible, broke ejabberd because it was updated",
-"platform" : "2830NUC"
+"notes" : "install from netinstall CentOS. This is going to Rwanda",
+"platform" : "i3 NUC"
 }

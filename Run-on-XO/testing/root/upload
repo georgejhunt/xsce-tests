@@ -1,6 +1,6 @@
 #!/bin/bash -x
 # put the data into a couchdb
-ipaddr="192.168.123.11"
+ipaddr="5.5.1.23"
 user_pass="admin:admin"
 dbname="testlog"
 
