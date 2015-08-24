@@ -1,6 +1,7 @@
-#!/bin/bash -x
+#!/bin/bash 
 LOGFILE=testresults
 SCHOOLSERVER=172.18.96.1
+#SCHOOLSERVER=192.168.123.105
 
 # Perform the following tests:
 # - dhcpd - done by connect script
@@ -27,11 +28,12 @@ SCHOOLSERVER=172.18.96.1
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
-# ToDo
+# done on the server
 
 # - monit
 # - openvpn
 # - vnstat
+# - teamviewer
 
 function test_server_prep() {
 echo -n "[XSCE] Test server prep..."
@@ -47,27 +49,6 @@ cat xsce.ini | ./ini2map.py > xsce.ini.map
 # now create a bash map with this information
 declare -A settings=`cat xsce.ini.map`
 }
-
-# default to gateway mode
-testmode="gateway"
-# except in appliance mode, let server's dns resolve schoolserver's name
-if [ $# -gt 0 ];then
-  if [ "$1" == "appliance" ];then
-    testmode="appliance"
-  else
-    if [ "$1" == "lan-controller" ]; then
-      source ./lan-controller
-    fi
-  fi
-fi
-
-# Are we running on an XO platform
-if [ -f /proc/device-tree/mfg-data/MN ]
-then
-  XO_VERSION=`cat /proc/device-tree/mfg-data/MN`
-else
-  XO_VERSION="none"
-fi
 
 # Define colors for results
 NORMAL=$(tput sgr0)
@@ -131,7 +112,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -Is http://${SCHOOLSERVER} | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
+if `curl -I http://${SCHOOLSERVER} | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
 then
       log httpd OK
     green OK
@@ -246,7 +227,7 @@ fi
 
 function test_kalite() {
 echo -n "[XSCE] Test Kalite..."
-if `curl -Is http://${SCHOOLSERVER}:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+if `curl -I http://${SCHOOLSERVER}:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
 then
       log kalite OK
     green OK
@@ -479,7 +460,30 @@ fi
 
 }
 
+################################################################################
+# everythin above this is functions, and variables
 # Main
+
+# default to gateway mode
+testmode="gateway"
+# except in appliance mode, let server's dns resolve schoolserver's name
+if [ $# -gt 0 ];then
+  if [ "$1" == "appliance" ];then
+    testmode="appliance"
+  else
+    if [ "$1" == "lan-controller" ]; then
+      source ./lan-controller
+    fi
+  fi
+fi
+
+# Are we running on an XO platform
+if [ -f /proc/device-tree/mfg-data/MN ]
+then
+  XO_VERSION=`cat /proc/device-tree/mfg-data/MN`
+else
+  XO_VERSION="none"
+fi
 
 test_server_prep
 testmode=${settings['network_xsce_network_mode']}
