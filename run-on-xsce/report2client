@@ -1,22 +1,22 @@
-#!/bin/bash -x
-# test script initiated by cmdsrv and reports via http
-TESTRESULTS=test
-LOGFILE=/etc/xsce/${TESTRESULTS}.ini
+#!/bin/bash 
+# test script which runs on server and reports via http
+
+# script layout 1.variables 2.functions 3.main
+
+# variables ###################################################
+
+TESTRESULTS=server-test
+LOGBASE=/library/test
+mkdir -p ${LOGBASE}
+LOGFILE=${LOGBASE}/${TESTRESULTS}.ini
+set -u
+
+# functions ###################################################
 
 function log() {
  echo  "\"$1\" : \"$2\"," >> $LOGFILE
+ echo  "\"$1\" : \"$2\"," 
 }
-
-# first set up the link for xsce.ini if it does not exist
-if [ ! -h /library/content/xsce.ini ]; then
-   ln -sf /etc/xsce/xsce.ini /library/content/.xsce.ini
-fi
-
-# set up a link for feedback via httpd to client requesting test
-if [ ! -h /library/content/${TESTRESULTS}.ini ]; then
-
-   ln -sf /etc/xsce/${TESTRESULTS}.ini /library/content/.${TESTRESULTS}.ini
-fi
 
 function test_openvpn() {
   if `ping -c 1 10.8.0.1 | grep unknown`
@@ -28,7 +28,8 @@ function test_openvpn() {
 }	
 
 function test_teamviewer() {
-  if [ `systemctl status teamviewerd | grep running` ]; then
+  systemctl status teamviewerd | grep running > /dev/null
+  if [ $? ]; then
     log teamviewer OK
   else 
     log teamviewer FAILED
@@ -38,20 +39,38 @@ function test_teamviewer() {
 function test_vnstat() {
   LAN=`cat /etc/sysconfig/xs_lan_device`
   WAN=`cat /etc/sysconfig/xs_wan_device`
-  RESULT=OK
   if [ ! -z "$LAN" ]; then
     vnstat | grep "$LAN" 
     if [ $? -ne 0 ]; then
-      RESULT=FAILED
+      log vnstat-lan FAILED
+    else
+      log vnstat-lan OK
     fi
   fi
   if [ ! -z "$WAN" ]; then
     vnstat | grep "$WAN" 
     if [ $? -ne 0 ]; then
-      RESULT=FAILED
+      log vnstat-wan FAILED
+    else
+      log vnstat-wan OK
     fi
   fi
-  log vnstat "$RESULT"
 }
 
+function report_handle() {
+  HANDLE=`cat /etc/xsce/handle`
+  log handle ${HANDLE}
+}
+function report_uuid() {
+  HANDLE=`grep xsce_uuid /etc/xsce/xsce.ini |gawk '{print $3}'`
+  log xsce_uuid ${HANDLE}
+}
 
+# main ###################################################
+
+rm -rf ${LOGFILE}
+test_openvpn
+test_vnstat
+test_teamviewer
+report_handle
+report_uuid
