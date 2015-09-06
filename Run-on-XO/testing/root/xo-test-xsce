@@ -1,7 +1,8 @@
 #!/bin/bash
 LOGFILE=testresults
 #SCHOOLSERVER=172.18.96.1
-SCHOOLSERVER=192.168.123.12
+#SCHOOLSERVER=192.168.123.12
+SCHOOLSERVER=127.0.0.1
 
 # Perform the following tests:
 # - dhcpd - done by connect script
@@ -117,7 +118,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
+if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://${SCHOOLSERVER}/xs-portal" > /dev/null`
 then
       log httpd OK
     green OK
