@@ -48,7 +48,7 @@ else
 fi
 
 # complain and abort if SCHOOLERVER is not reachable
-ping -c 1 $SCHOOLSERVER > /dev/null
+ping -c 2 $SCHOOLSERVER > /dev/null
 if [ $? -ne 0 ]; then
   echo "Cannot communicate with SCHOOLSERVER at $SCHOOLSERVER . . .quitting"
   exit 1
@@ -144,7 +144,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
+if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://${SCHOOLSERVER}/xs-portal" > /dev/null`
 then
       log httpd OK
     green OK
