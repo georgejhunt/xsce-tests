@@ -1,4 +1,4 @@
-#!/bin/bash -x -e -u
+#!/bin/bash  
 #
 # conceptually removed from XSCE, this script can function in many contexts 
 #   -- even whe it is not removed, but rather, talks to the server as localhost
@@ -48,7 +48,7 @@ else
 fi
 
 # complain and abort if SCHOOLERVER is not reachable
-ping -c1 $SCHOOLSERVER
+ping -c 1 $SCHOOLSERVER > /dev/null
 if [ $? -ne 0 ]; then
   echo "Cannot communicate with SCHOOLSERVER at $SCHOOLSERVER . . .quitting"
   exit 1
@@ -120,7 +120,7 @@ fi
 # - dns: ping schoolserver, translate.google.com
 function test_dns() {
 echo -n "[XSCE] Test resolve schoolserver ..."
-if `ping -c 1 ${SCHOOLSERVER} | grep unknown`
+if `ping -c 1 ${SCHOOLSERVER} | grep unknown &> /dev/null`
   then
       log ping_schoolserver FAILED
       red FAILED!
@@ -187,7 +187,7 @@ fi
 
 # squid
 function test_squid_cache() {
-if [ ! $haveini || ${settings[squid_squid_enabled]} == "True"}; then
+if [ ! $haveini == TRUE ] || [ ${settings[squid_squid_enabled]} == "True" ]; then
   echo -n "[XSCE] Test squid proxy settings..."
   if `curl -Is http://one.laptop.org//sites/default/files/charlotte2.jpg | grep X-Cache | grep -q schoolserver`
   then
@@ -212,7 +212,7 @@ fi
 
 # - dansguardian
 function test_dansguardian() {
-if [ ! $haveini || ${settings[dansguardian_dansguardian_enabled]} == "True"}; then
+if [ ! $haveini == TRUE ] || [ ${settings[dansguardian_dansguardian_enabled]} == "True" ]; then
   echo -n "[XSCE] Test dansguardian settings..."
   if `wget -qO - http://www.pornhub.com | grep -is dansguardian > /dev/null`
   then
@@ -227,7 +227,7 @@ fi
 
 # - moodle
 function test_moodle() {
-if [ ! $haveini || ${settings[moodle_moodle_enabled]} == "True"}; then
+if [ ! $haveini == TRUE ] || [ ${settings[moodle_moodle_enabled]} == "True" ]; then
   echo -n "[XSCE] Test schoolserver moodle access..."
   if `curl -Is http://${SCHOOLSERVER}/moodle/ | grep -is "moodle/login" > /dev/null`
   then
@@ -253,7 +253,7 @@ function test_activity_server() {
 }
 
 function test_pathagar() {
-if [ ! $haveini || ${settings[pathagar_pathagar_enabled]} == "True"}; then
+if [ ! $haveini == TRUE ] || [ ${settings[pathagar_pathagar_enabled]} == "True" ]; then
   echo -n "[XSCE] Test Pathagar..."
   if `curl -Is http://${SCHOOLSERVER}/books/ | grep -is "HTTP/1.1 302 FOUND" > /dev/null`
   then
@@ -267,7 +267,7 @@ fi
 }
 
 function test_kalite() {
-  if [ ! $haveini || ${settings[kalite_kalite_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[kalite_kalite_enabled]} == "True" ]; then
     echo -n "[XSCE] Test Kalite..."
     if `curl -Is http://${SCHOOLSERVER}:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -281,7 +281,7 @@ function test_kalite() {
 }
 
 function test_kiwix() {
-  if [ ! $haveini || ${settings[kiwix_kiwix_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[kiwix_kiwix_enabled]} == "True" ]; then
   echo -n "[XSCE] Test Kiwix..."
 # the kiwix server returns a blank header, even when serving 
   lines=`curl -s http://${SCHOOLSERVER}:3000 | wc | gawk '{print $1}'`
@@ -297,7 +297,7 @@ function test_kiwix() {
 }
 
 function test_rachel() {
-  if [ ! $haveini || ${settings[rachel_rachel_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[rachel_rachel_enabled]} == "True" ]; then
     echo -n "[XSCE] Test rachel..."
     if `curl -Is http://${SCHOOLSERVER}/rachel/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -312,7 +312,7 @@ function test_rachel() {
 
 
 function test_elgg() {
-  if [ ! $haveini || ${settings[elgg_elgg_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[elgg_elgg_enabled]} == "True" ]; then
     echo -n "[XSCE] Test elgg..."
     if `curl -Is http://${SCHOOLSERVER}/elgg/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -326,7 +326,7 @@ function test_elgg() {
 }
 
 function test_owncloud() {
-  if [ ! $haveini || ${settings[owncloud_owncloud_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[owncloud_owncloud_enabled]} == "True" ]; then
     echo -n "[XSCE] Test owncloud..."
     if `curl -Is http://${SCHOOLSERVER}/owncloud/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -357,7 +357,7 @@ function test_backup() {
 
 # - ejabberd
 function test_ejabberd() {
-  if [ ! $haveini || ${settings[ejabberd_ejabberd_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[ejabberd_ejabberd_enabled]} == "True" ]; then
     echo -n "[XSCE] Test ejabberd running..."
 
     if `curl -Is http://${SCHOOLSERVER}:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
@@ -373,7 +373,7 @@ function test_ejabberd() {
 
 # Samba
 function test_samba(){
-  if [ ! $haveini || ${settings[samba_samba_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[samba_samba_enabled]} == "True" ]; then
     mkdir -p /tmp/smb
     if  mount -t cifs  -o username=smbuser,password=smbuser //${SCHOOLSERVER}/public /tmp/smb
        then
@@ -401,7 +401,7 @@ function test_samba(){
 # munin
 
 function test_munin() {
-  if [ ! $haveini || ${settings[munin_munin_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[munin_munin_enabled]} == "True" ]; then
     echo -n "[XSCE] Test munin access..."
     if `curl -Is http://${SCHOOLSERVER}/munin  | grep -is 'realm="Munin"' > /dev/null`
     then
@@ -417,7 +417,7 @@ function test_munin() {
 # ajenti
 
 function test_ajenti() {
-  if [ ! $haveini || ${settings[ajenti_ajenti_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[ajenti_ajenti_enabled]} == "True" ]; then
     echo -n "[XSCE] Test ajenti access..."
     if `curl -Is http://${SCHOOLSERVER}:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -433,7 +433,7 @@ function test_ajenti() {
 # xovis
 
 function test_xovis() {
-  if [ ! $haveini || ${settings[xovis_xovis_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[xovis_xovis_enabled]} == "True" ]; then
     echo -n "[XSCE] Test xovis access..."
     if `curl -Is http://${SCHOOLSERVER}:5984/xovis/_design/xovis-couchapp/index.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -447,7 +447,7 @@ function test_xovis() {
 }
 
 function test_awstats() {
-  if [ ! $haveini || ${settings[awstats_awstats_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[awstats_awstats_enabled]} == "True" ]; then
     echo -n "[XSCE] Test awstats..."
     if `curl -Is http://${SCHOOLSERVER}/awstats/awstats.pl | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -461,7 +461,7 @@ function test_awstats() {
 }
 
 function iiab_presence() {
-  if [ ! $haveini || ${settings[pathagar_pathagar_enabled]} == "True"}; then
+  if [ ! $haveini == TRUE ] || [ ${settings[pathagar_pathagar_enabled]} == "True" ]; then
     echo -n "[IIAB] Test main iiab page..."
     if `curl -Is http://${SCHOOLSERVER}/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -541,7 +541,6 @@ else
   XO_VERSION="none"
 fi
 
-test_server_prep
 echo
 echo "Starting Tests in $testmode mode on XO model $XO_VERSION"
 
@@ -585,6 +584,6 @@ echo "IIAB Tests"
 
 iiab_presence
 
-echo [server] >>$LOBFILE
+echo [server] >>$LOGFILE
 cat server-test.ini >> $LOGFILE
 cat footer >> $LOGFILE
