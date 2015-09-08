@@ -41,7 +41,12 @@ FALSE=-1
 
 # if no parameter, assume target is schoolserver across LAN
 if [ $# == 0 ]; then
-  SCHOOLSERVER=172.18.96.1
+  ping -c 2 172.18.96.1 > /dev/null
+  if [ $? -eq 0 ]; then
+    SCHOOLSERVER=172.18.96.1
+  else
+    SCHOOLSERVER=localhost
+  fi
 else
   SCHOOLSERVER=$1
 fi
@@ -70,10 +75,10 @@ if [ $lines -lt 10 ];then
   haveini=FALSE
 else
   haveni=TRUE
-  cat xsce.ini | $scriptdir/ini2bash.py > $LOGFILE
-  cat xsce.ini | $scriptdir/ini2map.py > $intermediatedir/xsce.ini.map
+  cat $intermediatedir/xsce.ini | $scriptdir/ini2bash.py > $LOGFILE
+  cat $intermediatedir/xsce.ini | $scriptdir/ini2map.py > $intermediatedir/xsce.ini.map
 
-# now create a bash map with this information
+# now create a bash array with this information
   declare -A settings=`cat $intermediatedir/xsce.ini.map`
 
 # get the results of the tests that are done on the server.
