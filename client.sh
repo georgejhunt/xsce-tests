@@ -144,7 +144,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://schoolserver/xs-portal" > /dev/null`
+if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://${SCHOOLSERVER}/xs-portal" > /dev/null`
 then
       log httpd OK
     green OK
