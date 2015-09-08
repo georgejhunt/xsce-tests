@@ -1,5 +1,0 @@
-systemctl start sshd.service
-systemctl enable sshd.service
-# change root password
-passwd
-ifconfig

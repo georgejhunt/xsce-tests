@@ -1,7 +1,7 @@
-#!/bin/bash
-LOGFILE=testresults
-#SCHOOLSERVER=172.18.96.1
-SCHOOLSERVER=192.168.123.12
+#!/bin/bash -x -e -u
+#
+# conceptually removed from XSCE, this script can function in many contexts 
+#   -- even whe it is not removed, but rather, talks to the server as localhost
 
 # Perform the following tests:
 # - dhcpd - done by connect script
@@ -35,31 +35,60 @@ SCHOOLSERVER=192.168.123.12
 # - vnstat
 # - teamviewer
 
-function test_server_prep() {
-echo -n "[XSCE] Test server prep..."
-curl -s http://${SCHOOLSERVER}/test/xsce.ini > xsce.ini
-lines=`cat xsce.ini | wc | gawk '{print $1}'`
-if [ $lines -lt 10 ];then
-  echo
-  echo "http://${SCHOOLSERVER}/test/xsce.ini was not found"
-  echo "Please run the ./report2client script on server before this test from client"
+##################  Define variables, determine context ##############
+LOGFILE=testresults
+TRUE=0
+FALSE=-1
+
+# if no parameter, assume target is schoolserver across LAN
+if [ $# == 0 ]; then
+  SCHOOLSERVER=172.18.96.1
+else
+  SCHOOLSERVER=$1
+fi
+
+# complain and abort if SCHOOLERVER is not reachable
+ping -c1 $SCHOOLSERVER
+if [ $? -ne 0 ]; then
+  echo "Cannot communicate with SCHOOLSERVER at $SCHOOLSERVER . . .quitting"
   exit 1
 fi
-cat xsce.ini | ./ini2bash.py > $LOGFILE
-cat xsce.ini | ./ini2map.py > xsce.ini.map
+
+# where is this script located?`
+scriptdir=$(cd `dirname ${0}`; pwd)
+
+# create an intermediates file for this server device
+intermediatedir=$scriptdir/$SCHOOLSERVER
+rm -rf $intermediatedir
+mkdir $intermediatedir
+
+#determine if the ini file is available to refine the tests performed
+curl -s http://${SCHOOLSERVER}/test/xsce.ini > $intermediatedir/xsce.ini
+
+lines=`cat xsce.ini | wc | gawk '{print $1}'`
+if [ $lines -lt 10 ];then
+  haveini=FALSE
+else
+  haveni=TRUE
+fi
+cat xsce.ini | $scriptdir/ini2bash.py > $LOGFILE
+cat xsce.ini | $scriptdir/ini2map.py > xsce.ini.map
 
 # now create a bash map with this information
 declare -A settings=`cat xsce.ini.map`
 
 # get the results of the tests that are done on the server.
-curl -s http://${SCHOOLSERVER}/test/server-test.ini > server-test.ini
-}
+if [ $haveini  ];
+curl -s http://${SCHOOLSERVER}/test/server-test.ini > $intermediatedir/server-test.ini
+
 
 # Define colors for results
 NORMAL=$(tput sgr0)
 GREEN=$(tput setaf 2; tput bold)
 YELLOW=$(tput setaf 3)
 RED=$(tput setaf 1)
+
+###############################  Functions  ###############################
 
 function red() {
     echo -e "$RED$*$NORMAL"
