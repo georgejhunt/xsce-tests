@@ -36,7 +36,6 @@
 # - teamviewer
 
 ##################  Define variables, determine context ##############
-LOGFILE=testresults
 TRUE=0
 FALSE=-1
 
@@ -59,6 +58,7 @@ scriptdir=$(cd `dirname ${0}`; pwd)
 
 # create an intermediates file for this server device
 intermediatedir=$scriptdir/$SCHOOLSERVER
+LOGFILE=$intermediatedir/testresults
 rm -rf $intermediatedir
 mkdir $intermediatedir
 
@@ -71,10 +71,10 @@ if [ $lines -lt 10 ];then
 else
   haveni=TRUE
   cat xsce.ini | $scriptdir/ini2bash.py > $LOGFILE
-  cat xsce.ini | $scriptdir/ini2map.py > xsce.ini.map
+  cat xsce.ini | $scriptdir/ini2map.py > $intermediatedir/xsce.ini.map
 
 # now create a bash map with this information
-  declare -A settings=`cat xsce.ini.map`
+  declare -A settings=`cat $intermediatedir/xsce.ini.map`
 
 # get the results of the tests that are done on the server.
   curl -s http://${SCHOOLSERVER}/test/server-test.ini > $intermediatedir/server-test.ini
