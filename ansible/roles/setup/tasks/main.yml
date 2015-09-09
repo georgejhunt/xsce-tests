@@ -3,5 +3,5 @@
   when: ansible_host == "schoolserver" 
 
 - name: Do stuff on the client
-  import: server.yml
+  import: client.yml
   when: ansible_host != 'schoolserver'
