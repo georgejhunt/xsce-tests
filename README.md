@@ -1,15 +1,26 @@
 xsce-tests
 ==========
 
-Scripts to test basic xsce functionality.  Scripts are planned for both client and server side testing.
+Scripts to test basic xsce functionality.  Scripts run on both client and server for testing.
+
+Run on Server
+-------------
+
+It is probably best to run the tests on the server first. This will make the server's configuration available to the client as it is testing. It will let the client skip over tests that would fail because the services are not enabled on the server.
+
+On the server, as root, do the following::
+
+#. cd /root
+#. clone the tests "git clone https://github.com/XSCE/xsce-tests --depth 1
+#. execute the "/root/xsce-tests/runansible" script.
+#. Do the test "/usr/bin/xsce-cmdsrv-ctl TEST"
 
 Run on XO1
 ----------
 
-This includes a tinycore bootable script to install test scripts on an xo and configure it to a minimal system
-with only terminal and browser.
+This includes a tinycore linux bootable USB image to install test scripts on an xo.
 
-Copy files to a usb stick, insert in an xo, and boot (without depressing the four buttons).
+Copy files in the "Run-on-XS" directory to a usb stick, insert in an xo, and boot (without depressing the four buttons).
 
 Enter the console by pressing Ctrl-Alt-F2 (F2 is the Friends key)
 
@@ -17,9 +28,9 @@ or start a terminal session
 
 and run the following Commands:
 
-* cd testing
-* ./connect <access point ssid> (assumes no password)
-* ./xo-test-xsce
+* cd /root/testing
+* ./connect <access point ssid> (assumes no password) or use the network neighborhood to connect to schoolserver Access Point.
+* ./xo-test-xsce.sh
 
 If you prefer to ssh into the xo, you can run ./start-sshd
 
@@ -28,11 +39,11 @@ Install Manually
 
 It is also possible to simply copy the test scripts into the proper directories and run them.
 
-On the target machine git clone https://github.com/XSCE/xsce-tests --depth 1
+On the target machine:
 
-mkdir /root/testing
-cp xsce-tests/Run-on-XO/testing/root/* /root/testing
-chmod 755 /root/testing/*
+ cd /root
+ git clone https://github.com/XSCE/xsce-tests --depth 1
+ cd xsce-tests/testing
 
 To run the XO-specific tests, which will be marked as FAIL otherwise:
 
