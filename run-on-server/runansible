@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ -f ezadmin.yml ]
+if [ -f test.yml ]
 then
- PLAYBOOK="ezadmin.yml"
+ PLAYBOOK="test.yml"
  INVENTORY="ansible_hosts"
  CWD=`pwd`
  echo "Running local playbooks! "
@@ -14,7 +14,7 @@ then
  exit
 fi
 
-export ANSIBLE_LOG_PATH="ezadmin-install.log"
+export ANSIBLE_LOG_PATH="xsce-tests.log"
 ansible -m setup -i $INVENTORY localhost --connection=local >> /dev/null
 
 ansible-playbook -i $INVENTORY $PLAYBOOK $@  
