@@ -1,5 +1,5 @@
-xsce-tests -- Test basic XSCE functionality
-===========================================
+Test basic XSCE functionality
+=============================
 
 Scripts run on both client and server for testing.
 
@@ -39,11 +39,11 @@ It is also possible to simply copy the test scripts into the proper directories 
 
 On the target machine:
 
- cd /root
- git clone https://github.com/XSCE/xsce-tests --depth 1
- cd xsce-tests/Run-on-xo/testing
- ./connect <access point ssid> (assumes no password) if you don't already have a network connection
- ./xo-test-xsce
+    * cd /root
+    * git clone https://github.com/XSCE/xsce-tests --depth 1
+    * cd xsce-tests/Run-on-xo/testing
+    * ./connect <access point ssid> (assumes no password) if you don't already have a network connection
+    * ./xo-test-xsce
 
 
 Tests Performed:
@@ -51,10 +51,11 @@ Tests Performed:
 ( if server test data is available:)
 * openvpn: Can the server connect to http://xscenet.net?
 * vnstat: Are network statistics being collecter for Lan and WAN?
-* tesmviewer: Is the teamviewer running?
+* teamviewer: Is the teamviewer running?
 * handle: Has an identifying handle been assigned?
 * uuid: What is the unique identifier of this server?
 
+( regardless of whether tests have been run on server)
 * dhcpd - done by connect script
 * dns: ping schoolserver, ping translate.google.com
 * httpd: access portal page
