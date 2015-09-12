@@ -8,29 +8,28 @@ Run on Server
 
 It is probably best to run the tests on the server first. This will make the server's configuration available to the client as it is testing. It will let the client skip over tests that would fail because the services are not enabled on the server.
 
-On the server, as root, do the following::
+On the server, as root, do the following:
 
-    #. cd /root
-    #. clone the tests "git clone https://github.com/XSCE/xsce-tests --depth 1
-    #. execute the "/root/xsce-tests/runansible" script.
-    #. Do the test "/usr/bin/xsce-cmdsrv-ctl TEST"
+    1. cd /root
+    2. clone the tests "git clone https://github.com/XSCE/xsce-tests --depth 1
+    3. execute the "/root/xsce-tests/runansible" script.
+    4. Do the test "/usr/bin/xsce-cmdsrv-ctl TEST"
+
+If you have enabled openvpn, and can connect to http://xscenet.net and see your server, you can ask the openvpn server at xscenet.net to perform the client test, and provide you with a report. This will never be quite as complete a test as running the client tests on an XO, because the wifi connection will not be tested.
 
 Run on XO1
 ----------
 
 This includes a tinycore linux bootable USB image to install test scripts on an xo.
 
-Copy files in the "Run-on-XS" directory to a usb stick, insert in an xo, and boot (without depressing the four buttons).
+  Copy files in the "Run-on-XS" directory to a usb stick, insert in an xo, and boot (without depressing the four buttons).
+  Enter the console by pressing Ctrl-Alt-F2 (F2 is the Friends key)
+  or start a terminal session
+  and run the following Commands:
 
-Enter the console by pressing Ctrl-Alt-F2 (F2 is the Friends key)
-
-or start a terminal session
-
-and run the following Commands:
-
-* cd /root/testing
-* ./connect <access point ssid> (assumes no password) or use the network neighborhood to connect to schoolserver Access Point.
-* ./xo-test-xsce.sh
+      * cd /root/testing
+      * ./connect <access point ssid> (assumes no password) or use the network neighborhood to connect to schoolserver Access Point.
+      * ./xo-test-xsce.sh
 
 If you prefer to ssh into the xo, you can run ./start-sshd
 
@@ -46,11 +45,6 @@ On the target machine:
  cd xsce-tests/testing
 
 To run the XO-specific tests, which will be marked as FAIL otherwise:
-
-mkdir /home/olpc/testing
-cp xsce-tests/Run-on-XO/testing/olpc/* /home/olpc/testing
-chmod 755 /home/olpc/testing/*
-chown -R olpc:olpc /home/olpc/testing
 
 If you want to remove the XO tests edit /root/testing/xo-test-xsce and comment out things that fail.
 
