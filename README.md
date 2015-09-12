@@ -15,7 +15,9 @@ On the server, as root, do the following:
     3. Go into run-on-server folder, install test with "./runansible" script.
     4. Do the test "xsce-cmdsrv-ctl TEST"
 
-If you have enabled openvpn, and can see your server at http://xscenet.net, you can ask the openvpn server at xscenet.net to perform the client test, and provide you with a report. This will never be quite as complete a test as running the client tests locally on an XO, because the wifi connection will not be tested.
+If you have enabled openvpn, and can see your server at http://xscenet.net, you can ask the openvpn server at xscenet.net to perform the client test, and provide you with a report.<this feature is not currently available>
+
+This will never be quite as complete a test as running the client tests locally on an XO, because the wifi connection will not be tested.
 
 Run on XO1
 ----------
