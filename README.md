@@ -10,10 +10,10 @@ It is probably best to run the tests on the server first. This will make the ser
 
 On the server, as root, do the following::
 
-#. cd /root
-#. clone the tests "git clone https://github.com/XSCE/xsce-tests --depth 1
-#. execute the "/root/xsce-tests/runansible" script.
-#. Do the test "/usr/bin/xsce-cmdsrv-ctl TEST"
+    #. cd /root
+    #. clone the tests "git clone https://github.com/XSCE/xsce-tests --depth 1
+    #. execute the "/root/xsce-tests/runansible" script.
+    #. Do the test "/usr/bin/xsce-cmdsrv-ctl TEST"
 
 Run on XO1
 ----------
