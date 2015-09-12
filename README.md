@@ -1,7 +1,7 @@
-xsce-tests
-==========
+xsce-tests -- Test basic XSCE functionality
+===========================================
 
-Scripts to test basic xsce functionality.  Scripts run on both client and server for testing.
+Scripts run on both client and server for testing.
 
 Run on Server
 -------------
@@ -12,10 +12,10 @@ On the server, as root, do the following:
 
     1. cd /root
     2. clone the tests "git clone https://github.com/XSCE/xsce-tests --depth 1
-    3. execute the "/root/xsce-tests/runansible" script.
+    3. Go into run-on-server folder, install test with "/root/xsce-tests/runansible" script.
     4. Do the test "/usr/bin/xsce-cmdsrv-ctl TEST"
 
-If you have enabled openvpn, and can connect to http://xscenet.net and see your server, you can ask the openvpn server at xscenet.net to perform the client test, and provide you with a report. This will never be quite as complete a test as running the client tests on an XO, because the wifi connection will not be tested.
+If you have enabled openvpn, and can see your server at http://xscenet.net, you can ask the openvpn server at xscenet.net to perform the client test, and provide you with a report. This will never be quite as complete a test as running the client tests locally on an XO, because the wifi connection will not be tested.
 
 Run on XO1
 ----------
@@ -27,11 +27,10 @@ This includes a tinycore linux bootable USB image to install test scripts on an 
   or start a terminal session
   and run the following Commands:
 
-      * cd /root/testing
+      * cd testing
       * ./connect <access point ssid> (assumes no password) or use the network neighborhood to connect to schoolserver Access Point.
       * ./xo-test-xsce.sh
 
-If you prefer to ssh into the xo, you can run ./start-sshd
 
 Install Manually
 ----------------
@@ -42,19 +41,19 @@ On the target machine:
 
  cd /root
  git clone https://github.com/XSCE/xsce-tests --depth 1
- cd xsce-tests/testing
+ cd xsce-tests/Run-on-xo/testing
+ ./connect <access point ssid> (assumes no password) if you don't already have a network connection
+ ./xo-test-xsce
 
-To run the XO-specific tests, which will be marked as FAIL otherwise:
-
-If you want to remove the XO tests edit /root/testing/xo-test-xsce and comment out things that fail.
-
-Now you can:
-
-* cd /root/testing
-* ./connect <access point ssid> (assumes no password) if you don't already have a network connection
-* ./xo-test-xsce
 
 Tests Performed:
+
+( if server test data is available:)
+* openvpn: Can the server connect to http://xscenet.net?
+* vnstat: Are network statistics being collecter for Lan and WAN?
+* tesmviewer: Is the teamviewer running?
+* handle: Has an identifying handle been assigned?
+* uuid: What is the unique identifier of this server?
 
 * dhcpd - done by connect script
 * dns: ping schoolserver, ping translate.google.com
@@ -68,6 +67,13 @@ Tests Performed:
 * ajenti: see if  schoolserver:9990 exists
 * backup: perform a backup for user SHF00000000
 * ejabberd: see if  schoolserver:5280/admin redirects to login
+* activitiy-server: call up the page showing activities available
+* ka-lite: Khan Academy with exercises
+* owncloud: easy interface to shared documents stored on server
+* elgg: Social networking
+* rachel: Large amounts of freely available content
+* pathagar: Book repository for student, teacher, generated content
+* kiwix: indexed access to wikipedia in many languages
 * xovis: see if http://schoolserver:5984/xovis/_design/xovis-couchapp/index.html exists
 * IIAB: main page and several items of content.
 *       content will fail if not present
