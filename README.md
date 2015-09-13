@@ -24,7 +24,7 @@ Run on XO1
 
 This includes a tinycore linux bootable USB image to install test scripts on an xo.
 
-  Copy files in the "Run-on-XS" directory to a usb stick, insert in an xo, and boot (without depressing the four buttons).
+  Copy files in the "Run-on-XO" directory to a usb stick, insert in an xo, and boot (without depressing the four buttons).
   Enter the console by pressing Ctrl-Alt-F2 (F2 is the Friends key)
   or start a terminal session
   and run the following Commands:
