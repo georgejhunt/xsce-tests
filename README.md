@@ -43,7 +43,7 @@ On the target machine:
 
     * cd /root
     * git clone https://github.com/XSCE/xsce-tests --depth 1
-    * cd xsce-tests/Run-on-xo/testing
+    * cd xsce-tests/Run-on-XO/testing
     * ./connect <access point ssid> (assumes no password) if you don't already have a network connection
     * ./xo-test-xsce
 
