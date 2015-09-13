@@ -1,7 +1,21 @@
-- name: Do stuff on the server
-  import: server.yml
-  when: ansible_host == "schoolserver" 
+- name: Set up httpd to pass ini and other setup info to client when properly authenticated
+  template: src=xsce-tests.conf
+            dest=/etc/httpd/conf.d/
+            mode=0644
 
-- name: Do stuff on the client
-  import: client.yml
-  when: ansible_host != 'schoolserver'
+- name: Make a directory where test results can be published
+  file: dest=/library/tests
+        state=directory
+        mode=0755
+
+- name: Create a link for the ini file, so that the client can adjust the tests to those enabled
+  file: dest=/library/tests/xsce.ini
+        src=/etc/xsce/xsce.ini
+        state=link
+
+- name: Copy the script that we will substitute for the dummy test into the scripts directory
+  template: src=onserver.sh
+            dest=/opt/schoolserver/xsce_cmdsrv/scripts/test.sh
+            mode=0755
+            backup=yes
+
