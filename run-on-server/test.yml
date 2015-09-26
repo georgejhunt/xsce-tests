@@ -1,0 +1,9 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+    ip: 172.18.96.1
+    role: gateway
+  roles:
+      - { role: setup, tags: ['setuup'] }
+#      - { role: openvpn`, tags: ['test'] }
