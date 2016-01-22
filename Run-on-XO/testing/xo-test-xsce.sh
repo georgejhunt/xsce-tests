@@ -1,6 +1,6 @@
-#!/bin/bash  
+#!/bin/bash
 #
-# conceptually removed from XSCE, this script can function in many contexts 
+# conceptually removed from XSCE, this script can function in many contexts
 #   -- even whe it is not removed, but rather, talks to the server as localhost
 
 # Perform the following tests:
@@ -288,7 +288,7 @@ function test_kalite() {
 function test_kiwix() {
   if [ ! $haveini == TRUE ] || [ ${settings[kiwix_kiwix_enabled]} == "True" ]; then
   echo -n "[XSCE] Test Kiwix..."
-# the kiwix server returns a blank header, even when serving 
+# the kiwix server returns a blank header, even when serving
   lines=`curl -s http://${SCHOOLSERVER}:3000 | wc | gawk '{print $1}'`
     if [ $lines -gt 10 ]
     then
@@ -347,7 +347,7 @@ function test_owncloud() {
 # - ds-backup
 function test_backup() {
   echo -n "[XSCE] Test backup..."
-  su - olpc -c "python /home/olpc/testing/idmgr-test.py >/home/olpc/testing/backup-test.result"
+  su - olpc -c "python /home/olpc/testing/ds-backup-test.py >/home/olpc/testing/backup-test.result"
   rc=`cat /home/olpc/testing/backup-test.result`
 
   if [ "$rc" == "OK" ]
@@ -416,7 +416,7 @@ function test_munin() {
         log munin FAILED
         red FAILED!
     fi
-  fi  
+  fi
 }
 
 # ajenti
