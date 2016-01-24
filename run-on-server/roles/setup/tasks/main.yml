@@ -4,12 +4,12 @@
             mode=0644
 
 - name: Make a directory where test results can be published
-  file: dest=/library/tests
+  file: dest={{ xsce_test_dir }}
         state=directory
         mode=0755
 
 - name: Create a link for the ini file, so that the client can adjust the tests to those enabled
-  file: dest=/library/tests/xsce.ini
+  file: dest="{{ xsce_test_dir }}/xsce.ini"
         src=/etc/xsce/xsce.ini
         state=link
 
