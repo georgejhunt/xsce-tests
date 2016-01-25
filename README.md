@@ -13,6 +13,7 @@ On the server, as root, do the following:
     1. cd /root
     2. clone the tests "git clone https://github.com/XSCE/xsce-tests --depth 1
     3. Go into run-on-server folder, install test with "./runansible" script.
+    4. If the server is not an XO or you want to change the OpenVPN handle run "xs-handle"
     4. Do the test "xsce-cmdsrv-ctl TEST"
 
 If you have enabled openvpn, and can see your server at http://xscenet.net, you can ask the openvpn server at xscenet.net to perform the client test, and provide you with a report. (this feature is not currently available)
