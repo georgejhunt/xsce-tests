@@ -3,5 +3,5 @@
 
 mkdir /home/olpc/testing
 cp olpc/* /home/olpc/testing
-chmod 755 /home/olpc/testing/*
-chown olpc:olpc /home/olpc/testing/*
+chmod -R 755 /home/olpc/testing
+chown -R olpc:olpc /home/olpc/testing
