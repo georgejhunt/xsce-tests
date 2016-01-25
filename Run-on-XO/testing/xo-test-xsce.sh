@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # conceptually removed from XSCE, this script can function in many contexts
-#   -- even whe it is not removed, but rather, talks to the server as localhost
+#   -- even when it is not removed, but rather, talks to the server as localhost
 
 # Perform the following tests:
 # - dhcpd - done by connect script
@@ -39,6 +39,9 @@
 TRUE=0
 FALSE=-1
 
+# Hard code the default admin password
+AdminPW=g0adm1n
+
 # if no parameter, assume target is schoolserver across LAN
 if [ $# == 0 ]; then
   ping -c 2 172.18.96.1 > /dev/null
@@ -68,7 +71,7 @@ rm -rf $intermediatedir
 mkdir $intermediatedir
 
 #determine if the ini file is available to refine the tests performed
-curl -s http://${SCHOOLSERVER}/test/xsce.ini > $intermediatedir/xsce.ini
+curl -s -u xsce-admin:$AdminPW http://${SCHOOLSERVER}/test/xsce.ini > $intermediatedir/xsce.ini
 
 lines=`cat xsce.ini | wc | gawk '{print $1}'`
 if [ $lines -lt 10 ];then
