@@ -1,6 +1,0 @@
-#!/bin/bash -x
-# copy files to be run by olpc
-
-mkdir /home/olpc/testing
-cp /media/testing/olpc/* /home/olpc/testing
-chmod 755 /home/olpc/testing/*
