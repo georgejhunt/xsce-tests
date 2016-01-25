@@ -1,0 +1,11 @@
+#!/bin/bash -x
+# put the data into a couchdb
+ipaddr="5.5.1.23"
+user_pass="admin:admin"
+dbname="testlog"
+
+# fetch the ini settings for this unit under test
+declare -A settings=`cat xsce.ini.map`
+
+curl --user $user_pass -vX PUT -o output  \
+      -d @testresults http://$ipaddr:5984/$dbname/${settings["version_xsce_uuid"]}

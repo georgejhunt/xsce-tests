@@ -1,0 +1,24 @@
+#!/bin/bash 
+# put the data into a couchdb
+ipaddr="5.5.1.23"
+user_pass="admin:admin"
+dbname="testlog"
+
+# fetch the ini settings for this unit under test
+# we'll use the xsce_uuid as record identifier for the test
+declare -A settings=`cat xsce.ini.map`
+
+# in order to update a document, we need its current rev number
+docid=`curl -Iis http://$ipaddr:5984/$dbname/${settings["version_xsce_uuid"]} | \
+	gawk 'BEGIN {FS="[ \r\n]+"} /ETag:/ {print $2}'`
+
+# rewrite the document to include the headers
+echo -n "{\"_id\":\"${settings[version_xsce_uuid]}\",\"_rev\":$docid," > id_testresults
+tail -n +2 testresults >> id_testresults
+curl --user $user_pass -vX PUT \
+      -d @id_testresults  http://$ipaddr:5984/$dbname/${settings["version_xsce_uuid"]}
+if [ $? -eq 0 ];then
+  echo ok
+else
+  echo "ERROR, record not written"
+fi

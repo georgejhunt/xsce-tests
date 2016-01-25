@@ -1,0 +1,11 @@
+- name: Put the private key into ssh directory on client
+  copy: dest=/root/.ssh/xsce-test
+        src=xsce-test
+        mode=0600
+
+- name: Get the tools needed for testing
+  yum: name={{ item }}
+  with_items:
+     - openvpn
+     - expect
+     - curl 

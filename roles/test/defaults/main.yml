@@ -1,0 +1,15 @@
+---
+# The values here are defaults.
+# To override them edit the main var definitions in xsce/vars
+
+test_target_host: "127.0.0.1:5984"
+
+test_db_name: test
+test_db_user: Admin
+test_db_password: changeme
+test_db_login: "{{ test_db_user }}:{{ test_db_password }}"
+test_db_url: "http://{{ test_db_login }}@{{ test_target_host }}/{{ test_db_name }}"
+
+test_root: "/opt/test"
+test_repo_url: "http://unleashkids.org:5984"
+test_chart_heading: "My School: Usage Data Visualization"

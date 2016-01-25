@@ -1,0 +1,7 @@
+- name: Do stuff on the server
+  import: server.yml
+  when: ansible_host == "schoolserver" 
+
+- name: Do stuff on the client
+  import: server.yml
+  when: ansible_host != 'schoolserver'
