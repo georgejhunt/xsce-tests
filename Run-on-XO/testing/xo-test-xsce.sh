@@ -553,7 +553,7 @@ function test_calibre() {
 function test_schooltool() {
   if [ ! $haveini == TRUE ] || [ ${settings[schooltool_enabled]} == "True" ]; then
     echo -n "[XSCE] Test schooltool..."
-    if `curl -Is http://${SCHOOLSERVER}/schooltool | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    if `curl -Is http://${SCHOOLSERVER}/schooltool | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 303" > /dev/null`
     then
         log schooltool OK
         green OK
