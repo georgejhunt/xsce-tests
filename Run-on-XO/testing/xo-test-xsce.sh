@@ -25,6 +25,13 @@
 # - backup: does a backup
 # - samba
 # - awstats
+# - wordpress
+# - dokuwiki
+# - phpmyadmin
+# - cups
+# - calibre
+# - schooltool
+# - sugarizer
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
@@ -468,6 +475,111 @@ function test_awstats() {
   fi
 }
 
+# - wordpress
+function test_wordpress() {
+  if [ ! $haveini == TRUE ] || [ ${settings[wordpress_worpress_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test wordpress..."
+    if `curl -Is http://${SCHOOLSERVER}/wordpress | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log wordpress OK
+        green OK
+    else
+        log wordpress FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - dokuwiki
+function test_dokuwiki() {
+  if [ ! $haveini == TRUE ] || [ ${settings[dokuwiki_dokuwiki_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test dokuwiki..."
+    if `curl -Is http://${SCHOOLSERVER}/wiki | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log dokuwiki OK
+        green OK
+    else
+        log dokuwiki FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - phpmyadmin
+function test_phpmyadmin() {
+  if [ ! $haveini == TRUE ] || [ ${settings[phpmyadmin_phpmyadmin_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test phpmyadmin..."
+    if `curl -Is http://${SCHOOLSERVER}/phpmyadmin | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log phpmyadmin OK
+        green OK
+    else
+        log phpmyadmin FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - cups
+function test_cups() {
+  if [ ! $haveini == TRUE ] || [ ${settings[cups_cups_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test cups..."
+    if `curl -u xsce-admin:$AdminPW -Is http://${SCHOOLSERVER}:631 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log cups OK
+        green OK
+    else
+        log cups FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - calibre
+function test_calibre() {
+  if [ ! $haveini == TRUE ] || [ ${settings[calibre_calibre_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test calibre..."
+    if `curl -Is http://${SCHOOLSERVER}/calibre | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log calibre OK
+        green OK
+    else
+        log calibre FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - schooltool
+function test_schooltool() {
+  if [ ! $haveini == TRUE ] || [ ${settings[schooltool_schooltool_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test schooltool..."
+    if `curl -Is http://${SCHOOLSERVER}/schooltool | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log schooltool OK
+        green OK
+    else
+        log schooltool FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - sugarizer
+function test_sugarizer() {
+  if [ ! $haveini == TRUE ] || [ ${settings[sugarizer_sugarizer_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test sugarizer..."
+    if `curl -Is http://${SCHOOLSERVER}/sugarizer | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log sugarizer OK
+        green OK
+    else
+        log sugarizer FAILED
+        red FAILED!
+    fi
+  fi
+}
+
 function iiab_presence() {
   if [ ! $haveini == TRUE ] || [ ${settings[pathagar_pathagar_enabled]} == "True" ]; then
     echo -n "[IIAB] Test main iiab page..."
@@ -568,6 +680,14 @@ test_elgg
 test_rachel
 test_pathagar
 test_kiwix
+test_wordpress
+test_dokuwiki
+test_phpmyadmin
+test_cups
+test_calibre
+test_schooltool
+test_sugarizer
+
 #test_samba -- fc18 XO kernel does not have cifs configured
 
 if [ "$testmode" == "LanController" -o "$testmode" == "Gateway" ]; then
