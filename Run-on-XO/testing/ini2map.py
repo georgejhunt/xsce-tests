@@ -23,7 +23,10 @@ def emit_bashmap(config):
         for pair in config.items(sec):
             k, v = pair
             if v[0] == '"':
-                print '["%s_%s"]=%s' % (sec, k, v),
+                if v[1] == '"':
+                    print '["%s_%s"]=%s' % (sec, k, v[1:-1]),
+                else:
+                    print '["%s_%s"]=%s' % (sec, k, v),
             else:
                 print '["%s_%s"]="%s"' % (sec, k, v),
     print ')'

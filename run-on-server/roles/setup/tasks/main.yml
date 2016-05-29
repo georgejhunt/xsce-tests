@@ -13,6 +13,11 @@
         src=/etc/xsce/xsce.ini
         state=link
 
+- name: Create a link for the console config file, so that the client can verify
+  file: dest="{{ xsce_test_dir }}/config_vars.yml"
+        src=/etc/xsce/config_vars.yml
+        state=link
+
 - name: Copy the script that we will substitute for the dummy test into the scripts directory
   template: src=onserver.sh
             dest=/opt/schoolserver/xsce_cmdsrv/scripts/test.sh
