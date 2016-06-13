@@ -53,7 +53,7 @@ AdminPW=g0adm1n
 if [ $# == 0 ]; then
   ping -c 2 172.18.96.1 > /dev/null
   if [ $? -ne 0 ]; then
-    SCHOOLSERVER=172.18.96.1
+    SCHOOLSERVER=schoolserver.lan
   else
     SCHOOLSERVER=localhost
   fi
@@ -160,7 +160,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://${SCHOOLSERVER}/xs-portal" > /dev/null`
+if `curl -s -I http://${SCHOOLSERVER} | grep -is "302 Found" > /dev/null`
 then
       log httpd OK
     green OK
@@ -245,7 +245,7 @@ fi
 function test_moodle() {
 if [ ! $haveini == TRUE ] || [ ${settings[moodle_moodle_enabled]} == "True" ]; then
   echo -n "[XSCE] Test schoolserver moodle access..."
-  if `curl -Is http://${SCHOOLSERVER}/moodle/ | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
+  if `curl -Is http://${SCHOOLSERVER}/moodle | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
   then
       log moodle OK
       green OK
@@ -344,7 +344,7 @@ function test_elgg() {
 function test_owncloud() {
   if [ ! $haveini == TRUE ] || [ ${settings[owncloud_enabled]} == "True" ]; then
     echo -n "[XSCE] Test owncloud..."
-    if `curl -Is http://${SCHOOLSERVER}/owncloud/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    if `curl -IsL http://${SCHOOLSERVER}/owncloud | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
         log owncloud OK
         green OK
