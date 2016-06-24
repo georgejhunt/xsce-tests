@@ -93,7 +93,7 @@ else
   declare -A settings=`cat $intermediatedir/xsce.ini.map`
 
 # get the results of the tests that are done on the server.
-  curl -s http://${SCHOOLSERVER}/test/server-test.ini > $intermediatedir/server-test.ini
+  curl -s -u xsce-admin:$AdminPW  http://${SCHOOLSERVER}/test/server-test.ini > $intermediatedir/server-test.ini
 fi
 
 # Define colors for results
@@ -321,7 +321,11 @@ function test_rachel() {
         green OK
     else
         log rachel FAILED
-        red FAILED!
+        if [ ${settings[rachel_content_found]} == "False" ]; then
+            red No_Content
+        else
+            red FAILED!
+        fi
     fi
   fi
 }
@@ -551,7 +555,8 @@ function test_calibre() {
 
 # - schooltool
 function test_schooltool() {
-  if [ ! $haveini == TRUE ] || [ ${settings[schooltool_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [[ ! -z ${settings[schooltool_enabled]} && \
+        ${settings[schooltool_enabled]} == "True" ]] ; then
     echo -n "[XSCE] Test schooltool..."
     if `curl -Is http://${SCHOOLSERVER}/schooltool | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 303" > /dev/null`
     then
@@ -560,6 +565,7 @@ function test_schooltool() {
     else
         log schooltool FAILED
         red FAILED!
+        red "schooltool disabled in armv7l"
     fi
   fi
 }
@@ -590,7 +596,10 @@ function iiab_presence() {
         log iiab FAILED
         red FAILED!
     fi
-
+  fi
+}
+function iiab_wikipedia() {
+  if [ ! $haveini == TRUE ] || [ ${settings[iiab_enabled]} == "True" ]; then
     echo -n "[IIAB] Test wikipedia page..."
     if `curl -Is http://${SCHOOLSERVER}/iiab/zim/wikipedia_gn_all_01_2013/A/Pirane.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -712,5 +721,6 @@ echo "IIAB Tests"
 iiab_presence
 
 echo [server] >>$LOGFILE
-cat server-test.ini >> $LOGFILE
+cat $intermediatedir/server-test.ini >> $LOGFILE
+cat $intermediatedir/server-test.ini
 #cat footer >> $LOGFILE
