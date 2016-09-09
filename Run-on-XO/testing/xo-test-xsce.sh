@@ -52,7 +52,7 @@ AdminPW=g0adm1n
 # if no parameter, assume target is schoolserver across LAN
 if [ $# == 0 ]; then
   ping -c 2 172.18.96.1 > /dev/null
-  if [ $? -ne 0 ]; then
+  if [ $? -eq 0 ]; then
     SCHOOLSERVER=schoolserver.lan
   else
     SCHOOLSERVER=localhost
@@ -391,6 +391,7 @@ function test_ejabberd() {
 
 # Samba
 function test_samba(){
+  echo -n "[XSCE] Test samba running..."
   if [ ! $haveini == TRUE ] || [ ${settings[samba_enabled]} == "True" ]; then
     mkdir -p /tmp/smb
     if  mount -t cifs  -o username=smbuser,password=smbuser //${SCHOOLSERVER}/public /tmp/smb
@@ -693,10 +694,10 @@ test_dokuwiki
 test_phpmyadmin
 test_cups
 test_calibre
-test_schooltool
+#test_schooltool
 test_sugarizer
 
-#test_samba -- fc18 XO kernel does not have cifs configured
+test_samba -- fc18 XO kernel does not have cifs configured
 
 if [ "$testmode" == "LanController" -o "$testmode" == "Gateway" ]; then
   ip_range
