@@ -25,6 +25,13 @@
 # - backup: does a backup
 # - samba
 # - awstats
+# - wordpress
+# - dokuwiki
+# - phpmyadmin
+# - cups
+# - calibre
+# - schooltool
+# - sugarizer
 # - IIAB: main page and several items of content.
 #   content will fail if not present
 
@@ -249,13 +256,13 @@ fi
 }
 
 function test_activity_server() {
-  echo -n "[XSCE] Test schoolserver moodle access..."
+  echo -n "[XSCE] Test schoolserver activity_server..."
   if `curl -Is http://${SCHOOLSERVER}/activities/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
   then
     log activity_server OK
     green OK
   else
-    log activity_seerver FAILED
+    log activity_server FAILED
     red FAILED!
   fi
 }
