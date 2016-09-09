@@ -52,14 +52,15 @@ AdminPW=g0adm1n
 # if no parameter, assume target is schoolserver across LAN
 if [ $# == 0 ]; then
   ping -c 2 172.18.96.1 > /dev/null
-  if [ $? -eq 0 ]; then
-    SCHOOLSERVER=172.18.96.1
+  if [ $? -ne 0 ]; then
+    SCHOOLSERVER=schoolserver.lan
   else
     SCHOOLSERVER=localhost
   fi
 else
   SCHOOLSERVER=$1
 fi
+echo School server is $SCHOOLSERVER
 
 # complain and abort if SCHOOLERVER is not reachable
 ping -c 1 $SCHOOLSERVER > /dev/null
@@ -73,26 +74,26 @@ scriptdir=$(cd `dirname ${0}`; pwd)
 
 # create an intermediates file for this server device
 intermediatedir=$scriptdir/$SCHOOLSERVER
-LOGFILE=$intermediatedir/testresults
+LOGFILE=$intermediatedir/testresults.log
 rm -rf $intermediatedir
-mkdir $intermediatedir
+mkdir -p $intermediatedir
 
 #determine if the ini file is available to refine the tests performed
 curl -s -u xsce-admin:$AdminPW http://${SCHOOLSERVER}/test/xsce.ini > $intermediatedir/xsce.ini
 
-lines=`cat xsce.ini | wc | gawk '{print $1}'`
+lines=`cat $intermediatedir/xsce.ini | wc | gawk '{print $1}'`
 if [ $lines -lt 10 ];then
   haveini=FALSE
 else
   haveni=TRUE
-  cat $intermediatedir/xsce.ini | $scriptdir/ini2bash.py > $LOGFILE
-  cat $intermediatedir/xsce.ini | $scriptdir/ini2map.py > $intermediatedir/xsce.ini.map
+  cat $intermediatedir/xsce.ini | ./ini2bash.py > $LOGFILE
+  cat $intermediatedir/xsce.ini | ./ini2map.py > $intermediatedir/xsce.ini.map
 
 # now create a bash array with this information
   declare -A settings=`cat $intermediatedir/xsce.ini.map`
 
 # get the results of the tests that are done on the server.
-  curl -s http://${SCHOOLSERVER}/test/server-test.ini > $intermediatedir/server-test.ini
+  curl -s -u xsce-admin:$AdminPW  http://${SCHOOLSERVER}/test/server-test.ini > $intermediatedir/server-test.ini
 fi
 
 # Define colors for results
@@ -159,7 +160,7 @@ fi
 # - httpd: access home page
 function test_httpd() {
 echo -n "[XSCE] Test schoolserver http access..."
-if `curl -s -I http://${SCHOOLSERVER} | grep -is "Location: http://${SCHOOLSERVER}/xs-portal" > /dev/null`
+if `curl -s -I http://${SCHOOLSERVER} | grep -is "302 Found" > /dev/null`
 then
       log httpd OK
     green OK
@@ -202,7 +203,7 @@ fi
 
 # squid
 function test_squid_cache() {
-if [ ! $haveini == TRUE ] || [ ${settings[squid_squid_enabled]} == "True" ]; then
+if [ ! $haveini == TRUE ] || [ ${settings[squid_enabled]} == "True" ]; then
   echo -n "[XSCE] Test squid proxy settings..."
   if `curl -Is http://one.laptop.org//sites/default/files/charlotte2.jpg | grep X-Cache | grep -q schoolserver`
   then
@@ -227,7 +228,7 @@ fi
 
 # - dansguardian
 function test_dansguardian() {
-if [ ! $haveini == TRUE ] || [ ${settings[dansguardian_dansguardian_enabled]} == "True" ]; then
+if [ ! $haveini == TRUE ] || [ ${settings[dansguardian_enabled]} == "True" ]; then
   echo -n "[XSCE] Test dansguardian settings..."
   if `wget -qO - http://www.pornhub.com | grep -is dansguardian > /dev/null`
   then
@@ -244,7 +245,7 @@ fi
 function test_moodle() {
 if [ ! $haveini == TRUE ] || [ ${settings[moodle_moodle_enabled]} == "True" ]; then
   echo -n "[XSCE] Test schoolserver moodle access..."
-  if `curl -Is http://${SCHOOLSERVER}/moodle/ | grep -is "moodle/login" > /dev/null`
+  if `curl -Is http://${SCHOOLSERVER}/moodle | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
   then
       log moodle OK
       green OK
@@ -268,7 +269,7 @@ function test_activity_server() {
 }
 
 function test_pathagar() {
-if [ ! $haveini == TRUE ] || [ ${settings[pathagar_pathagar_enabled]} == "True" ]; then
+if [ ! $haveini == TRUE ] || [ ${settings[pathagar_name]} == "pathagar" ]; then
   echo -n "[XSCE] Test Pathagar..."
   if `curl -Is http://${SCHOOLSERVER}/books/ | grep -is "HTTP/1.1 302 FOUND" > /dev/null`
   then
@@ -282,7 +283,7 @@ fi
 }
 
 function test_kalite() {
-  if [ ! $haveini == TRUE ] || [ ${settings[kalite_kalite_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[kalite_enabled]} == "True" ]; then
     echo -n "[XSCE] Test Kalite..."
     if `curl -Is http://${SCHOOLSERVER}:8008 | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -296,7 +297,7 @@ function test_kalite() {
 }
 
 function test_kiwix() {
-  if [ ! $haveini == TRUE ] || [ ${settings[kiwix_kiwix_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[kiwix-serve_enabled]} == "True" ]; then
   echo -n "[XSCE] Test Kiwix..."
 # the kiwix server returns a blank header, even when serving
   lines=`curl -s http://${SCHOOLSERVER}:3000 | wc | gawk '{print $1}'`
@@ -312,7 +313,7 @@ function test_kiwix() {
 }
 
 function test_rachel() {
-  if [ ! $haveini == TRUE ] || [ ${settings[rachel_rachel_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[rachel_enabled]} == "True" ]; then
     echo -n "[XSCE] Test rachel..."
     if `curl -Is http://${SCHOOLSERVER}/rachel/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -320,14 +321,18 @@ function test_rachel() {
         green OK
     else
         log rachel FAILED
-        red FAILED!
+        if [ ${settings[rachel_content_found]} == "False" ]; then
+            red No_Content
+        else
+            red FAILED!
+        fi
     fi
   fi
 }
 
 
 function test_elgg() {
-  if [ ! $haveini == TRUE ] || [ ${settings[elgg_elgg_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[elgg_enabled]} == "True" ]; then
     echo -n "[XSCE] Test elgg..."
     if `curl -Is http://${SCHOOLSERVER}/elgg/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -341,9 +346,9 @@ function test_elgg() {
 }
 
 function test_owncloud() {
-  if [ ! $haveini == TRUE ] || [ ${settings[owncloud_owncloud_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[owncloud_enabled]} == "True" ]; then
     echo -n "[XSCE] Test owncloud..."
-    if `curl -Is http://${SCHOOLSERVER}/owncloud/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    if `curl -IsL http://${SCHOOLSERVER}/owncloud | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
         log owncloud OK
         green OK
@@ -372,7 +377,6 @@ function test_backup() {
 
 # - ejabberd
 function test_ejabberd() {
-  if [ ! $haveini == TRUE ] || [ ${settings[ejabberd_ejabberd_enabled]} == "True" ]; then
     echo -n "[XSCE] Test ejabberd running..."
 
     if `curl -Is http://${SCHOOLSERVER}:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
@@ -383,12 +387,11 @@ function test_ejabberd() {
         log ejabberd FAILED
         red FAILED!
     fi
-  fi
 }
 
 # Samba
 function test_samba(){
-  if [ ! $haveini == TRUE ] || [ ${settings[samba_samba_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[samba_enabled]} == "True" ]; then
     mkdir -p /tmp/smb
     if  mount -t cifs  -o username=smbuser,password=smbuser //${SCHOOLSERVER}/public /tmp/smb
        then
@@ -416,7 +419,7 @@ function test_samba(){
 # munin
 
 function test_munin() {
-  if [ ! $haveini == TRUE ] || [ ${settings[munin_munin_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[munin_enabled]} == "True" ]; then
     echo -n "[XSCE] Test munin access..."
     if `curl -Is http://${SCHOOLSERVER}/munin  | grep -is 'realm="Munin"' > /dev/null`
     then
@@ -432,7 +435,7 @@ function test_munin() {
 # ajenti
 
 function test_ajenti() {
-  if [ ! $haveini == TRUE ] || [ ${settings[ajenti_ajenti_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[ajenti_enabled]} == "True" ]; then
     echo -n "[XSCE] Test ajenti access..."
     if `curl -Is http://${SCHOOLSERVER}:9990 | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -448,7 +451,7 @@ function test_ajenti() {
 # xovis
 
 function test_xovis() {
-  if [ ! $haveini == TRUE ] || [ ${settings[xovis_xovis_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[xovis_enabled]} == "True" ]; then
     echo -n "[XSCE] Test xovis access..."
     if `curl -Is http://${SCHOOLSERVER}:5984/xovis/_design/xovis-couchapp/index.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -462,7 +465,7 @@ function test_xovis() {
 }
 
 function test_awstats() {
-  if [ ! $haveini == TRUE ] || [ ${settings[awstats_awstats_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[awstats_enabled]} == "True" ]; then
     echo -n "[XSCE] Test awstats..."
     if `curl -Is http://${SCHOOLSERVER}/awstats/awstats.pl | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -475,8 +478,115 @@ function test_awstats() {
   fi
 }
 
+# - wordpress
+function test_wordpress() {
+  if [ ! $haveini == TRUE ] || [ ${settings[wordpress_wordpress_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test wordpress..."
+    if `curl -Is http://${SCHOOLSERVER}/wordpress | grep -is -e "HTTP/1.1 200 OK" -e"HTTP/1.1 301" > /dev/null`
+    then
+        log wordpress OK
+        green OK
+    else
+        log wordpress FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - dokuwiki
+function test_dokuwiki() {
+  if [ ! $haveini == TRUE ] || [ ${settings[dokuwiki_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test dokuwiki..."
+    if `curl -Is http://${SCHOOLSERVER}/wiki | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
+    then
+        log dokuwiki OK
+        green OK
+    else
+        log dokuwiki FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - phpmyadmin
+function test_phpmyadmin() {
+  if [ ! $haveini == TRUE ] || [ ${settings[phpmyadmin_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test phpmyadmin..."
+    if `curl -Is http://${SCHOOLSERVER}/phpmyadmin | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
+    then
+        log phpmyadmin OK
+        green OK
+    else
+        log phpmyadmin FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - cups
+function test_cups() {
+  if [ ! $haveini == TRUE ] || [ ${settings[cups_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test cups..."
+    if `curl -u xsce-admin:$AdminPW -Is http://${SCHOOLSERVER}:631 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log cups OK
+        green OK
+    else
+        log cups FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - calibre
+function test_calibre() {
+  if [ ! $haveini == TRUE ] || [ ${settings[calibre_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test calibre..."
+    if `curl -Is http://${SCHOOLSERVER}:8010 | grep -is "HTTP/1.1 200 OK" > /dev/null`
+    then
+        log calibre OK
+        green OK
+    else
+        log calibre FAILED
+        red FAILED!
+    fi
+  fi
+}
+
+# - schooltool
+function test_schooltool() {
+  if [ ! $haveini == TRUE ] || [[ ! -z ${settings[schooltool_enabled]} && \
+        ${settings[schooltool_enabled]} == "True" ]] ; then
+    echo -n "[XSCE] Test schooltool..."
+    if `curl -Is http://${SCHOOLSERVER}/schooltool | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 303" > /dev/null`
+    then
+        log schooltool OK
+        green OK
+    else
+        log schooltool FAILED
+        red FAILED!
+        red "schooltool disabled in armv7l"
+    fi
+  fi
+}
+
+# - sugarizer
+function test_sugarizer() {
+  if [ ! $haveini == TRUE ] || [ ${settings[sugarizer_enabled]} == "True" ]; then
+    echo -n "[XSCE] Test sugarizer..."
+    if `curl -Is http://${SCHOOLSERVER}/sugarizer | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
+    then
+        log sugarizer OK
+        green OK
+    else
+        log sugarizer FAILED
+        red FAILED!
+    fi
+  fi
+}
+
 function iiab_presence() {
-  if [ ! $haveini == TRUE ] || [ ${settings[pathagar_pathagar_enabled]} == "True" ]; then
+  if [ ! $haveini == TRUE ] || [ ${settings[iiab_enabled]} == "True" ]; then
     echo -n "[IIAB] Test main iiab page..."
     if `curl -Is http://${SCHOOLSERVER}/iiab/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -486,7 +596,10 @@ function iiab_presence() {
         log iiab FAILED
         red FAILED!
     fi
-
+  fi
+}
+function iiab_wikipedia() {
+  if [ ! $haveini == TRUE ] || [ ${settings[iiab_enabled]} == "True" ]; then
     echo -n "[IIAB] Test wikipedia page..."
     if `curl -Is http://${SCHOOLSERVER}/iiab/zim/wikipedia_gn_all_01_2013/A/Pirane.html | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
@@ -575,6 +688,14 @@ test_elgg
 test_rachel
 test_pathagar
 test_kiwix
+test_wordpress
+test_dokuwiki
+test_phpmyadmin
+test_cups
+test_calibre
+test_schooltool
+test_sugarizer
+
 #test_samba -- fc18 XO kernel does not have cifs configured
 
 if [ "$testmode" == "LanController" -o "$testmode" == "Gateway" ]; then
@@ -600,5 +721,6 @@ echo "IIAB Tests"
 iiab_presence
 
 echo [server] >>$LOGFILE
-cat server-test.ini >> $LOGFILE
-cat footer >> $LOGFILE
+cat $intermediatedir/server-test.ini >> $LOGFILE
+cat $intermediatedir/server-test.ini
+#cat footer >> $LOGFILE
