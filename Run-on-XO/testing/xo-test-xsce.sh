@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 #
 # conceptually removed from XSCE, this script can function in many contexts
 #   -- even when it is not removed, but rather, talks to the server as localhost
@@ -82,7 +82,7 @@ mkdir -p $intermediatedir
 curl -s -u xsce-admin:$AdminPW http://${SCHOOLSERVER}/test/xsce.ini > $intermediatedir/xsce.ini
 
 lines=`cat $intermediatedir/xsce.ini | wc | gawk '{print $1}'`
-if [ $lines -lt 10 ];then
+if [ $lines -lt 20 ];then
   haveini=FALSE
 else
   haveni=TRUE
@@ -258,7 +258,7 @@ fi
 
 function test_activity_server() {
   echo -n "[XSCE] Test schoolserver activity_server..."
-  if `curl -Is http://${SCHOOLSERVER}/activities/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
+  if `curl -IsL http://${SCHOOLSERVER}/activities/ | grep -is "HTTP/1.1 200 OK" > /dev/null`
   then
     log activity_server OK
     green OK
@@ -321,7 +321,7 @@ function test_rachel() {
         green OK
     else
         log rachel FAILED
-        if [ ${settings[rachel_content_found]} == "False" ]; then
+        if [ ! $haveini == TRUE ] || [ ${settings[rachel_content_found]} == "False" ]; then
             red No_Content
         else
             red FAILED!
@@ -394,7 +394,7 @@ function test_samba(){
   echo -n "[XSCE] Test samba running..."
   if [ ! $haveini == TRUE ] || [ ${settings[samba_enabled]} == "True" ]; then
     mkdir -p /tmp/smb
-    if  mount -t cifs  -o username=smbuser,password=smbuser //${SCHOOLSERVER}/public /tmp/smb
+    if  mount -t cifs  -o password=smbuser //${SCHOOLSERVER}/public /tmp/smb
        then
       echo "this is a test" > /tmp/smb/test
       stored=`cat /tmp/smb/test`
@@ -422,7 +422,7 @@ function test_samba(){
 function test_munin() {
   if [ ! $haveini == TRUE ] || [ ${settings[munin_enabled]} == "True" ]; then
     echo -n "[XSCE] Test munin access..."
-    if `curl -Is http://${SCHOOLSERVER}/munin  | grep -is 'realm="Munin"' > /dev/null`
+    if `curl -IsL http://${SCHOOLSERVER}/munin  | grep -is "HTTP/1.1 200 OK" > /dev/null`
     then
         log munin OK
         green OK
@@ -479,11 +479,11 @@ function test_awstats() {
   fi
 }
 
-# - wordpress
+# Wordpress
 function test_wordpress() {
   if [ ! $haveini == TRUE ] || [ ${settings[wordpress_wordpress_enabled]} == "True" ]; then
     echo -n "[XSCE] Test wordpress..."
-    if `curl -Is http://${SCHOOLSERVER}/wordpress | grep -is -e "HTTP/1.1 200 OK" -e"HTTP/1.1 301" > /dev/null`
+    if `curl -IsL  http://${SCHOOLSERVER}/wordpress | grep -is -e "HTTP/1.1 200 OK"  > /dev/null`
     then
         log wordpress OK
         green OK
@@ -498,7 +498,7 @@ function test_wordpress() {
 function test_dokuwiki() {
   if [ ! $haveini == TRUE ] || [ ${settings[dokuwiki_enabled]} == "True" ]; then
     echo -n "[XSCE] Test dokuwiki..."
-    if `curl -Is http://${SCHOOLSERVER}/wiki | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
+    if `curl -IsL http://${SCHOOLSERVER}/wiki | grep -is -e "HTTP/1.1 200 OK" -e "HTTP/1.1 301" > /dev/null`
     then
         log dokuwiki OK
         green OK
@@ -680,14 +680,14 @@ test_munin
 if [ "x$ajenti_name" != "x" ];then
   test_ajenti
 fi
-test_ejabberd
+#test_ejabberd
 #test_xovis
-test_activity_server
+#test_activity_server
 test_kalite
 test_owncloud
 test_elgg
 test_rachel
-test_pathagar
+#test_pathagar
 test_kiwix
 test_wordpress
 test_dokuwiki
@@ -722,6 +722,6 @@ echo "IIAB Tests"
 iiab_presence
 
 echo [server] >>$LOGFILE
-cat $intermediatedir/server-test.ini >> $LOGFILE
-cat $intermediatedir/server-test.ini
+#cat $intermediatedir/server-test.ini >> $LOGFILE
+#cat $intermediatedir/server-test.ini
 #cat footer >> $LOGFILE
