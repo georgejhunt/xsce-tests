@@ -9,9 +9,10 @@ vboxmanage  modifyvm centos-test --natpf1 "ssh,tcp,,4022,,22"
 vboxmanage startvm centos-test --type headless
 
 # give enough time for sshd to be running
+YMD=`date +"%y%m%d-%H:%M"`
 sleep 60
 ssh -p 4022 localhost etho hi
 scp -P 4022 ./iiab-centos.sh localhost:/root/iiab-centos.sh
 # execute the following remotely on the VM
 ssh -p 4022 localhost '/root/iiab-centos.sh|tee -a /root/output.log'
-scp -P 4022 localhost:/root/output.log ./centos-output.log
+scp -P 4022 localhost:/root/output.log ./$YMD-centos.log

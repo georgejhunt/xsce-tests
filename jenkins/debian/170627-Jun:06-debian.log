@@ -1,22 +1,22 @@
-Get:1 http://security.debian.org jessie/updates InRelease [63.1 kB]
-Get:2 http://security.debian.org jessie/updates/main Sources [209 kB]
 Ign http://mirrors.kernel.org jessie InRelease
-Get:3 http://mirrors.kernel.org jessie-updates InRelease [145 kB]
-Get:4 http://security.debian.org jessie/updates/main amd64 Packages [415 kB]
-Get:5 http://security.debian.org jessie/updates/main Translation-en [218 kB]
-Get:6 http://mirrors.kernel.org jessie Release.gpg [2,373 B]
-Get:7 http://mirrors.kernel.org jessie Release [148 kB]
-Get:8 http://mirrors.kernel.org jessie-updates/main Sources [15.7 kB]
-Get:9 http://mirrors.kernel.org jessie-updates/main amd64 Packages/DiffIndex [8,392 B]
-Get:10 http://mirrors.kernel.org jessie-updates/main Translation-en/DiffIndex [3,196 B]
+Get:1 http://mirrors.kernel.org jessie-updates InRelease [145 kB]
+Get:2 http://mirrors.kernel.org jessie Release.gpg [2,373 B]
+Get:3 http://security.debian.org jessie/updates InRelease [63.1 kB]
+Get:4 http://mirrors.kernel.org jessie-updates/main Sources [15.7 kB]
+Get:5 http://mirrors.kernel.org jessie-updates/main amd64 Packages/DiffIndex [8,392 B]
+Get:6 http://security.debian.org jessie/updates/main Sources [209 kB]
+Get:7 http://mirrors.kernel.org jessie-updates/main Translation-en/DiffIndex [3,196 B]
+Get:8 http://mirrors.kernel.org jessie Release [148 kB]
+Get:9 http://security.debian.org jessie/updates/main amd64 Packages [415 kB]
+Get:10 http://mirrors.kernel.org jessie-updates/main amd64 2017-06-18-1416.03.pdiff [473 B]
+Get:11 http://mirrors.kernel.org jessie-updates/main 2017-06-18-1416.03.pdiff [196 B]
+Get:12 http://security.debian.org jessie/updates/main Translation-en [218 kB]
+Get:13 http://mirrors.kernel.org jessie-updates/main amd64 2017-06-18-1416.03.pdiff [473 B]
+Get:14 http://mirrors.kernel.org jessie-updates/main 2017-06-18-1416.03.pdiff [196 B]
 Hit http://mirrors.kernel.org jessie/main Sources
 Hit http://mirrors.kernel.org jessie/main amd64 Packages
 Hit http://mirrors.kernel.org jessie/main Translation-en
-Get:11 http://mirrors.kernel.org jessie-updates/main amd64 2017-06-18-1416.03.pdiff [473 B]
-Get:12 http://mirrors.kernel.org jessie-updates/main amd64 2017-06-18-1416.03.pdiff [473 B]
-Get:13 http://mirrors.kernel.org jessie-updates/main 2017-06-18-1416.03.pdiff [196 B]
-Get:14 http://mirrors.kernel.org jessie-updates/main 2017-06-18-1416.03.pdiff [196 B]
-Fetched 1,230 kB in 2s (417 kB/s)
+Fetched 1,230 kB in 2s (452 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -38,8 +38,8 @@ The following packages will be upgraded:
 37 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
 Need to get 122 MB of archives.
 After this operation, 7,473 kB of additional disk space will be used.
-Get:1 http://security.debian.org/ jessie/updates/main perl amd64 5.20.2-3+deb8u7 [2,631 kB]
-Get:2 http://mirrors.kernel.org/debian/ jessie-updates/main debian-archive-keyring all 2017.5~deb8u1 [56.7 kB]
+Get:1 http://mirrors.kernel.org/debian/ jessie-updates/main debian-archive-keyring all 2017.5~deb8u1 [56.7 kB]
+Get:2 http://security.debian.org/ jessie/updates/main perl amd64 5.20.2-3+deb8u7 [2,631 kB]
 Get:3 http://mirrors.kernel.org/debian/ jessie/main libjsoncpp0 amd64 0.6.0~rc2-3.1 [71.8 kB]
 Get:4 http://security.debian.org/ jessie/updates/main libperl5.20 amd64 5.20.2-3+deb8u7 [1,354 B]
 Get:5 http://security.debian.org/ jessie/updates/main perl-base amd64 5.20.2-3+deb8u7 [1,227 kB]
@@ -77,7 +77,7 @@ Get:36 http://security.debian.org/ jessie/updates/main linux-compiler-gcc-4.8-x8
 Get:37 http://security.debian.org/ jessie/updates/main linux-headers-3.16.0-4-amd64 amd64 3.16.43-2+deb8u1 [451 kB]
 Get:38 http://security.debian.org/ jessie/updates/main linux-headers-3.16.0-4-common amd64 3.16.43-2+deb8u1 [4,556 kB]
 Preconfiguring packages ...
-Fetched 122 MB in 12s (9,804 kB/s)
+Fetched 122 MB in 11s (10.4 MB/s)
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 104036 files and directories currently installed.)
 Preparing to unpack .../perl_5.20.2-3+deb8u7_amd64.deb ...
 Unpacking perl (5.20.2-3+deb8u7) over (5.20.2-3+deb8u6) ...
@@ -227,6 +227,11 @@ Setting up linux-headers-3.16.0-4-amd64 (3.16.43-2+deb8u1) ...
 Examining /etc/kernel/header_postinst.d.
 run-parts: executing /etc/kernel/header_postinst.d/dkms 3.16.0-4-amd64
 Processing triggers for libc-bin (2.19-18+deb8u10) ...
+/opt/iiab/iiab /opt/iiab
+Fetching origin
+Fetching ghunt
+Branch test set up to track remote branch test from ghunt.
+/opt/iiab
 /usr/local/bin/ansible
 Running local playbooks! 
 
@@ -302,9 +307,9 @@ changed: [127.0.0.1] => (item={u'option': u'iiab_dir', u'value': u'/opt/iiab/iia
 TASK [1-prep : add version section] ********************************************
 changed: [127.0.0.1] => (item={u'option': u'distribution', u'value': u'Debian'})
 changed: [127.0.0.1] => (item={u'option': u'arch', u'value': u'x86_64'})
-changed: [127.0.0.1] => (item={u'option': u'iiab_branch', u'value': u'master'})
-changed: [127.0.0.1] => (item={u'option': u'iiab_commit', u'value': u'144bb156030faf89fad06837ac39597731e9c5da'})
-changed: [127.0.0.1] => (item={u'option': u'install_date', u'value': u'2017-06-27T18:01:02Z'})
+changed: [127.0.0.1] => (item={u'option': u'iiab_branch', u'value': u'test'})
+changed: [127.0.0.1] => (item={u'option': u'iiab_commit', u'value': u'17a0d97b058136c22e199cd6d9fa947c0c0801bf'})
+changed: [127.0.0.1] => (item={u'option': u'install_date', u'value': u'2017-06-27T18:18:19Z'})
 changed: [127.0.0.1] => (item={u'option': u'install_xo', u'value': u'none'})
 
 TASK [1-prep : re-read facts] **************************************************
@@ -323,16 +328,16 @@ TASK [1-prep : Set exFAT enabled for XOs] **************************************
 skipping: [127.0.0.1]
 
 TASK [1-prep : add version section] ********************************************
-changed: [127.0.0.1] => (item={u'option': u'runtime_branch', u'value': u'master'})
-changed: [127.0.0.1] => (item={u'option': u'runtime_commit', u'value': u'144bb156030faf89fad06837ac39597731e9c5da'})
-changed: [127.0.0.1] => (item={u'option': u'runtime_date', u'value': u'2017-06-27T18:01:02Z'})
+changed: [127.0.0.1] => (item={u'option': u'runtime_branch', u'value': u'test'})
+changed: [127.0.0.1] => (item={u'option': u'runtime_commit', u'value': u'17a0d97b058136c22e199cd6d9fa947c0c0801bf'})
+changed: [127.0.0.1] => (item={u'option': u'runtime_date', u'value': u'2017-06-27T18:18:19Z'})
 changed: [127.0.0.1] => (item={u'option': u'runtime_php', u'value': u'/usr/lib/php'})
 changed: [127.0.0.1] => (item={u'option': u'runtime_preload', u'value': False})
 changed: [127.0.0.1] => (item={u'option': u'runtime_base_ver', u'value': u'0'})
 changed: [127.0.0.1] => (item={u'option': u'kernel', u'value': u'3.16.0-4-amd64'})
 changed: [127.0.0.1] => (item={u'option': u'memory_mb', u'value': 1000})
 changed: [127.0.0.1] => (item={u'option': u'swap_mb', u'value': 1996})
-changed: [127.0.0.1] => (item={u'option': u'product_id', u'value': u'26B4A08B-D9E5-45E5-82FC-D0AAB7FD2CFB'})
+changed: [127.0.0.1] => (item={u'option': u'product_id', u'value': u'5EE2E7BF-8A04-47BB-A783-23EB21565967'})
 
 TASK [1-prep : Set port 80 for Admin Console] **********************************
 ok: [127.0.0.1]
@@ -379,15 +384,15 @@ skipping: [127.0.0.1]
 TASK [1-prep : CentOS] *********************************************************
 skipping: [127.0.0.1]
 
-TASK [1-prep : Checking xs_domain_name] ****************************************
-fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "cat /etc/sysconfig/xs_domain_name", "delta": "0:00:00.006824", "end": "2017-06-27 11:01:18.775379", "failed": true, "rc": 1, "start": "2017-06-27 11:01:18.768555", "stderr": "cat: /etc/sysconfig/xs_domain_name: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
+TASK [1-prep : Checking iiab_domain_name] **************************************
+fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "cat /etc/sysconfig/iiab_domain_name", "delta": "0:00:00.006634", "end": "2017-06-27 11:18:35.257450", "failed": true, "rc": 1, "start": "2017-06-27 11:18:35.250816", "stderr": "cat: /etc/sysconfig/iiab_domain_name: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : Checking for prior domain name] *********************************
 skipping: [127.0.0.1]
 
-TASK [1-prep : xs_wan_device] **************************************************
-fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "cat /etc/sysconfig/xs_wan_device", "delta": "0:00:00.006836", "end": "2017-06-27 11:01:18.971744", "failed": true, "rc": 1, "start": "2017-06-27 11:01:18.964908", "stderr": "cat: /etc/sysconfig/xs_wan_device: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
+TASK [1-prep : iiab_wan_device] ************************************************
+fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "cat /etc/sysconfig/iiab_wan_device", "delta": "0:00:00.006672", "end": "2017-06-27 11:18:35.455020", "failed": true, "rc": 1, "start": "2017-06-27 11:18:35.448348", "stderr": "cat: /etc/sysconfig/iiab_wan_device: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : Checking for old device gateway interface for device test] ******
@@ -400,7 +405,7 @@ TASK [1-prep : Setting ifcfg-WAN True] *****************************************
 skipping: [127.0.0.1]
 
 TASK [1-prep : Get a list of slaves from previous config] **********************
-fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "egrep -rn BRIDGE=br0 /etc/sysconfig/network-scripts/ifcfg-* | gawk -F'[-:]' '{print $3}'", "delta": "0:00:00.007879", "end": "2017-06-27 11:01:19.350755", "failed": true, "rc": 127, "start": "2017-06-27 11:01:19.342876", "stderr": "/bin/sh: 1: gawk: not found\ngrep: /etc/sysconfig/network-scripts/ifcfg-*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
+fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "egrep -rn BRIDGE=br0 /etc/sysconfig/network-scripts/ifcfg-* | gawk -F'[-:]' '{print $3}'", "delta": "0:00:00.007643", "end": "2017-06-27 11:18:35.833947", "failed": true, "rc": 127, "start": "2017-06-27 11:18:35.826304", "stderr": "/bin/sh: 1: gawk: not found\ngrep: /etc/sysconfig/network-scripts/ifcfg-*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : Finding gateway] ************************************************
@@ -431,7 +436,7 @@ TASK [1-prep : Setting wan if detected] ****************************************
 ok: [127.0.0.1]
 
 TASK [1-prep : Find gateway config based on device] ****************************
-fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "egrep -rn eth0 /etc/sysconfig/network-scripts/ifcfg* | gawk -F ':' '{print $1}'", "delta": "0:00:00.008173", "end": "2017-06-27 11:01:22.950159", "failed": true, "rc": 127, "start": "2017-06-27 11:01:22.941986", "stderr": "/bin/sh: 1: gawk: not found\ngrep: /etc/sysconfig/network-scripts/ifcfg*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
+fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "egrep -rn eth0 /etc/sysconfig/network-scripts/ifcfg* | gawk -F ':' '{print $1}'", "delta": "0:00:00.007865", "end": "2017-06-27 11:18:38.603542", "failed": true, "rc": 127, "start": "2017-06-27 11:18:38.595677", "stderr": "/bin/sh: 1: gawk: not found\ngrep: /etc/sysconfig/network-scripts/ifcfg*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : Setting has ifcfg gw based on device if found] ******************
@@ -443,7 +448,7 @@ TASK [1-prep : Set has ifcfg gw based on on macaddress if found] ***************
 skipping: [127.0.0.1]
 
 TASK [1-prep : Find wifi gateway config if present] ****************************
-fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "egrep -rn ESSID /etc/sysconfig/network-scripts/ifcfg* | gawk -F ':' '{print $1}' | gawk -F '/' '{print $5}'", "delta": "0:00:00.007827", "end": "2017-06-27 11:01:23.347490", "failed": true, "rc": 127, "start": "2017-06-27 11:01:23.339663", "stderr": "/bin/sh: 1: gawk: not found\n/bin/sh: 1: gawk: not found\ngrep: /etc/sysconfig/network-scripts/ifcfg*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
+fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "egrep -rn ESSID /etc/sysconfig/network-scripts/ifcfg* | gawk -F ':' '{print $1}' | gawk -F '/' '{print $5}'", "delta": "0:00:00.007832", "end": "2017-06-27 11:18:38.997353", "failed": true, "rc": 127, "start": "2017-06-27 11:18:38.989521", "stderr": "/bin/sh: 1: gawk: not found\n/bin/sh: 1: gawk: not found\ngrep: /etc/sysconfig/network-scripts/ifcfg*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : Setting has_wifi_gw based on ESSID if found] ********************
@@ -455,7 +460,7 @@ TASK [1-prep : Setting wifi device] ********************************************
 skipping: [127.0.0.1]
 
 TASK [1-prep : Look for any wireless interfaces] *******************************
-fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "cat /proc/net/wireless | grep -v -e Inter -e face | gawk -F: '{print $1}'", "delta": "0:00:00.007833", "end": "2017-06-27 11:01:23.609351", "failed": true, "rc": 127, "start": "2017-06-27 11:01:23.601518", "stderr": "/bin/sh: 1: gawk: not found", "stdout": "", "stdout_lines": [], "warnings": []}
+fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "cat /proc/net/wireless | grep -v -e Inter -e face | gawk -F: '{print $1}'", "delta": "0:00:00.007870", "end": "2017-06-27 11:18:39.258126", "failed": true, "rc": 127, "start": "2017-06-27 11:18:39.250256", "stderr": "/bin/sh: 1: gawk: not found", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : Set the discovered wireless, if found] **************************
@@ -493,7 +498,7 @@ TASK [1-prep : Set the variable for wireless_iface if present] *****************
 skipping: [127.0.0.1]
 
 TASK [1-prep : Get a list of ifcfg files to delete] ****************************
-fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "ls -1 /etc/sysconfig/network-scripts/ifcfg-* | grep -v -e ifcfg-lo -e ifcfg-WAN -e none", "delta": "0:00:00.008152", "end": "2017-06-27 11:01:24.716023", "failed": true, "rc": 1, "start": "2017-06-27 11:01:24.707871", "stderr": "ls: cannot access /etc/sysconfig/network-scripts/ifcfg-*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
+fatal: [127.0.0.1]: FAILED! => {"changed": false, "cmd": "ls -1 /etc/sysconfig/network-scripts/ifcfg-* | grep -v -e ifcfg-lo -e ifcfg-WAN -e none", "delta": "0:00:00.008998", "end": "2017-06-27 11:18:40.369168", "failed": true, "rc": 1, "start": "2017-06-27 11:18:40.360170", "stderr": "ls: cannot access /etc/sysconfig/network-scripts/ifcfg-*: No such file or directory", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : Setting detected lan] *******************************************
@@ -570,7 +575,7 @@ TASK [1-prep : Reboot if the config.txt was changed] ***************************
 skipping: [127.0.0.1]
 
 TASK [1-prep : Check if the identifier for intel's NUC6 builtin wifi is present] ***
-fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "lsusb | grep 8087:0a2b | wc |gawk '{print $1}'", "delta": "0:00:00.099778", "end": "2017-06-27 11:01:27.229276", "failed": true, "rc": 127, "start": "2017-06-27 11:01:27.129498", "stderr": "/bin/sh: 1: gawk: not found\nwc: write error", "stdout": "", "stdout_lines": [], "warnings": []}
+fatal: [127.0.0.1]: FAILED! => {"changed": true, "cmd": "lsusb | grep 8087:0a2b | wc |gawk '{print $1}'", "delta": "0:00:00.099896", "end": "2017-06-27 11:18:42.872065", "failed": true, "rc": 127, "start": "2017-06-27 11:18:42.772169", "stderr": "/bin/sh: 1: gawk: not found\nwc: write error", "stdout": "", "stdout_lines": [], "warnings": []}
 ...ignoring
 
 TASK [1-prep : download the firmware for built in wifi on NUC6] ****************
@@ -586,9 +591,9 @@ ok: [127.0.0.1] => (item={u'option': u'iiab_dir', u'value': u'/opt/iiab/iiab'})
 TASK [2-common : add version section] ******************************************
 ok: [127.0.0.1] => (item={u'option': u'distribution', u'value': u'Debian'})
 ok: [127.0.0.1] => (item={u'option': u'arch', u'value': u'x86_64'})
-ok: [127.0.0.1] => (item={u'option': u'iiab_branch', u'value': u'master'})
-ok: [127.0.0.1] => (item={u'option': u'iiab_commit', u'value': u'144bb156030faf89fad06837ac39597731e9c5da'})
-ok: [127.0.0.1] => (item={u'option': u'install_date', u'value': u'2017-06-27T18:01:02Z'})
+ok: [127.0.0.1] => (item={u'option': u'iiab_branch', u'value': u'test'})
+ok: [127.0.0.1] => (item={u'option': u'iiab_commit', u'value': u'17a0d97b058136c22e199cd6d9fa947c0c0801bf'})
+ok: [127.0.0.1] => (item={u'option': u'install_date', u'value': u'2017-06-27T18:18:19Z'})
 ok: [127.0.0.1] => (item={u'option': u'install_xo', u'value': u'none'})
 
 TASK [2-common : Create /opt/schoolserver/iiab] ********************************
@@ -1052,17 +1057,17 @@ TASK [network : I'm not guessing declare gateway please] ***********************
 skipping: [127.0.0.1]
 
 TASK [network : Add location section to config file] ***************************
+skipping: [127.0.0.1] => (item={u'option': u'hostapd_enabled', u'value': True}) 
+skipping: [127.0.0.1] => (item={u'option': u'iiab_network_mode', u'value': u'Gateway'}) 
+skipping: [127.0.0.1] => (item={u'option': u'iiab_lan_iface', u'value': u'br0'}) 
+skipping: [127.0.0.1] => (item={u'option': u'user_lan_iface', u'value': u'auto'}) 
 skipping: [127.0.0.1] => (item={u'option': u'iiab_lan_enabled', u'value': True}) 
 skipping: [127.0.0.1] => (item={u'option': u'iiab_wan_iface', u'value': u'eth0'}) 
 skipping: [127.0.0.1] => (item={u'option': u'user_wan_iface', u'value': u'auto'}) 
 skipping: [127.0.0.1] => (item={u'option': u'iiab_wan_enabled', u'value': True}) 
-skipping: [127.0.0.1] => (item={u'option': u'iiab_lan_iface', u'value': u'br0'}) 
-skipping: [127.0.0.1] => (item={u'option': u'user_lan_iface', u'value': u'auto'}) 
-skipping: [127.0.0.1] => (item={u'option': u'host_ssid', u'value': u'Internet in a Box'}) 
-skipping: [127.0.0.1] => (item={u'option': u'hostapd_enabled', u'value': True}) 
-skipping: [127.0.0.1] => (item={u'option': u'iiab_network_mode', u'value': u'Gateway'}) 
-skipping: [127.0.0.1] => (item={u'option': u'host_channel', u'value': 6}) 
 skipping: [127.0.0.1] => (item={u'option': u'host_wifi_mode', u'value': u'g'}) 
+skipping: [127.0.0.1] => (item={u'option': u'host_ssid', u'value': u'Internet in a Box'}) 
+skipping: [127.0.0.1] => (item={u'option': u'host_channel', u'value': 6}) 
 
 TASK [network : debug] *********************************************************
 skipping: [127.0.0.1]
@@ -1082,8 +1087,8 @@ skipping: [127.0.0.1]
 TASK [network : Configure /etc/sysconfig/network] ******************************
 skipping: [127.0.0.1]
 
-TASK [network : Create xs_domain_name flag] ************************************
-skipping: [127.0.0.1] => (item=xs_domain_name) 
+TASK [network : Create iiab_domain_name flag] **********************************
+skipping: [127.0.0.1] => (item=iiab_domain_name) 
 
 TASK [network : Domain name did not change setting iiab_prepped] ***************
 skipping: [127.0.0.1]
@@ -1111,31 +1116,31 @@ skipping: [127.0.0.1]
 
 TASK [network : Set folder permission] *****************************************
 skipping: [127.0.0.1] => (item=/etc/sysconfig/olpc-scripts/domain_config.d) 
-skipping: [127.0.0.1] => (item=/var/named-xs/data) 
-skipping: [127.0.0.1] => (item=/var/named-xs) 
+skipping: [127.0.0.1] => (item=/var/named-iiab/data) 
+skipping: [127.0.0.1] => (item=/var/named-iiab) 
 
 TASK [network : Configure named] ***********************************************
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/localdomain.zone', u'src': u'named/localdomain.zone', u'mode': u'0644', u'owner': u'bind'}) 
 skipping: [127.0.0.1] => (item={u'dest': u'/etc/sysconfig/olpc-scripts/domain_config.d/named', u'src': u'named/named', u'mode': u'0644', u'owner': u'root'}) 
 skipping: [127.0.0.1] => (item={u'dest': u'/etc/sysconfig/named', u'src': u'named/named.j2', u'mode': u'0644', u'owner': u'root'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/named-xs.conf', u'src': u'named/named-xs.conf.j2', u'mode': u'0644', u'owner': u'root'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.ip6.local', u'src': u'named/named.ip6.local', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.broadcast', u'src': u'named/named.broadcast', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/localhost.zone', u'src': u'named/localhost.zone', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.root', u'src': u'named/named.root', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.rfc1912.zones', u'src': u'named/named.rfc1912.zones', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.local', u'src': u'named/named.local', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.external.zone.db', u'src': u'named/school.external.zone.db', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.zero', u'src': u'named/named.zero', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.root.hints', u'src': u'named/named.root.hints', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.32.in-addr.db', u'src': u'named/school.internal.zone.32.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.16.in-addr.db', u'src': u'named/school.internal.zone.16.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.local.zone.db', u'src': u'named/school.local.zone.db', u'mode': u'0644', u'owner': u'root'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.db', u'src': u'named/school.internal.zone.db', u'mode': u'0644', u'owner': u'root'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.48.in-addr.db', u'src': u'named/school.internal.zone.48.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.blackhole', u'src': u'named/named.blackhole', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/data/dummy', u'src': u'named/dummy', u'mode': u'0644', u'owner': u'bind'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.in-addr.db', u'src': u'named/school.internal.zone.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/etc/named-iiab.conf', u'src': u'named/named-iiab.conf.j2', u'mode': u'0644', u'owner': u'root'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.broadcast', u'src': u'named/named.broadcast', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/localhost.zone', u'src': u'named/localhost.zone', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/localdomain.zone', u'src': u'named/localdomain.zone', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.rfc1912.zones', u'src': u'named/named.rfc1912.zones', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.local', u'src': u'named/named.local', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.ip6.local', u'src': u'named/named.ip6.local', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.zero', u'src': u'named/named.zero', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.root.hints', u'src': u'named/named.root.hints', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.root', u'src': u'named/named.root', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.16.in-addr.db', u'src': u'named/school.internal.zone.16.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.external.zone.db', u'src': u'named/school.external.zone.db', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.db', u'src': u'named/school.internal.zone.db', u'mode': u'0644', u'owner': u'root'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.48.in-addr.db', u'src': u'named/school.internal.zone.48.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.32.in-addr.db', u'src': u'named/school.internal.zone.32.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/data/dummy', u'src': u'named/dummy', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.in-addr.db', u'src': u'named/school.internal.zone.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.local.zone.db', u'src': u'named/school.local.zone.db', u'mode': u'0644', u'owner': u'root'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.blackhole', u'src': u'named/named.blackhole', u'mode': u'0644', u'owner': u'bind'}) 
 
 TASK [network : substitute our unit file which uses $OPTIONS from sysconfig] ***
 skipping: [127.0.0.1]
@@ -1163,7 +1168,7 @@ skipping: [127.0.0.1]
 
 TASK [network : Configure dhcpd] ***********************************************
 skipping: [127.0.0.1] => (item={u'dest': u'/etc/systemd/system/dhcpd.service', u'src': u'dhcp/dhcpd.service', u'mode': u'0755'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/dhcpd-xs.conf', u'src': u'dhcp/dhcpd-xs.conf.j2', u'mode': u'0644'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/etc/dhcpd-iiab.conf', u'src': u'dhcp/dhcpd-iiab.conf.j2', u'mode': u'0644'}) 
 
 TASK [network : Create dhcpd needed files] *************************************
 skipping: [127.0.0.1]
@@ -1178,7 +1183,7 @@ TASK [network : Create the squid user] *****************************************
 skipping: [127.0.0.1]
 
 TASK [network : Copy init script and config file] ******************************
-skipping: [127.0.0.1] => (item={u'dest': u'/usr/bin/xs-httpcache', u'src': u'squid/xs-httpcache.j2', u'group': u'root', u'mode': u'0755', u'owner': u'root'}) 
+skipping: [127.0.0.1] => (item={u'dest': u'/usr/bin/iiab-httpcache', u'src': u'squid/iiab-httpcache.j2', u'group': u'root', u'mode': u'0755', u'owner': u'root'}) 
 skipping: [127.0.0.1] => (item={u'dest': u'/etc/squid3/dstaddress.rules', u'src': u'squid/dstaddress.rules', u'group': u'proxy', u'mode': u'0644', u'owner': u'proxy'}) 
 skipping: [127.0.0.1] => (item={u'dest': u'/etc/squid3/denyregex.rules', u'src': u'squid/denyregex.rules', u'group': u'proxy', u'mode': u'0644', u'owner': u'proxy'}) 
 skipping: [127.0.0.1] => (item={u'dest': u'/etc/squid3/allowregex.rules', u'src': u'squid/allowregex.rules', u'group': u'proxy', u'mode': u'0644', u'owner': u'proxy'}) 
@@ -1210,9 +1215,9 @@ TASK [network : Stop Squid] ****************************************************
 skipping: [127.0.0.1]
 
 TASK [network : Add squid to service list] *************************************
-skipping: [127.0.0.1] => (item={u'option': u'enabled', u'value': True}) 
 skipping: [127.0.0.1] => (item={u'option': u'description', u'value': u'"Squid caches web pages the first time they are accessed, and pulls them from the cache thereafter"'}) 
 skipping: [127.0.0.1] => (item={u'option': u'name', u'value': u'squid'}) 
+skipping: [127.0.0.1] => (item={u'option': u'enabled', u'value': True}) 
 
 TASK [network : Add dansguardian to service list] ******************************
 skipping: [127.0.0.1] => (item={u'option': u'enabled', u'value': False}) 
@@ -1501,19 +1506,19 @@ TASK [network : dhcpd may be affected] *****************************************
 skipping: [127.0.0.1]
 
 TASK [network : Add location section to config file] ***************************
-skipping: [127.0.0.1] => (item={u'option': u'wireless_list_1', u'value': u'not found-1'}) 
 skipping: [127.0.0.1] => (item={u'option': u'prior_gateway', u'value': u''}) 
 skipping: [127.0.0.1] => (item={u'option': u'detected_gateway', u'value': u'eth0'}) 
 skipping: [127.0.0.1] => (item={u'option': u'gateway_ifcfg', u'value': u'none'}) 
 skipping: [127.0.0.1] => (item={u'option': u'internet_accessible', u'value': True}) 
 skipping: [127.0.0.1] => (item={u'option': u'gateway_active', u'value': False}) 
-skipping: [127.0.0.1] => (item={u'option': u'num_wifi_interfaces', u'value': u'0'}) 
 skipping: [127.0.0.1] => (item={u'option': u'wireless_list_2', u'value': u'not found-2'}) 
-skipping: [127.0.0.1] => (item={u'option': u'num_lan_interfaces', u'value': u'1'}) 
+skipping: [127.0.0.1] => (item={u'option': u'wireless_list_1', u'value': u'not found-1'}) 
 skipping: [127.0.0.1] => (item={u'option': u'iiab_wireless_lan_iface', u'value': u'none'}) 
 skipping: [127.0.0.1] => (item={u'option': u'discovered_wireless_iface', u'value': u'none'}) 
+skipping: [127.0.0.1] => (item={u'option': u'num_wifi_interfaces', u'value': u'0'}) 
 skipping: [127.0.0.1] => (item={u'option': u'static_wan', u'value': False}) 
 skipping: [127.0.0.1] => (item={u'option': u'detected_lan', u'value': u'eth1'}) 
+skipping: [127.0.0.1] => (item={u'option': u'num_lan_interfaces', u'value': u'1'}) 
 
 TASK [network : Raspbian stock has openresolv which is not available in debian, off it] ***
 skipping: [127.0.0.1]
@@ -1579,23 +1584,23 @@ TASK [network : debug] *********************************************************
 skipping: [127.0.0.1]
 
 TASK [network : Add location section to config file] ***************************
-skipping: [127.0.0.1] => (item={u'option': u'num_wifi_interfaces', u'value': u'0'}) 
-skipping: [127.0.0.1] => (item={u'option': u'wireless_list_2', u'value': u'not found-2'}) 
-skipping: [127.0.0.1] => (item={u'option': u'wireless_list_1', u'value': u'not found-1'}) 
 skipping: [127.0.0.1] => (item={u'option': u'prior_gateway', u'value': u''}) 
 skipping: [127.0.0.1] => (item={u'option': u'detected_gateway', u'value': u'eth0'}) 
 skipping: [127.0.0.1] => (item={u'option': u'gateway_ifcfg', u'value': u'none'}) 
 skipping: [127.0.0.1] => (item={u'option': u'internet_accessible', u'value': True}) 
 skipping: [127.0.0.1] => (item={u'option': u'gateway_active', u'value': False}) 
+skipping: [127.0.0.1] => (item={u'option': u'num_wifi_interfaces', u'value': u'0'}) 
+skipping: [127.0.0.1] => (item={u'option': u'wireless_list_2', u'value': u'not found-2'}) 
+skipping: [127.0.0.1] => (item={u'option': u'wireless_list_1', u'value': u'not found-1'}) 
+skipping: [127.0.0.1] => (item={u'option': u'num_lan_interfaces', u'value': u'1'}) 
 skipping: [127.0.0.1] => (item={u'option': u'iiab_wireless_lan_iface', u'value': u'none'}) 
 skipping: [127.0.0.1] => (item={u'option': u'discovered_wireless_iface', u'value': u'none'}) 
-skipping: [127.0.0.1] => (item={u'option': u'num_lan_interfaces', u'value': u'1'}) 
 skipping: [127.0.0.1] => (item={u'option': u'static_wan', u'value': False}) 
 skipping: [127.0.0.1] => (item={u'option': u'detected_lan', u'value': u'eth1'}) 
 
-TASK [network : Create xs network flags] ***************************************
-skipping: [127.0.0.1] => (item=xs_lan_device) 
-skipping: [127.0.0.1] => (item=xs_wan_device) 
+TASK [network : Create iiab network flags] *************************************
+skipping: [127.0.0.1] => (item=iiab_lan_device) 
+skipping: [127.0.0.1] => (item=iiab_wan_device) 
 
 TASK [network : No LAN configured - Appliance mode] ****************************
 skipping: [127.0.0.1]
@@ -1658,9 +1663,12 @@ skipping: [127.0.0.1]
 TASK [network : Disable wondershaper service] **********************************
 skipping: [127.0.0.1]
 
-TASK [network : Grab clean copy of xs-gen-iptables] ****************************
+TASK [network : Grab clean copy of iiab-gen-iptables] **************************
 skipping: [127.0.0.1] => (item={0: u'gateway/check-LAN', 1: u'/usr/bin/check-LAN'}) 
-skipping: [127.0.0.1] => (item={0: u'gateway/xs-gen-iptables', 1: u'/usr/bin/xs-gen-iptables'}) 
+skipping: [127.0.0.1] => (item={0: u'gateway/iiab-gen-iptables', 1: u'/usr/bin/iiab-gen-iptables'}) 
+
+TASK [network : Create link so that old invocation will work] ******************
+skipping: [127.0.0.1]
 
 TASK [network : Execute the script that sets up userspace firewall] ************
 skipping: [127.0.0.1]
@@ -1870,8 +1878,8 @@ changed: [127.0.0.1]
 TASK [network : Configure /etc/sysconfig/network] ******************************
 changed: [127.0.0.1]
 
-TASK [network : Create xs_domain_name flag] ************************************
-changed: [127.0.0.1] => (item=xs_domain_name)
+TASK [network : Create iiab_domain_name flag] **********************************
+changed: [127.0.0.1] => (item=iiab_domain_name)
 
 TASK [network : Domain name did not change setting iiab_prepped] ***************
 skipping: [127.0.0.1]
@@ -1898,32 +1906,32 @@ TASK [network : Stop named before copying files] *******************************
 changed: [127.0.0.1]
 
 TASK [network : Set folder permission] *****************************************
-changed: [127.0.0.1] => (item=/var/named-xs)
-changed: [127.0.0.1] => (item=/var/named-xs/data)
+changed: [127.0.0.1] => (item=/var/named-iiab)
+changed: [127.0.0.1] => (item=/var/named-iiab/data)
 changed: [127.0.0.1] => (item=/etc/sysconfig/olpc-scripts/domain_config.d)
 
 TASK [network : Configure named] ***********************************************
-changed: [127.0.0.1] => (item={u'dest': u'/etc/named-xs.conf', u'src': u'named/named-xs.conf.j2', u'mode': u'0644', u'owner': u'root'})
+changed: [127.0.0.1] => (item={u'dest': u'/etc/named-iiab.conf', u'src': u'named/named-iiab.conf.j2', u'mode': u'0644', u'owner': u'root'})
 changed: [127.0.0.1] => (item={u'dest': u'/etc/sysconfig/named', u'src': u'named/named.j2', u'mode': u'0644', u'owner': u'root'})
 changed: [127.0.0.1] => (item={u'dest': u'/etc/sysconfig/olpc-scripts/domain_config.d/named', u'src': u'named/named', u'mode': u'0644', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/localdomain.zone', u'src': u'named/localdomain.zone', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/localhost.zone', u'src': u'named/localhost.zone', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.broadcast', u'src': u'named/named.broadcast', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.ip6.local', u'src': u'named/named.ip6.local', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.local', u'src': u'named/named.local', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.rfc1912.zones', u'src': u'named/named.rfc1912.zones', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.root', u'src': u'named/named.root', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.root.hints', u'src': u'named/named.root.hints', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.zero', u'src': u'named/named.zero', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.external.zone.db', u'src': u'named/school.external.zone.db', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.16.in-addr.db', u'src': u'named/school.internal.zone.16.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.32.in-addr.db', u'src': u'named/school.internal.zone.32.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.48.in-addr.db', u'src': u'named/school.internal.zone.48.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.db', u'src': u'named/school.internal.zone.db', u'mode': u'0644', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.local.zone.db', u'src': u'named/school.local.zone.db', u'mode': u'0644', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/school.internal.zone.in-addr.db', u'src': u'named/school.internal.zone.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/data/dummy', u'src': u'named/dummy', u'mode': u'0644', u'owner': u'bind'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/named.blackhole', u'src': u'named/named.blackhole', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/localdomain.zone', u'src': u'named/localdomain.zone', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/localhost.zone', u'src': u'named/localhost.zone', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.broadcast', u'src': u'named/named.broadcast', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.ip6.local', u'src': u'named/named.ip6.local', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.local', u'src': u'named/named.local', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.rfc1912.zones', u'src': u'named/named.rfc1912.zones', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.root', u'src': u'named/named.root', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.root.hints', u'src': u'named/named.root.hints', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.zero', u'src': u'named/named.zero', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.external.zone.db', u'src': u'named/school.external.zone.db', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.16.in-addr.db', u'src': u'named/school.internal.zone.16.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.32.in-addr.db', u'src': u'named/school.internal.zone.32.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.48.in-addr.db', u'src': u'named/school.internal.zone.48.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.db', u'src': u'named/school.internal.zone.db', u'mode': u'0644', u'owner': u'root'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.local.zone.db', u'src': u'named/school.local.zone.db', u'mode': u'0644', u'owner': u'root'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/school.internal.zone.in-addr.db', u'src': u'named/school.internal.zone.in-addr.db.j2', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/data/dummy', u'src': u'named/dummy', u'mode': u'0644', u'owner': u'bind'})
+changed: [127.0.0.1] => (item={u'dest': u'/var/named-iiab/named.blackhole', u'src': u'named/named.blackhole', u'mode': u'0644', u'owner': u'bind'})
 
 TASK [network : substitute our unit file which uses $OPTIONS from sysconfig] ***
 changed: [127.0.0.1]
@@ -1950,7 +1958,7 @@ TASK [network : Create non-privileged user] ************************************
 changed: [127.0.0.1]
 
 TASK [network : Configure dhcpd] ***********************************************
-changed: [127.0.0.1] => (item={u'dest': u'/etc/dhcpd-xs.conf', u'src': u'dhcp/dhcpd-xs.conf.j2', u'mode': u'0644'})
+changed: [127.0.0.1] => (item={u'dest': u'/etc/dhcpd-iiab.conf', u'src': u'dhcp/dhcpd-iiab.conf.j2', u'mode': u'0644'})
 changed: [127.0.0.1] => (item={u'dest': u'/etc/systemd/system/dhcpd.service', u'src': u'dhcp/dhcpd.service', u'mode': u'0755'})
 
 TASK [network : Create dhcpd needed files] *************************************
@@ -1971,7 +1979,7 @@ changed: [127.0.0.1] => (item={u'dest': u'/etc/squid3/sites.whitelist.txt', u'sr
 changed: [127.0.0.1] => (item={u'dest': u'/etc/squid3/allowregex.rules', u'src': u'squid/allowregex.rules', u'group': u'proxy', u'mode': u'0644', u'owner': u'proxy'})
 changed: [127.0.0.1] => (item={u'dest': u'/etc/squid3/denyregex.rules', u'src': u'squid/denyregex.rules', u'group': u'proxy', u'mode': u'0644', u'owner': u'proxy'})
 changed: [127.0.0.1] => (item={u'dest': u'/etc/squid3/dstaddress.rules', u'src': u'squid/dstaddress.rules', u'group': u'proxy', u'mode': u'0644', u'owner': u'proxy'})
-changed: [127.0.0.1] => (item={u'dest': u'/usr/bin/xs-httpcache', u'src': u'squid/xs-httpcache.j2', u'group': u'root', u'mode': u'0755', u'owner': u'root'})
+changed: [127.0.0.1] => (item={u'dest': u'/usr/bin/iiab-httpcache', u'src': u'squid/iiab-httpcache.j2', u'group': u'root', u'mode': u'0755', u'owner': u'root'})
 
 TASK [network : Create squid cache directory] **********************************
 changed: [127.0.0.1]
@@ -2382,9 +2390,9 @@ TASK [network : debug] *********************************************************
 skipping: [127.0.0.1]
 
 TASK [network : Add location section to config file] ***************************
-skipping: [127.0.0.1] => (item={u'option': u'gateway_ifcfg', u'value': u'none'}) 
 skipping: [127.0.0.1] => (item={u'option': u'internet_accessible', u'value': True}) 
 skipping: [127.0.0.1] => (item={u'option': u'gateway_active', u'value': False}) 
+skipping: [127.0.0.1] => (item={u'option': u'gateway_ifcfg', u'value': u'none'}) 
 skipping: [127.0.0.1] => (item={u'option': u'detected_gateway', u'value': u'eth0'}) 
 skipping: [127.0.0.1] => (item={u'option': u'prior_gateway', u'value': u''}) 
 skipping: [127.0.0.1] => (item={u'option': u'wireless_list_1', u'value': u'not found-1'}) 
@@ -2396,9 +2404,9 @@ skipping: [127.0.0.1] => (item={u'option': u'num_lan_interfaces', u'value': u'1'
 skipping: [127.0.0.1] => (item={u'option': u'detected_lan', u'value': u'eth1'}) 
 skipping: [127.0.0.1] => (item={u'option': u'static_wan', u'value': False}) 
 
-TASK [network : Create xs network flags] ***************************************
-changed: [127.0.0.1] => (item=xs_wan_device)
-changed: [127.0.0.1] => (item=xs_lan_device)
+TASK [network : Create iiab network flags] *************************************
+changed: [127.0.0.1] => (item=iiab_wan_device)
+changed: [127.0.0.1] => (item=iiab_lan_device)
 
 TASK [network : No LAN configured - Appliance mode] ****************************
 skipping: [127.0.0.1]
@@ -2422,939 +2430,10 @@ TASK [network : Copy /etc/sysconfig/dhcpd file] ********************************
 changed: [127.0.0.1] => (item={u'dest': u'/etc/sysconfig/dhcpd', u'src': u'dhcp/dhcpd-env.j2', u'mode': u'0755'})
 
 TASK [network : Copy named  file] **********************************************
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/', u'src': u'named/school.local.zone.db', u'mode': u'0755'})
-changed: [127.0.0.1] => (item={u'dest': u'/var/named-xs/', u'src': u'named/school.internal.zone.db', u'mode': u'0755'})
+failed: [127.0.0.1] (item={u'dest': u'/var/named-xs/', u'src': u'named/school.local.zone.db', u'mode': u'0755'}) => {"changed": true, "failed": true, "item": {"dest": "/var/named-xs/", "mode": "0755", "src": "named/school.local.zone.db"}, "msg": "Destination directory /var/named-xs does not exist"}
+failed: [127.0.0.1] (item={u'dest': u'/var/named-xs/', u'src': u'named/school.internal.zone.db', u'mode': u'0755'}) => {"changed": true, "failed": true, "item": {"dest": "/var/named-xs/", "mode": "0755", "src": "named/school.internal.zone.db"}, "msg": "Destination directory /var/named-xs does not exist"}
+	to retry, use: --limit @/opt/iiab/iiab/iiab.retry
 
-TASK [network : Enable named service] ******************************************
-ok: [127.0.0.1]
+PLAY RECAP *********************************************************************
+127.0.0.1                  : ok=206  changed=125  unreachable=0    failed=1   
 
-TASK [network : Disable named service] *****************************************
-skipping: [127.0.0.1]
-
-TASK [network : Enable dansguardian] *******************************************
-skipping: [127.0.0.1]
-
-TASK [network : Disable dansguardian] ******************************************
-changed: [127.0.0.1]
-
-TASK [network : Create xs_httpcache flag] **************************************
-changed: [127.0.0.1]
-
-TASK [network : Enable squid service] ******************************************
-ok: [127.0.0.1]
-
-TASK [network : Copy init script and config file] ******************************
-changed: [127.0.0.1] => (item={u'dest': u'/etc/squid3/squid-xs.conf', u'src': u'squid/squid-xs.conf.j2', u'group': u'proxy', u'mode': u'0644', u'owner': u'proxy'})
-
-TASK [network : point to Squid config file from startup file] ******************
-changed: [127.0.0.1]
-
-TASK [network : Disable squid service] *****************************************
-skipping: [127.0.0.1]
-
-TASK [network : Remove xs_httpcache flag] **************************************
-skipping: [127.0.0.1]
-
-TASK [network : Enable wondershaper service] ***********************************
-skipping: [127.0.0.1]
-
-TASK [network : Disable wondershaper service] **********************************
-ok: [127.0.0.1]
-
-TASK [network : Grab clean copy of xs-gen-iptables] ****************************
-changed: [127.0.0.1] => (item={0: u'gateway/xs-gen-iptables', 1: u'/usr/bin/xs-gen-iptables'})
-ok: [127.0.0.1] => (item={0: u'gateway/check-LAN', 1: u'/usr/bin/check-LAN'})
-
-TASK [network : Execute the script that sets up userspace firewall] ************
-changed: [127.0.0.1]
-
-TASK [network : Add squid to service list] *************************************
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': True})
-
-TASK [network : Add dansguardian to service list] ******************************
-ok: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [network : Add wondershaper to service list] ******************************
-ok: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [network : Stop dhcpd] ****************************************************
-skipping: [127.0.0.1]
-
-TASK [network : Stop named service] ********************************************
-skipping: [127.0.0.1]
-
-TASK [network : Start named service] *******************************************
-ok: [127.0.0.1]
-
-TASK [network : Stop dansguardian] *********************************************
-ok: [127.0.0.1]
-
-TASK [network : Restart dansguardian] ******************************************
-skipping: [127.0.0.1]
-
-TASK [network : Stop squid service] ********************************************
-skipping: [127.0.0.1]
-
-TASK [network : Restart squid service] *****************************************
-changed: [127.0.0.1]
-
-TASK [network : Restart wondershaper service] **********************************
-skipping: [127.0.0.1]
-
-TASK [network : Restart avahi service] *****************************************
-changed: [127.0.0.1]
-
-TASK [network : Create gateway flag] *******************************************
-changed: [127.0.0.1]
-
-TASK [network : Run iptables] **************************************************
-changed: [127.0.0.1]
-
-TASK [network : Create a config file for hostapd] ******************************
-skipping: [127.0.0.1]
-
-TASK [network : Disable the Access Point Hostapd program] **********************
-changed: [127.0.0.1]
-
-TASK [network : Use custom systemd unit file to start hostapd] *****************
-changed: [127.0.0.1]
-
-TASK [network : ask systemd to reread the unit files for hostapd] **************
-changed: [127.0.0.1]
-
-TASK [network : Enable the Access Point Hostapd program] ***********************
-skipping: [127.0.0.1]
-
-TASK [network : Checking if slave is active waiting 10 seconds] ****************
-skipping: [127.0.0.1]
-
-TASK [network : Restart hostapd if slave is inactive] **************************
-fatal: [127.0.0.1]: FAILED! => {"failed": true, "msg": "'dict object' has no attribute 'stdout'"}
-...ignoring
-
-TASK [postgresql : Install postgresql packages] ********************************
-changed: [127.0.0.1] => (item=[u'postgresql'])
-
-TASK [postgresql : Install postgresql for debian] ******************************
-changed: [127.0.0.1]
-
-TASK [postgresql : Install postgresql for fedora] ******************************
-skipping: [127.0.0.1]
-
-TASK [postgresql : Create postgresql-xs systemd service] ***********************
-changed: [127.0.0.1]
-
-TASK [postgresql : Create postgres data directory] *****************************
-changed: [127.0.0.1]
-
-TASK [postgresql : make sure that the en_US locale is enabled] *****************
-ok: [127.0.0.1]
-
-TASK [postgresql : generate the selected locales] ******************************
-changed: [127.0.0.1]
-
-TASK [postgresql : Initialize the postgres db] *********************************
-changed: [127.0.0.1]
-
-TASK [postgresql : Initialize the postgres db] *********************************
-skipping: [127.0.0.1]
-
-TASK [postgresql : Initialize the postgres db] *********************************
-skipping: [127.0.0.1]
-
-TASK [postgresql : Configure postgres] *****************************************
-changed: [127.0.0.1]
-
-TASK [postgresql : Stop and disable stock postgresql service] ******************
-changed: [127.0.0.1]
-
-TASK [postgresql : Start and enable postgresql-xs service] *********************
-skipping: [127.0.0.1]
-
-TASK [postgresql : Add postgresql to service list] *****************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'postgresql'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"PostgreSQL is a powerful, open source object-relational database system."'})
-changed: [127.0.0.1] => (item={u'option': u'installed', u'value': True})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [authserver : check pip is installed] *************************************
-skipping: [127.0.0.1]
-
-TASK [authserver : download xs-authserver from pypi] ***************************
-skipping: [127.0.0.1]
-
-TASK [authserver : install xs-authserver from pypi] ****************************
-skipping: [127.0.0.1]
-
-TASK [authserver : install gunicorn] *******************************************
-skipping: [127.0.0.1]
-
-TASK [authserver : Configure xs-authserver] ************************************
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/systemd/system/xs-authserver.service', u'src': u'xs-authserver.service.j2', u'mode': 420}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/sysconfig/xs-authserver', u'src': u'xs-authserver.env.j2', u'mode': 420}) 
-
-TASK [authserver : create database folder] *************************************
-skipping: [127.0.0.1]
-
-TASK [authserver : init database] **********************************************
-skipping: [127.0.0.1]
-
-TASK [authserver : Enable xs-authserver service] *******************************
-skipping: [127.0.0.1]
-
-TASK [authserver : add xs-authserver to service list] **************************
-skipping: [127.0.0.1] => (item={u'option': u'path', u'value': u'/'}) 
-skipping: [127.0.0.1] => (item={u'option': u'port', u'value': 5000}) 
-skipping: [127.0.0.1] => (item={u'option': u'description', u'value': u'"xs-authserver implements a seamless web authentication service using XO laptop registration capabilities.  It is heavily inspired by the Moodle OLPC-XS authentication plugin"'}) 
-skipping: [127.0.0.1] => (item={u'option': u'name', u'value': u'XS-authserver'}) 
-
-TASK [openvpn : Install openvpn packages] **************************************
-changed: [127.0.0.1] => (item=[u'openvpn', u'nmap'])
-
-TASK [openvpn : Create the directory for keys] *********************************
-changed: [127.0.0.1]
-
-TASK [openvpn : Create the directory for scripts] ******************************
-changed: [127.0.0.1]
-
-TASK [openvpn : Create a folder for iiab executable not on path] ***************
-changed: [127.0.0.1]
-
-TASK [openvpn : Configure openvpn] *********************************************
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/keys/ca.crt', u'src': u'ca.crt', u'mode': u'0644', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/keys/client1.crt', u'src': u'client1.crt', u'mode': u'0644', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/keys/client1.key', u'src': u'client1.key', u'mode': u'0600', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/scripts/announce', u'src': u'announce', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/scripts/announcer', u'src': u'announcer', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/scripts/silence', u'src': u'silence', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/xscenet.conf', u'src': u'xscenet.conf', u'mode': u'0644', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/etc/openvpn/iiab-vpn.conf.in', u'src': u'iiab-vpn.conf.in', u'mode': u'0644', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/usr/bin/xs-vpn', u'src': u'xs-vpn', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/usr/bin/xs-handle', u'src': u'xs-handle', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/usr/lib/iiab/up_wan', u'src': u'up_wan', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/usr/lib/iiab/start', u'src': u'start.j2', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/usr/bin/iiab-remote-on', u'src': u'iiab-remote-on', u'mode': u'0755', u'owner': u'root'})
-changed: [127.0.0.1] => (item={u'dest': u'/usr/bin/iiab-remote-off', u'src': u'iiab-remote-off', u'mode': u'0755', u'owner': u'root'})
-
-TASK [openvpn : put up_wan in place for debian] ********************************
-ok: [127.0.0.1]
-
-TASK [openvpn : put dispatcher up for NM] **************************************
-skipping: [127.0.0.1]
-
-TASK [openvpn : check for manually configured openvpn tunnel] ******************
-ok: [127.0.0.1]
-
-TASK [openvpn : enable the openvpn tunnel at boot time] ************************
-skipping: [127.0.0.1]
-
-TASK [openvpn : enable the openvpn tunnel at boot time for Debian] *************
-skipping: [127.0.0.1]
-
-TASK [openvpn : start the openvpn tunnel now] **********************************
-skipping: [127.0.0.1]
-
-TASK [openvpn : make openvpn connection automatic] *****************************
-skipping: [127.0.0.1]
-
-TASK [openvpn : make openvpn connection manual] ********************************
-ok: [127.0.0.1]
-
-TASK [openvpn : stop starting the openvpn tunnel at boot time] *****************
-skipping: [127.0.0.1]
-
-TASK [openvpn : stop starting the openvpn tunnel at boot time for Debian] ******
-changed: [127.0.0.1]
-
-TASK [openvpn : stop  openvpn tunnel immediately] ******************************
-changed: [127.0.0.1]
-
-TASK [openvpn : Add openvpn to service list] ***********************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'openvpn'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"Openvpn is a means of Contacting a server anywhere on the internet via a middleman server"'})
-changed: [127.0.0.1] => (item={u'option': u'middleman_url', u'value': u'xscenet.net'})
-changed: [127.0.0.1] => (item={u'option': u'port', u'value': 1194})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-changed: [127.0.0.1] => (item={u'option': u'cron_enabled', u'value': False})
-
-TASK [samba : create smb user] *************************************************
-changed: [127.0.0.1]
-
-TASK [samba : create the public folder] ****************************************
-changed: [127.0.0.1]
-
-TASK [samba : Ensure Samba-related packages are installed.] ********************
-changed: [127.0.0.1] => (item=[u'samba', u'samba-client', u'samba-common', u'cifs-utils'])
-
-TASK [samba : put our smb.conf in place] ***************************************
-changed: [127.0.0.1]
-
-TASK [samba : Ensure Samba is running and set to start on boot.] ***************
-skipping: [127.0.0.1]
-
-TASK [samba : netbios name server is running and set to start on boot.] ********
-skipping: [127.0.0.1]
-
-TASK [samba : Disable Samba if that is wanted] *********************************
-changed: [127.0.0.1]
-
-TASK [samba : Disable Samba name server if that is wanted] *********************
-changed: [127.0.0.1]
-
-TASK [samba : Add samba to service list] ***************************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'samba'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"Samba is a Microsoft compatible remote file access system  - generalized to CIFS --common internet file system"'})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [usb-lib : Add a  content directory for links to be located] **************
-changed: [127.0.0.1]
-
-TASK [usb-lib : Copy mount file to usbmount when enabled] **********************
-changed: [127.0.0.1]
-
-TASK [usb-lib : Copy umount file to usbmount when enabled] *********************
-changed: [127.0.0.1]
-
-TASK [usb-lib : Remove mount file to usbmount when not enabled] ****************
-skipping: [127.0.0.1]
-
-TASK [usb-lib : Remove umount file to usbmount when not enabled] ***************
-skipping: [127.0.0.1]
-
-TASK [usb-lib : Add apache config for content directory] ***********************
-changed: [127.0.0.1]
-
-TASK [usb-lib : create the link to enable for debian] **************************
-changed: [127.0.0.1]
-
-TASK [usb-lib : remove the link that enables in debian] ************************
-skipping: [127.0.0.1]
-
-TASK [usb-lib : remove apache config for content directory] ********************
-skipping: [127.0.0.1]
-
-TASK [usb-lib : Add usb-lib to service list] ***********************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'usb-lib'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"usb-lib automounts a usb drive with and links to library content."'})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': True})
-
-TASK [cups : debug] ************************************************************
-ok: [127.0.0.1] => {
-    "cups_install": true
-}
-
-TASK [cups : get the CUPS package installed] ***********************************
-changed: [127.0.0.1] => (item=[u'cups'])
-
-TASK [cups : Put our own config file in place, to permit local lan admin] ******
-changed: [127.0.0.1]
-
-TASK [cups : Put an apache2 config file in place] ******************************
-changed: [127.0.0.1]
-
-TASK [cups : Create the link for sites-enabled] ********************************
-skipping: [127.0.0.1]
-
-TASK [cups : Enable services for cups] *****************************************
-skipping: [127.0.0.1] => (item=cups) 
-skipping: [127.0.0.1] => (item=cups-browsed) 
-
-TASK [cups : Enable services for cups for xo's] ********************************
-skipping: [127.0.0.1]
-
-TASK [cups : Permit headless admin of CUPS -- only works when cups daemon is running] ***
-skipping: [127.0.0.1]
-
-TASK [cups : Disable services for cups] ****************************************
-changed: [127.0.0.1] => (item=cups)
-changed: [127.0.0.1] => (item=cups-browsed)
-
-TASK [cups : Disable services for cups for xo's] *******************************
-skipping: [127.0.0.1]
-
-TASK [cups : add cups to service list] *****************************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'"Common UNIX Printing System (CUPS)"'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"CUPS  is a modular printing system  which allows a computer to act as a print server. A computer running CUPS is a host that can accept print jobs from client computers, process them, and send them to the appropriate printer."'})
-changed: [127.0.0.1] => (item={u'option': u'installed', u'value': True})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [4-server-options : Server Options Installed] *****************************
-changed: [127.0.0.1]
-
-TASK [4-server-options : Stop postgresql service] ******************************
-changed: [127.0.0.1]
-
-TASK [4-server-options : Start postgresql service] *****************************
-skipping: [127.0.0.1]
-
-TASK [4-server-options : Stop authserver service] ******************************
-skipping: [127.0.0.1]
-
-TASK [4-server-options : Start xs-authserver service] **************************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Install ejabberd packages] ************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [ejabberd : Install ejabberd packages] ************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [ejabberd : Configure ejabberd] *******************************************
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/ejabberd/ejabberd-xs.cfg', u'src': u'ejabberd-xs.cfg.j2', u'mode': u'0644'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/ejabberd/ejabberdctl.cfg', u'src': u'ejabberdctl.cfg.j2', u'mode': u'0644'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/sysconfig/ejabberd-xs', u'src': u'ejabberd-xs', u'mode': u'0755'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/systemd/system/ejabberd-xs.service', u'src': u'ejabberd-xs.service.j2', u'mode': u'0755'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/usr/bin/xs-ejabberd-srg', u'src': u'xs-ejabberd-srg', u'mode': u'0755'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/sudoers.d/10-ejabberdmoodle', u'src': u'10-ejabberdmoodle', u'mode': u'0440'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/tmpfiles.d/ejabberd.conf', u'src': u'ejabberd.tmpfiles', u'mode': u'0640'}) 
-
-TASK [ejabberd : Put the startup script in place - debian] *********************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Put the startup script in place - non debian] *****************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Remove ejabberd_domain if domain changes] *********************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Enable ejabberd service] **************************************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Start ejabberd service] ***************************************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Wait for ejabberd service start] ******************************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Create online group] ******************************************
-skipping: [127.0.0.1]
-
-TASK [ejabberd : Add all users to online group] ********************************
-skipping: [127.0.0.1]
-
-TASK [idmgr : Install idmgr packages] ******************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [idmgr : Configure idmgr] *************************************************
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/idmgr.conf', u'src': u'idmgr', u'mode': u'0644'}) 
-skipping: [127.0.0.1] => (item={u'dest': u'/etc/systemd/system/idmgr.service', u'src': u'idmgr.service.j2', u'mode': u'0755'}) 
-
-TASK [idmgr : Configure ds-backup] *********************************************
-skipping: [127.0.0.1]
-
-TASK [idmgr : Configure idmgr sqlite db] ***************************************
-skipping: [127.0.0.1]
-
-TASK [idmgr : Configure xs-rsync] **********************************************
-skipping: [127.0.0.1]
-
-TASK [idmgr : Copy idmgr init script] ******************************************
-skipping: [127.0.0.1]
-
-TASK [idmgr : Enable idmgr service] ********************************************
-skipping: [127.0.0.1] => (item=xinetd) 
-skipping: [127.0.0.1] => (item=idmgr) 
-
-TASK [idmgr : Disable idmgr service] *******************************************
-skipping: [127.0.0.1] => (item=xinetd) 
-skipping: [127.0.0.1] => (item=idmgr) 
-
-TASK [idmgr : Enable ejabberd service] *****************************************
-skipping: [127.0.0.1]
-
-TASK [idmgr : Configure rssh rsync permissions to allow OLPC Backup clients] ***
-skipping: [127.0.0.1]
-
-TASK [idmgr : Configure rssh sftp permissions for backup restore clients] ******
-skipping: [127.0.0.1]
-
-TASK [idmgr : Add idmgr to service list] ***************************************
-skipping: [127.0.0.1] => (item={u'option': u'name', u'value': u'idmgr'}) 
-skipping: [127.0.0.1] => (item={u'option': u'enabled', u'value': False}) 
-skipping: [127.0.0.1] => (item={u'option': u'description', u'value': u'"Idmgr is an automatic identity manager for XO clients which enables automatic backup"'}) 
-
-TASK [activity-server : Create xs-activity-server directory tree] **************
-changed: [127.0.0.1] => (item=/library/xs-activity-server)
-changed: [127.0.0.1] => (item=/library/xs-activity-server/activities)
-changed: [127.0.0.1] => (item=/library/xs-activity-server/lang_templates)
-changed: [127.0.0.1] => (item=/library/xs-activity-server/www.0)
-changed: [127.0.0.1] => (item=/library/xs-activity-server/tmp)
-
-TASK [activity-server : Copy language templates] *******************************
-changed: [127.0.0.1]
-
-TASK [activity-server : Copy default index files] ******************************
-changed: [127.0.0.1] => (item=/opt/iiab/iiab/roles/activity-server/files/www.0/index.html.fr)
-changed: [127.0.0.1] => (item=/opt/iiab/iiab/roles/activity-server/files/www.0/index.html.ht)
-changed: [127.0.0.1] => (item=/opt/iiab/iiab/roles/activity-server/files/www.0/index.html.en)
-
-TASK [activity-server : Point www to www.0 as default] *************************
-changed: [127.0.0.1]
-
-TASK [activity-server : Chown language templates] ******************************
-changed: [127.0.0.1]
-
-TASK [activity-server : Create xs-activity-server python site-packages directory] ***
-changed: [127.0.0.1]
-
-TASK [activity-server : Install Python module] *********************************
-changed: [127.0.0.1]
-
-TASK [activity-server : Copy scripts to /usr/bin] ******************************
-changed: [127.0.0.1] => (item=bin/xs-regenerate-activities)
-changed: [127.0.0.1] => (item=bin/xs-check-activities)
-
-TASK [activity-server : Copy xs-activity-server config file] *******************
-changed: [127.0.0.1]
-
-TASK [activity-server : enable mod_expires for debian] *************************
-changed: [127.0.0.1]
-
-TASK [activity-server : create the link which enables the site] ****************
-changed: [127.0.0.1]
-
-TASK [activity-server : delete the link which enables the site] ****************
-skipping: [127.0.0.1]
-
-TASK [activity-server : Copy xs-activity-server usbmount file] *****************
-changed: [127.0.0.1]
-
-TASK [activity-server : Restart httpd] *****************************************
-changed: [127.0.0.1]
-
-TASK [activity-server : add xs-activity-server to service list] ****************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'Activity Server'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'Download an Activity.'})
-changed: [127.0.0.1] => (item={u'option': u'path', u'value': u'/activities'})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [5-xo-services : XO Services Installed] ***********************************
-changed: [127.0.0.1]
-
-TASK [mysql : Install MySQL Debian] ********************************************
-changed: [127.0.0.1] => (item=[u'mariadb-server', u'mariadb-client', u'python-mysqldb', u'php5', u'php5-mysql', u'php-pear', u'php5-gd', u'php5-imap', u'php5-ldap', u'php5-odbc', u'php-xml-parser', u'php5-xmlrpc'])
-
-TASK [mysql : Install MySQL] ***************************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [mysql : Install MySQL] ***************************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [mysql : Install MySQL] ***************************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [mysql : Start the MySQL service] *****************************************
-ok: [127.0.0.1]
-
-TASK [mysql : Enable the MySQL service] ****************************************
-ok: [127.0.0.1]
-
-TASK [mysql : update mysql root password for localhost root accounts] **********
-changed: [127.0.0.1] => (item=localhost)
-
-TASK [mysql : copy .my.cnf file with root password credentials] ****************
-changed: [127.0.0.1]
-
-TASK [mysql : update mysql root password for all remaining root accounts] ******
-changed: [127.0.0.1] => (item=127.0.0.1)
-changed: [127.0.0.1] => (item=::1)
-
-TASK [mysql : delete anonymous MySQL server user for debian] *******************
-ok: [127.0.0.1]
-
-TASK [mysql : delete anonymous MySQL server user for localhost] ****************
-ok: [127.0.0.1]
-
-TASK [mysql : remove the MySQL test database] **********************************
-ok: [127.0.0.1]
-
-TASK [mysql : Set the php default date, so it does not complain] ***************
-changed: [127.0.0.1]
-
-TASK [mysql : Provisioally Disable the MySQL service] **************************
-skipping: [127.0.0.1]
-
-TASK [mysql : add mysql to service list] ***************************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'mysql-database'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"mySQL is a widely used database service on the Internet which runs on many platforms, and is often offered and available at hosting Internet Service Providers"'})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': True})
-
-TASK [mysql : Install MySQL Debian] ********************************************
-ok: [127.0.0.1] => (item=[u'mariadb-server', u'mariadb-client', u'python-mysqldb', u'php5', u'php5-mysql', u'php-pear', u'php5-gd', u'php5-imap', u'php5-ldap', u'php5-odbc', u'php-xml-parser', u'php5-xmlrpc'])
-
-TASK [mysql : Install MySQL] ***************************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [mysql : Install MySQL] ***************************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [mysql : Install MySQL] ***************************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [mysql : Start the MySQL service] *****************************************
-ok: [127.0.0.1]
-
-TASK [mysql : Enable the MySQL service] ****************************************
-ok: [127.0.0.1]
-
-TASK [mysql : update mysql root password for localhost root accounts] **********
-ok: [127.0.0.1] => (item=localhost)
-
-TASK [mysql : copy .my.cnf file with root password credentials] ****************
-ok: [127.0.0.1]
-
-TASK [mysql : update mysql root password for all remaining root accounts] ******
-ok: [127.0.0.1] => (item=127.0.0.1)
-ok: [127.0.0.1] => (item=::1)
-
-TASK [mysql : delete anonymous MySQL server user for debian] *******************
-ok: [127.0.0.1]
-
-TASK [mysql : delete anonymous MySQL server user for localhost] ****************
-ok: [127.0.0.1]
-
-TASK [mysql : remove the MySQL test database] **********************************
-ok: [127.0.0.1]
-
-TASK [mysql : Set the php default date, so it does not complain] ***************
-ok: [127.0.0.1]
-
-TASK [mysql : Provisioally Disable the MySQL service] **************************
-skipping: [127.0.0.1]
-
-TASK [mysql : add mysql to service list] ***************************************
-ok: [127.0.0.1] => (item={u'option': u'name', u'value': u'mysql-database'})
-ok: [127.0.0.1] => (item={u'option': u'description', u'value': u'"mySQL is a widely used database service on the Internet which runs on many platforms, and is often offered and available at hosting Internet Service Providers"'})
-ok: [127.0.0.1] => (item={u'option': u'enabled', u'value': True})
-
-TASK [elgg : download current version from our copy] ***************************
-changed: [127.0.0.1]
-
-TASK [elgg : Determine if software is already expanded] ************************
-ok: [127.0.0.1]
-
-TASK [elgg : Expand it to our location] ****************************************
-changed: [127.0.0.1]
-
-TASK [elgg : change ownership] *************************************************
-changed: [127.0.0.1]
-
-TASK [elgg : Create a link to the versioned elgg folder] ***********************
-changed: [127.0.0.1]
-
-TASK [elgg : Create file to load database] *************************************
-changed: [127.0.0.1]
-
-TASK [elgg : Create a mysql database for elgg] *********************************
-skipping: [127.0.0.1]
-
-TASK [elgg : Load elgg database dump] ******************************************
-skipping: [127.0.0.1]
-
-TASK [elgg : Remove database dump after load] **********************************
-changed: [127.0.0.1]
-
-TASK [elgg : Create a user to access the elgg database] ************************
-skipping: [127.0.0.1] => (item=localhost) 
-skipping: [127.0.0.1] => (item=::1) 
-skipping: [127.0.0.1] => (item=127.0.0.1) 
-
-TASK [elgg : If the TZ is not set in env, set it to UTC] ***********************
-ok: [127.0.0.1]
-
-TASK [elgg : Copy default .htaccess to the root directory of elgg tree] ********
-changed: [127.0.0.1]
-
-TASK [elgg : Modify .htaccess to have RewriteBase as our directory] ************
-changed: [127.0.0.1]
-
-TASK [elgg : Substitute our parameters in engine/settings.example.php] *********
-changed: [127.0.0.1]
-
-TASK [elgg : Install config file for elgg in Apache] ***************************
-skipping: [127.0.0.1]
-
-TASK [elgg : enable elgg] ******************************************************
-skipping: [127.0.0.1]
-
-TASK [elgg : disable elgg] *****************************************************
-ok: [127.0.0.1]
-
-TASK [elgg : Change permissions on engine directory so apache can write] *******
-ok: [127.0.0.1]
-
-TASK [elgg : Create an upload directory that Apache can write in or elgg] ******
-changed: [127.0.0.1]
-
-TASK [elgg : add elgg to service list] *****************************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'elgg-social-netwoking'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"Elgg is an award-winning social networking engine, delivering the building blocks that enable businesses, schools, universities and associations to create their own fully-featured social networks and applications"'})
-changed: [127.0.0.1] => (item={u'option': u'path', u'value': u'/opt/elgg'})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [elgg : Restart apache, so it picks up the new aliases] *******************
-changed: [127.0.0.1]
-
-TASK [owncloud : add a repo def for ubuntu] ************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : See if the owncloud startup page exists] **********************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Install owncloud package] *************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [owncloud : Remove owncloud package] **************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : remove config files for package] ******************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : remove config files for package] ******************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Get the owncloud software] ************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Copy it to permanent location /opt] ***************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Copy it to permanent location /opt] ***************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : in Centos, the following config dir is symlink to /etc/owncloud] ***
-skipping: [127.0.0.1]
-
-TASK [owncloud : Add autoconfig file] ******************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Make apache owner] ********************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Create data directory library] ********************************
-skipping: [127.0.0.1] => (item=/library/owncloud/data) 
-
-TASK [owncloud : Create a mysql database for owncloud] *************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Create a user to access the owncloud database] ****************
-skipping: [127.0.0.1] => (item=localhost) 
-skipping: [127.0.0.1] => (item=::1) 
-skipping: [127.0.0.1] => (item=127.0.0.1) 
-skipping: [127.0.0.1] => (item=localhost) 
-
-TASK [owncloud : Restart apache, so it picks up the new aliases] ***************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Compute owncloud listen ip addr for owncloud.conf] ************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Enable owncloud by copying template to httpd config] **********
-skipping: [127.0.0.1]
-
-TASK [owncloud : Enable owncloud] **********************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Disable owncloud] *********************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Restart apache, so it picks up the new aliases] ***************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Run owncloud initial install wizard] **************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Remove Rewrite URL] *******************************************
-skipping: [127.0.0.1]
-
-TASK [owncloud : Add owncloud to service list] *********************************
-skipping: [127.0.0.1] => (item={u'option': u'enabled', u'value': False}) 
-skipping: [127.0.0.1] => (item={u'option': u'source', u'value': u'owncloud-9.0.2.tar.bz2'}) 
-skipping: [127.0.0.1] => (item={u'option': u'path', u'value': u'/opt/owncloud'}) 
-skipping: [127.0.0.1] => (item={u'option': u'description', u'value': u'"OwnCloud is a local server-based facility for sharing files, photos, contacts, calendars, etc."'}) 
-skipping: [127.0.0.1] => (item={u'option': u'name', u'value': u'owncloud'}) 
-
-TASK [nextcloud : See if the nextcloud startup page exists] ********************
-ok: [127.0.0.1]
-
-TASK [nextcloud : Get the nextcloud software] **********************************
-changed: [127.0.0.1]
-
-TASK [nextcloud : ubuntu and debian treat names differently] *******************
-ok: [127.0.0.1] => (item=[u'libapache2-mod-php5'])
-
-TASK [nextcloud : ubuntu and debian treat names differently] *******************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [nextcloud : Install list of packages for debuntu] ************************
-changed: [127.0.0.1] => (item=[u'php5-gd', u'php5-json', u'php5-mysql', u'php5-curl', u'php5-intl', u'php5-mcrypt'])
-
-TASK [nextcloud : Install list of packages] ************************************
-skipping: [127.0.0.1] => (item=[]) 
-
-TASK [nextcloud : Copy it to permanent location /opt] **************************
-changed: [127.0.0.1]
-
-TASK [nextcloud : Copy it to permanent location /opt] **************************
-skipping: [127.0.0.1]
-
-TASK [nextcloud : in Centos, the following config dir is symlink to /etc/nextcloud] ***
-skipping: [127.0.0.1]
-
-TASK [nextcloud : Add autoconfig file] *****************************************
-skipping: [127.0.0.1]
-
-TASK [nextcloud : Make apache owner] *******************************************
-changed: [127.0.0.1]
-
-TASK [nextcloud : Create data directory library] *******************************
-changed: [127.0.0.1] => (item=/library/nextcloud/data)
-
-TASK [nextcloud : Create a mysql database for nextcloud] ***********************
-skipping: [127.0.0.1]
-
-TASK [nextcloud : Create a user to access the nextcloud database] **************
-skipping: [127.0.0.1] => (item=localhost) 
-skipping: [127.0.0.1] => (item=::1) 
-skipping: [127.0.0.1] => (item=127.0.0.1) 
-skipping: [127.0.0.1] => (item=localhost) 
-
-TASK [nextcloud : Restart apache, so it picks up the new aliases] **************
-changed: [127.0.0.1]
-
-TASK [nextcloud : Compute nextcloud listen ip addr for nextcloud.conf] *********
-ok: [127.0.0.1]
-
-TASK [nextcloud : Enable nextcloud by copying template to httpd config] ********
-skipping: [127.0.0.1]
-
-TASK [nextcloud : Enable nextcloud] ********************************************
-skipping: [127.0.0.1]
-
-TASK [nextcloud : For redhat, remove the config file] **************************
-skipping: [127.0.0.1]
-
-TASK [nextcloud : Restart apache, so it picks up the new aliases] **************
-changed: [127.0.0.1]
-
-TASK [nextcloud : Determine if nextcloud is installed] *************************
-changed: [127.0.0.1]
-
-TASK [nextcloud : Run nextcloud initial install wizard] ************************
-skipping: [127.0.0.1]
-
-TASK [nextcloud : Determine if nextcloud user exists already] ******************
-changed: [127.0.0.1]
-
-TASK [nextcloud : create the default user] *************************************
-skipping: [127.0.0.1]
-
-TASK [nextcloud : Remove Rewrite URL] ******************************************
-ok: [127.0.0.1]
-
-TASK [nextcloud : Add nextcloud to service list] *******************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'nextcloud'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"NextCloud is a local server-based facility for sharing files, photos, contacts, calendars, etc."'})
-changed: [127.0.0.1] => (item={u'option': u'path', u'value': u'/opt/nextcloud'})
-changed: [127.0.0.1] => (item={u'option': u'source', u'value': u'latest-12.tar.bz2'})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [dokuwiki : Get the Dokuwiki software] ************************************
-changed: [127.0.0.1]
-
-TASK [dokuwiki : Copy it to permanent location /library] ***********************
-changed: [127.0.0.1]
-
-TASK [dokuwiki : Symlink /library/dokuwiki* to /library/dokuwiki] **************
-changed: [127.0.0.1]
-
-TASK [dokuwiki : Install config file for dokuwiki in Apache] *******************
-skipping: [127.0.0.1]
-
-TASK [dokuwiki : enable the dokuwiki] ******************************************
-skipping: [127.0.0.1]
-
-TASK [dokuwiki : disable the dokuwiki] *****************************************
-ok: [127.0.0.1]
-
-TASK [dokuwiki : Change permissions on engine directory so apache can write] ***
-changed: [127.0.0.1]
-
-TASK [dokuwiki : Restart apache, so it picks up the new aliases] ***************
-changed: [127.0.0.1]
-
-TASK [dokuwiki : Add dokuwiki to service list] *********************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'dokuwiki'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"DokuWiki is a simple to use and highly versatile Open Source wiki software that does not require a database. "'})
-changed: [127.0.0.1] => (item={u'option': u'installed', u'value': True})
-changed: [127.0.0.1] => (item={u'option': u'enabled', u'value': False})
-
-TASK [wordpress : Get the WordPress software] **********************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Copy it to permanent location /library] **********************
-changed: [127.0.0.1]
-
-TASK [wordpress : Rename /library/wordpress* to /library/wordpress] ************
-changed: [127.0.0.1]
-
-TASK [wordpress : Make apache owner and group] *********************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Make directories 775 so apache can traverse and write] *******
-changed: [127.0.0.1]
-
-TASK [wordpress : Copy wp salt values] *****************************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Create wp salt script] ***************************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Run wp salt script to create /library/wordpress/wp-keys.php] *
-changed: [127.0.0.1]
-
-TASK [wordpress : Cleanup - remove wp salt script] *****************************
-changed: [127.0.0.1]
-
-TASK [wordpress : mysql database needs to be running if we are trying to create a new db] ***
-ok: [127.0.0.1]
-
-TASK [wordpress : Create mysql wordpress database] *****************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Create mysql wordpress database user] ************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Copy WordPress config file] **********************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Copy WordPress httpd conf file] ******************************
-changed: [127.0.0.1]
-
-TASK [wordpress : Enable httpd conf file if we are disabled] *******************
-skipping: [127.0.0.1]
-
-TASK [wordpress : Remove httpd conf file if we are disabled] *******************
-ok: [127.0.0.1]
-
-TASK [wordpress : Restart apache, so it picks up the new aliases] **************
-changed: [127.0.0.1]
-
-TASK [wordpress : Add wordpress to service list] *******************************
-changed: [127.0.0.1] => (item={u'option': u'name', u'value': u'wordpress'})
-changed: [127.0.0.1] => (item={u'option': u'description', u'value': u'"WordPress is a blog and web site management application."'})
-changed: [127.0.0.1] => (item={u'option': u'wordpress_src', u'value': u'wordpress-4.8.tar.gz'})
-changed: [127.0.0.1] => (item={u'option': u'wp_abs_path', u'value': u'/library/wordpress'})
-changed: [127.0.0.1] => (item={u'option': u'wp_db_name', u'value': u'iiab_wp'})
-changed: [127.0.0.1] => (item={u'option': u'wp_db_user', u'value': u'iiab_wp'})
-changed: [127.0.0.1] => (item={u'option': u'wp_url', u'value': u'/wordpress'})
-changed: [127.0.0.1] => (item={u'option': u'wp_full_url', u'value': u'http://box/wordpress'})
-changed: [127.0.0.1] => (item={u'option': u'wordpress_enabled', u'value': False})
-
-TASK [calibre : Get calibre setup file] ****************************************
-skipping: [127.0.0.1]
-
-TASK [calibre : Install calibre] ***********************************************
-skipping: [127.0.0.1]
-
-TASK [calibre : Install Caibre rpms] *******************************************

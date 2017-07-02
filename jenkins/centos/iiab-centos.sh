@@ -6,7 +6,17 @@ yum -y update
 mkdir -p /opt/iiab
 cd /opt/iiab/
 git clone https://github.com/iiab/iiab 
+pushd iiab
+git remote add ghunt https://github.com/georgejhunt/iiab
+git fetch --all
+git checkout -b test ghunt/test
+popd
 git clone https://github.com/iiab/iiab-admin-console 
+pushd iiab-admin-console
+git remote add ghunt https://github.com/georgejhunt/iiab-console
+git fetch --all
+git checkout -b test ghunt/test
+popd
 git clone https://github.com/iiab/iiab-menu 
 git clone https://github.com/iiab/iiab-factory 
 
