@@ -18,7 +18,7 @@ for VM in centos debian8 debian9 ubuntu fc18; do
 		   if [ $? -eq 0 ]; then 
 		      echo "$fn SUCCESS -- skipping"
 		      DONE=TRUE
-		      continue 
+		      break 
 		   fi
 	   fi
 	 done
