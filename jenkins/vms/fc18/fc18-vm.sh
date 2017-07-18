@@ -6,7 +6,7 @@ vboxmanage controlvm f18-test poweroff
 vboxmanage unregistervm f18-test --delete
 vboxmanage clonevm f18-clone-this --register --name f18-test
 vboxmanage  modifyvm f18-test --natpf1 "ssh,tcp,,6022,,22"
-vboxmanage startvm centos-test --type headless
+vboxmanage startvm f18-test --type headless
 
 # give enough time for sshd to be running
 YMD=`date +"%y%m%d-%H:%M"`

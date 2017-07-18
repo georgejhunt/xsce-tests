@@ -32,7 +32,7 @@ for VM in centos debian8 debian9 ubuntu fc18; do
 	 rm -f *.log
       fi
       echo processing $VM
-   #   time ./$VM-vm.sh
+      time ./$VM-vm.sh
       mkdir -p ../../output/$YMD
       ls *.log  2> /dev/null
       if [ $? -eq 0 ]; then
