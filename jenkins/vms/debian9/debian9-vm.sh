@@ -9,7 +9,7 @@ vboxmanage  modifyvm debian9-test --natpf1 "ssh,tcp,,5022,,22"
 vboxmanage startvm debian9-test --type headless
 
 YMD=`date +"%y%m%d-%H:%M"`
-scp -P 5022 ./iiab-debian.sh localhost:/root/iiab-debian.sh
+scp -P 5022 ../../scripts/iiab.sh localhost:/root/iiab.sh
 # execute the following remotely on the VM
-ssh -p 5022 localhost '/root/iiab-debian.sh|tee -a /root/output.log'
-scp -P 5022 localhost:/root/output.log ./$YMD-debian.log
+ssh -p 5022 localhost '/root/iiab.sh|tee -a /root/output.log'
+scp -P 5022 localhost:/root/output.log ./debian9-$YMD.log

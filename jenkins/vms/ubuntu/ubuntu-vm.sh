@@ -9,7 +9,7 @@ vboxmanage  modifyvm ubuntu-test --natpf1 "ssh,tcp,,3022,,22"
 vboxmanage startvm ubuntu-test --type headless
 
 YMD=`date +"%y%m%d-%H:%M"`
-scp -P 3022 ./iiab-debian.sh localhost:/root/iiab-debian.sh
+scp -P 3022 ../../scripts/iiab.sh localhost:/root/iiab.sh
 # execute the following remotely on the VM
-ssh -p 3022 localhost '/root/iiab-debian.sh|tee -a /root/output.log'
-scp -P 3022 localhost:/root/output.log ./$YMD-ubuntu.log
+ssh -p 3022 localhost '/root/iiab.sh|tee -a /root/output.log'
+scp -P 3022 localhost:/root/output.log ./ubuntu-$YMD.log

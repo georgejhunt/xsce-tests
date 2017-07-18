@@ -12,7 +12,7 @@ vboxmanage startvm centos-test --type headless
 YMD=`date +"%y%m%d-%H:%M"`
 sleep 60
 ssh -p 4022 localhost etho hi
-scp -P 4022 ./iiab-centos.sh localhost:/root/iiab-centos.sh
+scp -P 4022 ../../scripts/iiab.sh localhost:/root/iiab.sh
 # execute the following remotely on the VM
-ssh -p 4022 localhost '/root/iiab-centos.sh|tee -a /root/output.log'
-scp -P 4022 localhost:/root/output.log ./$YMD-centos.log
+ssh -p 4022 localhost '/root/iiab.sh|tee -a /root/output.log'
+scp -P 4022 localhost:/root/output.log ./centos-$YMD.log

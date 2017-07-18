@@ -31,14 +31,17 @@ fi
 ./runansible
 
 if [ $? -ne 0 ]; then
+   echo "runansible FAILURE" >> /root/output.log
    exit 1
 fi
 cd /opt/iiab/iiab-admin-console/
 ./install
 
 if [ $? -ne 0 ]; then
+   echo "iiab-admin-console FAILURE" >> /root/output.log
    exit 1
 fi
 
 cd /opt/iiab/iiab-menu/
 ./cp-menus
+   echo "SUCCESS" >> /root/output.log
