@@ -1,6 +1,7 @@
 #!/bin/bash -x
 # script to run run cycle, and save the results
 
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 YMD=`date +"%y%m%d"`
-mkdir -p output/$YMD
-./cycle.sh | tee -a output/$YMD/script.log
+mkdir -p $SCRIPTDIR/../output/$YMD
+./cycle.sh | tee -a $SCRIPTDIR/../output/$YMD/script.log

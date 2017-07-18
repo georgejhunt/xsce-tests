@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 # script to run a script on a cloned vi
 
 # first remove any lingering set vm
@@ -11,5 +11,5 @@ vboxmanage startvm debian-test --type headless
 YMD=`date +"%y%m%d-%H:%M"`
 scp -P 2022 ../../scripts/iiab.sh localhost:/root/iiab.sh
 # execute the following remotely on the VM
-ssh -p 2022 localhost '/root/iiab.sh|tee -a /root/output.log'
+time  ssh -p 2022 localhost '/root/iiab.sh > /root/output.log'
 scp -P 2022 localhost:/root/output.log ./debian8-$YMD.log

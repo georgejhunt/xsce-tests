@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 # script to run a script on a cloned vi
 
 # first remove any lingering set vm
@@ -14,5 +14,5 @@ sleep 60
 ssh -p 4022 localhost etho hi
 scp -P 4022 ../../scripts/iiab.sh localhost:/root/iiab.sh
 # execute the following remotely on the VM
-ssh -p 4022 localhost '/root/iiab.sh|tee -a /root/output.log'
+time ssh -p 4022 localhost '/root/iiab.sh > /root/output.log'
 scp -P 4022 localhost:/root/output.log ./centos-$YMD.log
