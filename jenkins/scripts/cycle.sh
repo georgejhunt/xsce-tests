@@ -10,7 +10,8 @@ for VM in centos debian8 debian9 ubuntu fc18; do
    if [ -d $SCRIPTDIR/../output/$YMD/ ]; then
       pushd $SCRIPTDIR/../output/$YMD > /dev/null
       LIST=$(ls $VM*) 2> /dev/null
-      if [ -n $LIST ];then
+      LINES=$(echo $LIST | wc | cut -d" " -f1)
+      if [ "$LINES" != "0" ];then
 	 for fn in $LIST; do
 	   if [ -f $fn ]; then
 		   tail $fn |grep SUCCESS > /dev/null
