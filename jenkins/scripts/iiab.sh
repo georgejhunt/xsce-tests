@@ -5,6 +5,12 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get -y update
 apt-get -y dist-upgrade
 apt-get -y clean
+OS=`grep ^ID= /etc/*elease|cut -d= -f2`
+OS=${OS//\"/}
+VERSION_ID=`grep VERSION_ID /etc/*elease | cut -d= -f2`
+VERSION_ID=${VERSION_ID//\"/}
+VERSION_ID=${VERSION_ID%%.*}
+OS_VER=$OS-$VERSION_ID
 
 mkdir -p /opt/iiab
 cd /opt/iiab/
@@ -31,17 +37,17 @@ fi
 ./runansible
 
 if [ $? -ne 0 ]; then
-   echo "runansible FAILURE" >> /root/output.log
+   echo "$OS_VER runansible FAILURE" >> /root/output.log
    exit 1
 fi
 cd /opt/iiab/iiab-admin-console/
 ./install
 
 if [ $? -ne 0 ]; then
-   echo "iiab-admin-console FAILURE" >> /root/output.log
+   echo "$OS_VER iiab-admin-console FAILURE" >> /root/output.log
    exit 1
 fi
 
 cd /opt/iiab/iiab-menu/
 ./cp-menus
-   echo "SUCCESS" >> /root/output.log
+   echo "$OS_VER SUCCESS" >> /root/output.log
