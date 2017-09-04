@@ -4,7 +4,8 @@
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 YMD=`date +"%y%m%d"`
 pushd $SCRIIPTDIR > /dev/null
-for VM in centos debian8 debian9 ubuntu fc18; do
+#for VM in centos debian8 debian9 ubuntu fc18; do
+for VM in  debian9 ubuntu centos fc18 ; do
    DONE=
    # check to see if we have a successful run on this date
    if [ -d $SCRIPTDIR/../output/$YMD/ ]; then
