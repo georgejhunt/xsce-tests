@@ -1,0 +1,12 @@
+#!/bin/bash -x
+# run a sequence of vm tests 
+#
+# delete all the logs
+rm -f */*.log
+screen -d -m -S centos  bash ./centos/centos-vm.sh
+screen -d -m -S debian bash ./debian/debian-vm.sh
+screen -d -m -S debian9 bash ./debian9/debian9-vm.sh
+screen -d -m -S ubuntu bash ./ubuntu/ubuntu-vm.sh
+screen -d -m -S fc18 bash ./fc18/fc18-vm.sh
+
+

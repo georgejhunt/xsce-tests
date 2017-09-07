@@ -379,7 +379,7 @@ function test_backup() {
 function test_ejabberd() {
     echo -n "[XSCE] Test ejabberd running..."
 
-    if `curl -Is http://${SCHOOLSERVER}:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
+    if `curl -Is -m 5 http://${SCHOOLSERVER}:5280/admin | grep -is 'realm="ejabberd"' > /dev/null`
     then
         log ejabberd OK
         green OK

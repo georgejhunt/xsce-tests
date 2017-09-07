@@ -6,5 +6,5 @@ if [ $# -ne 1 ]; then
 	echo " If you would like a list of possible values, enter $0 XXX"
 	exit 1
 fi
-ansible-playbook -i ansible_hosts ezadmin.yml  --tags="""$1"""
+ansible-playbook -i ansible_hosts test.yml  --tags="""$1"""
 
