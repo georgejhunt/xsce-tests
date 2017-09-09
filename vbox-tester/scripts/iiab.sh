@@ -29,6 +29,9 @@ popd
 git clone https://github.com/iiab/iiab-menu 
 git clone https://github.com/iiab/iiab-factory 
 
+# put the local_vars.ymll in place
+cp /root/local_vars.yml /opt/iiab/iiab/vars/
+
 cd /opt/iiab/iiab/
 which ansible
 if [ $? -ne 0 ];then
