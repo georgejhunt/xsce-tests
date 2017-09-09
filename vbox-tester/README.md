@@ -6,6 +6,8 @@ For each base operating system, download, or create a VM that can be quickly clo
 * Download virtualbox appliances from archive.org
   ```
   wget https://archive.org/download/debian-9-vbox-appliance.ova
+  wget https://archive.org/download/ubuntu-16.4-vbox-appliance.ova
+
   ```
 * Install each of the appliance VM's into your vbox instance.
 * You will need to put your public key into the vbox appliance, in /root/.ssh/authorized_keys, because all of the communication with the cloned VM is via ssh and scp.
