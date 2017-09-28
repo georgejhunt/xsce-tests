@@ -32,11 +32,11 @@ git clone https://github.com/iiab/iiab-factory
 # put the local_vars.ymll in place
 cp /root/local_vars.yml /opt/iiab/iiab/vars/
 
+apt-get -y install ansible
+
+sed -i 's/StrictVersion/LooseVersion/g' /usr/lib/python2.7/dist-packages/ansible/modules/core/web_infrastructure/htpasswd.py
+
 cd /opt/iiab/iiab/
-which ansible
-if [ $? -ne 0 ];then
-  ./scripts/ansible
-fi
 ./runansible
 
 if [ $? -ne 0 ]; then
