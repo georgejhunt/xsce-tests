@@ -32,12 +32,11 @@ git clone https://github.com/iiab/iiab-factory
 # put the local_vars.ymll in place
 cp /root/local_vars.yml /opt/iiab/iiab/vars/
 
-apt-get -y install ansible
-
-sed -i 's/StrictVersion/LooseVersion/g' /usr/lib/python2.7/dist-packages/ansible/modules/core/web_infrastructure/htpasswd.py
+#apt-get -y install ansible
+/opt/iiab/iiab/scripts/ansible
 
 cd /opt/iiab/iiab/
-./runansible
+./iiab-install
 
 if [ $? -ne 0 ]; then
    echo "$OS_VER runansible FAILURE" >> /root/output.log

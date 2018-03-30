@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 # script to run a script on a cloned vi
 
 # first remove any lingering set vm
@@ -10,9 +10,8 @@ vboxmanage startvm centos-test --type headless
 
 # give enough time for sshd to be running
 YMD=`date +"%y%m%d-%H:%M"`
-sleep 60
-ssh -p 4022 localhost eth0 hi
-scp -P 4022 ../../scripts/iiab.sh localhost:/root/iiab.sh
+sleep 10
+scp -P 4022 ../../scripts/iiab-redhat.sh localhost:/root/iiab.sh
 # copy the desired local_vars.yml
 scp -P 4022 ../../scripts/local_vars.yml localhost:/root/local_vars.yml
 # execute the following remotely on the VM
