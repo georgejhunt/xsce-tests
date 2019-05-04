@@ -26,18 +26,18 @@ git remote add ghunt https://github.com/georgejhunt/iiab-admin
 git fetch --all
 git checkout -b test ghunt/test
 popd
-git clone https://github.com/iiab/iiab-menu 
 git clone https://github.com/iiab/iiab-factory 
 
 # put the local_vars.ymll in place
-cp /root/local_vars.yml /opt/iiab/iiab/vars/
+mkdir -p /etc/iiab
+cp /opt/iiab/iiab/vars/local_vars_min.yml /etc/iiab/local_vars.yml
 
 cd /opt/iiab/iiab/
 which ansible
 if [ $? -ne 0 ];then
   ./scripts/ansible
 fi
-./runansible
+./iiab-install
 
 if [ $? -ne 0 ]; then
    echo "$OS_VER runansible FAILURE" >> /root/output.log
@@ -51,6 +51,4 @@ if [ $? -ne 0 ]; then
    exit 1
 fi
 
-cd /opt/iiab/iiab-menu/
-./cp-menus
-   echo "$OS_VER SUCCESS" >> /root/output.log
+echo "$OS_VER SUCCESS" >> /root/output.log
