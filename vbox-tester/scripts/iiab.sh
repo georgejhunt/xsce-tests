@@ -29,7 +29,6 @@ popd
 git clone https://github.com/iiab/iiab-factory 
 
 # put the local_vars.ymll in place
-<<<<<<< HEAD:vbox-tester/scripts/iiab.sh
 mkdir -p /etc/iiab
 cp /opt/iiab/iiab/vars/local_vars_min.yml /etc/iiab/local_vars.yml
 
@@ -38,14 +37,6 @@ which ansible
 if [ $? -ne 0 ];then
   ./scripts/ansible
 fi
-=======
-cp /root/local_vars.yml /opt/iiab/iiab/vars/
-
-#apt-get -y install ansible
-/opt/iiab/iiab/scripts/ansible
-
-cd /opt/iiab/iiab/
->>>>>>> 613919db6a431b84b5ac84d5ade1559182b8f819:vbox-tester/scripts/iiab.sh
 ./iiab-install
 
 if [ $? -ne 0 ]; then
