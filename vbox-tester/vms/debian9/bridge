@@ -1,0 +1,7 @@
+
+vboxmanage controlvm debian9-test poweroff
+VBoxManage modifyvm degian9-test nic1 bridged eth0
+vboxmanage startvm debian9-test --type headless
+vboxManage guestproperty enumerate debian9-test | grep IP
+
+

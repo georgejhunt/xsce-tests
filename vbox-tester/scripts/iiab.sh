@@ -30,7 +30,11 @@ git clone https://github.com/iiab/iiab-factory
 
 # put the local_vars.ymll in place
 mkdir -p /etc/iiab
-cp /opt/iiab/iiab/vars/local_vars_min.yml /etc/iiab/local_vars.yml
+if [ -f /root/local_vars.yml ]; then
+   cp /root/local_vars.yml /etc/iiab/local_vars.yml
+else
+   cp /opt/iiab/iiab/vars/local_vars_min.yml /etc/iiab/local_vars.yml
+fi
 
 cd /opt/iiab/iiab/
 which ansible
